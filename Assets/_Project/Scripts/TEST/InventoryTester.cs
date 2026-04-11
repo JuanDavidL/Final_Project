@@ -3,7 +3,7 @@ using UnityEngine;
 public class InventoryTester : MonoBehaviour
 {
     [SerializeField] private InventorySO inventory;
-    [SerializeField] private ItemData resourceToTest;
+    [SerializeField] private ItemDataOld resourceToTest;
     [SerializeField] private int amountToPickUp = 150;
 
     [ContextMenu("Test Add Item")] // Esto permite ejecutarlo desde el Inspector

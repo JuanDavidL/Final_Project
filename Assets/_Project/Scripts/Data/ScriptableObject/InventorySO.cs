@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerInventory", menuName = "Inventory/System")]
+// [CreateAssetMenu(fileName = "PlayerInventory", menuName = "Inventory/System")]
 public class InventorySO : ScriptableObject
 {
     // Usamos una lista serializable para verla en el inspector
@@ -11,7 +11,7 @@ public class InventorySO : ScriptableObject
     // Evento para que la UI o el Caldero se enteren de cambios sin preguntar cada frame
     public event Action OnInventoryChanged;
 
-    public int AddItem(ItemData data, int amount)
+    public int AddItem(ItemDataOld data, int amount)
     {
         int remaining = amount;
 
@@ -46,6 +46,6 @@ public class InventorySO : ScriptableObject
 [Serializable]
 public class InventorySlot
 {
-    public ItemData item;
+    public ItemDataOld item;
     public int quantity;
 }
