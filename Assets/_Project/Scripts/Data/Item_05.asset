@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2278226448d84084ea6cb033ac528f4d, type: 3}
   m_Name: Item_05
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  id: 5
   itemName: Or 05
   itemIcon: {fileID: -47998441, guid: 295cf77750d4326439bc60ab61757640, type: 3}
   itemDescription: 

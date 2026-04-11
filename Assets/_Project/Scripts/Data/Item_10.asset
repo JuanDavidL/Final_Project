@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2278226448d84084ea6cb033ac528f4d, type: 3}
   m_Name: Item_10
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  id: 10
   itemName: F 05
   itemIcon: {fileID: 0}
   itemDescription: Flor sacfgra jfdjjdsfjsdfjsjdfjsdjfjdfjs
