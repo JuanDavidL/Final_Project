@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6214944635076796385}
   - component: {fileID: 6028076271027853117}
   - component: {fileID: 350339500569130822}
+  - component: {fileID: 4855903435295352071}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -174,6 +175,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4855903435295352071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570472152673844432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29f24b74974c1dd40b35aafe4da4a691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollectAura
+  collectPoint: {fileID: 0}
+  attractRadius: 10
 --- !u!1001 &4449092021716953288
 PrefabInstance:
   m_ObjectHideFlags: 0

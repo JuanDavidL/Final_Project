@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4506287079175399021}
   - component: {fileID: 1728619573743969444}
   - component: {fileID: 7654627948509957732}
+  - component: {fileID: 3216450440888701252}
   m_Layer: 0
   m_Name: PruebaLoot
   m_TagString: Untagged
@@ -134,7 +135,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!135 &1728619573743969444
 SphereCollider:
@@ -178,3 +179,16 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.35732818
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3216450440888701252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7863539330069029907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b52a5bf719bb248a04c71c0c09fad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollectOrb
+  target: {fileID: 0}
