@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleItem
   item: {fileID: 0}
   amount: 0
+  hasLuch: 1
 --- !u!54 &4506287079175399021
 Rigidbody:
   m_ObjectHideFlags: 0
