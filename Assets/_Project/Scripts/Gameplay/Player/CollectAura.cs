@@ -5,6 +5,9 @@ public class CollectAura : MonoBehaviour
 {
     public Transform collectPoint;
     public float attractRadius = 10f;
+    public MagicBook magicBook;
+
+
     private PlayerInput playerInput;
     private InputAction CollectAction;
 
@@ -38,6 +41,11 @@ public class CollectAura : MonoBehaviour
             }
         }
 
+        if (magicBook != null)
+        {
+            magicBook.StartCollecting(true);
+        }
+
     }
 
     private void OnCollectCanceled(InputAction.CallbackContext context)
@@ -50,6 +58,11 @@ public class CollectAura : MonoBehaviour
             {
                 orb.StopAttract();
             }
+        }
+
+        if (magicBook != null)
+        {
+            magicBook.StartCollecting(false);
         }
     }
 
