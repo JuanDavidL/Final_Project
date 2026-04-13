@@ -1723,11 +1723,7 @@ MonoBehaviour:
   tabRecipes: {fileID: 57329869}
   tabInfo: {fileID: 1250859443}
   tabAbilities: {fileID: 1472849923}
-<<<<<<< Updated upstream
   tabSelectedOffsetY: -20
-=======
-  tabSelectedOffsetY: 10
->>>>>>> Stashed changes
 --- !u!4 &860229216
 Transform:
   m_ObjectHideFlags: 0
@@ -2177,11 +2173,7 @@ MonoBehaviour:
   moveDuration: 0.5
   contentGroup: {fileID: 1079966492}
   fadeDuration: 0.5
-<<<<<<< Updated upstream
   tabsGroup: {fileID: 1739758307}
-=======
-  tabsGroup: {fileID: 0}
->>>>>>> Stashed changes
   tabAnimDuration: 0.15
 --- !u!1 &1120540097
 GameObject:
@@ -3655,11 +3647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
   inventoryPanel: {fileID: 1403649136}
-<<<<<<< Updated upstream
   itemGridPanel: {fileID: 1120540097}
-=======
-  itemGridPanel: {fileID: 0}
->>>>>>> Stashed changes
   itemGrid: {fileID: 1120540098}
   slotPrefab: {fileID: 6067582354542045606, guid: 1382daa908d35a941a383dfdb4ca1625, type: 3}
 --- !u!1 &1433405420
@@ -6166,10 +6154,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3288806680164033792, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: f72bbf0c2a12cd040954bd6ada21fd48, type: 2}
     - target: {fileID: 4855903435295352071, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: magicBook
       value: 
@@ -6417,6 +6401,14 @@ PrefabInstance:
     - target: {fileID: 6028076271027853117, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: m_ActionEvents.Array.data[23].m_ActionName
       value: UI/TrackedDeviceOrientation
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214944635076796385, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
+      propertyPath: m_Height
+      value: 1.645356
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214944635076796385, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
+      propertyPath: m_Center.y
+      value: -0.0035229325
       objectReference: {fileID: 0}
     - target: {fileID: 8289667608285280072, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: cameraTransform
