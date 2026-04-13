@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 
 public class CollectAura : MonoBehaviour
 {
-    public Transform collectPoint;
     public float attractRadius = 10f;
     public MagicBook magicBook;
 
@@ -31,19 +30,20 @@ public class CollectAura : MonoBehaviour
 
     private void OnCollectStarted (InputAction.CallbackContext context)
     {
+       if (magicBook != null)
+        {
+            magicBook.SetState(MagicBook.BookState.Collecting);
+        }
+       
+       
         Collider[] colliders = Physics.OverlapSphere(transform.position, attractRadius);
         foreach (Collider collider in colliders)
         {
             CollectOrb orb = collider.GetComponent<CollectOrb>();
             if (orb != null)
             {
-                orb.StartAttract(collectPoint);
+                orb.StartAttract(magicBook.transform);
             }
-        }
-
-        if (magicBook != null)
-        {
-            magicBook.StartCollecting(true);
         }
 
     }
@@ -62,16 +62,16 @@ public class CollectAura : MonoBehaviour
 
         if (magicBook != null)
         {
-            magicBook.StartCollecting(false);
+            magicBook.SetState(MagicBook.BookState.Orbiting);
         }
     }
 
     void OnDrawGizmosSelected()
     {
-        if (collectPoint != null)
+        if (magicBook != null)
         {
             Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(collectPoint.position, attractRadius);
+            Gizmos.DrawWireSphere(magicBook.GetBookPosition(), attractRadius);
         }
     }
 }
