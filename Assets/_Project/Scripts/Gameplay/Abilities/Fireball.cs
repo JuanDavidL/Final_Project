@@ -12,6 +12,7 @@ public class Fireball : BaseAbility
     public LineRenderer lineIndicator;
 
     private Camera mainCamera;
+    private MagicBook magicBook;
     private Mouse mouse;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -61,11 +62,12 @@ public class Fireball : BaseAbility
             return;
 
         Vector3 mouseWorldPosition = GetMouseWorldPosition();
-        Vector3 direction = (mouseWorldPosition - transform.position).normalized;
+        Vector3 spwanPosition = magicBook != null ? magicBook.GetBookPosition() : transform.position;
+        Vector3 direction = (mouseWorldPosition - spwanPosition).normalized;
+        direction.Normalize();
 
-        Vector3 spawnPosition = transform.position + direction * 1f;
-        spawnPosition.y = transform.position.y;
-        GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
+        Vector3 finalPosition = new Vector3(spwanPosition.x, transform.position.y, spwanPosition.z);
+        GameObject projectile = Instantiate(projectilePrefab, finalPosition, Quaternion.identity);
         
         FireballProjectile fp = projectile.GetComponent<FireballProjectile>();
         fp.Init(direction, projectileSpeed, explosionRadius, damage);

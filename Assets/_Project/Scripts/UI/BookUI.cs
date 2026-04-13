@@ -20,12 +20,13 @@ public class BookUI : MonoBehaviour
    private bool isOpen = false;
    private PlayerInput playerInput;
    private InputAction inventoryAction;
+   private BookAnimatorController bookAnimator;
 
    void Awake()
    {
        playerInput = FindFirstObjectByType<PlayerInput>();
        inventoryAction = playerInput.actions["Inventory"];
-       bookPanel.SetActive(false);
+       bookAnimator = bookPanel.GetComponent<BookAnimatorController>();
    }
 
    void OnEnable()
@@ -48,11 +49,13 @@ public class BookUI : MonoBehaviour
 
     private void ToggleBook(InputAction.CallbackContext context)
     {
-        isOpen = !isOpen;
-        bookPanel.SetActive(isOpen);
-        if (isOpen)
+        if (bookAnimator.IsOpen())
         {
-            ShowPage(inventoryPanel);
+            bookAnimator.CloseBook();
+        }
+        else
+        {
+            bookAnimator.OpenBook();
         }
     }
 

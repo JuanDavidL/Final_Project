@@ -5,13 +5,14 @@ public class AbilityManager : MonoBehaviour
 {
     public BaseAbility abilitySlot1;
     public BaseAbility abilitySlot2;
+    public MagicBook magicBook;
 
     private BaseAbility activeAbility;
     private PlayerInput playerInput;
     private InputAction ability1Action;
     private InputAction ability2Action;
     private InputAction fireAction;
-    private Camera mainCamera;
+    
 
     void Awake()
     {
@@ -19,7 +20,6 @@ public class AbilityManager : MonoBehaviour
         ability1Action = playerInput.actions["Ability1"];
         ability2Action = playerInput.actions["Ability2"];
         fireAction = playerInput.actions["Attack"];
-        mainCamera = Camera.main;
     }
 
     void OnEnable()
@@ -41,15 +41,15 @@ public class AbilityManager : MonoBehaviour
 
     private void OnAbility1 (InputAction.CallbackContext context)
     {
-        SelectAbility(abilitySlot1);
+        SelectAbility(abilitySlot1, MagicBook.BookState.Ability1);
     }
 
     private void OnAbility2 (InputAction.CallbackContext context)
     {
-        SelectAbility(abilitySlot2);
+        SelectAbility(abilitySlot2, MagicBook.BookState.Ability2);
     }
 
-    private void SelectAbility(BaseAbility ability)
+    private void SelectAbility(BaseAbility ability, MagicBook.BookState bookState)
     {
         if (ability == null) return;
 
@@ -58,17 +58,23 @@ public class AbilityManager : MonoBehaviour
         if (activeAbility != null  && activeAbility != ability)
         {
             activeAbility.HideIndicator();
+            magicBook.SetState(MagicBook.BookState.Orbiting);
         }
 
         if (activeAbility == ability)
         {
             activeAbility.HideIndicator();
             activeAbility = null;
+            magicBook.SetState(MagicBook.BookState.Orbiting);
             return;
         }
 
         activeAbility = ability;
         activeAbility.ShowIndicator();
+        if (magicBook != null)
+        {
+            magicBook.SetState(bookState);
+        }
     }
 
     private void OnFire(InputAction.CallbackContext context)
@@ -78,5 +84,9 @@ public class AbilityManager : MonoBehaviour
 
        activeAbility.Use();
        activeAbility = null;
+       if (magicBook != null)
+       {
+           magicBook.SetState(MagicBook.BookState.Orbiting);
+       }
     }
 }
