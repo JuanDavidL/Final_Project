@@ -5,12 +5,21 @@ using UnityEngine;
 public class CauldronLogic : MonoBehaviour
 {
     [Header("Configuración de Recetas")]
-    [SerializeField] private List<RecipeData> allRecipes;
     [SerializeField] private ItemData potionBasura;
+    
+    // Esta es la receta que el jugador eligió en la UI o el libro // por definir
+    private RecipeData selectedRecipe;
 
     [Header("Estado del Caldero")]
     // lista de ingredientes actualmente dentro del caldero
     private List<InventoryManager.InventorySlot> currentIngredients = new List<InventoryManager.InventorySlot>();
+
+    // MÉTODO NUEVO: Para cuando el jugador selecciona una receta en el menú
+    public void SelectRecipe(RecipeData recipe)
+    {
+        selectedRecipe = recipe;
+        Debug.Log($"Receta seleccionada: {recipe.recipeName}. ¡A cocinar!");
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -45,7 +54,6 @@ public class CauldronLogic : MonoBehaviour
 
         // devuelve al pool
         item.transform.localScale = initialScale;
-
         if (rb != null) rb.isKinematic = false;
 
         IngredientPool.Instance.Release(item);
@@ -57,57 +65,66 @@ public class CauldronLogic : MonoBehaviour
         if (existing != null) existing.quantity++;
         else currentIngredients.Add(new InventoryManager.InventorySlot { item = data, quantity = 1 });
 
-        Debug.Log($"Caldero contiene: {data.itemName} x{existing?.quantity ?? 1}");
+        Debug.Log($"Caldero: {data.itemName} x{(existing != null ? existing.quantity : 1)}");
     }
 
     public void RefundIngredients()
     {
         if (currentIngredients.Count == 0) return;
 
-        Debug.Log("Devolviendo ingredientes al inventario...");
-
         foreach (var slot in currentIngredients)
         {
-            // Accedemos al Singleton para devolver la cantidad exacta
             InventoryManager.Instance.AddItem(slot.item, slot.quantity);
         }
 
         // limpiamos la lista local => el caldero quede vacío
         currentIngredients.Clear();
-
         Debug.Log("Caldero vaciado y recursos devueltos.");
     }
 
-    public void Craft()
+    // AHORA MUCHO MÁS SIMPLE: Solo comparamos contra la elegida
+    public void TryCraft()
     {
-        ItemData result = CheckRecipe(currentIngredients, allRecipes);
-        Debug.Log($"¡Resultado: {result.itemName}!");
+        if (selectedRecipe == null)
+        {
+            Debug.LogWarning("¡No has seleccionado ninguna receta!");
+            return;
+        }
 
-        currentIngredients.Clear();
+        if (IsRecipeMatch(selectedRecipe))
+        {
+            Debug.Log($"<color=green>¡Éxito!</color> Crafteaste: {selectedRecipe.recipeName}");
+            Debug.Log($"Dificultad: {selectedRecipe.difficulty} | Valor: {selectedRecipe.marketValue}");
+            FinalizeCraft(selectedRecipe.resultPotion);
+        }
+        else
+        {
+            Debug.Log("<color=red>Fallo:</color> Ingredientes incorrectos para esta receta.");
+            FinalizeCraft(potionBasura);
+        }
     }
 
-    public ItemData CheckRecipe(List<InventoryManager.InventorySlot> cauldronContent, List<RecipeData> allRecipes)
+    private bool IsRecipeMatch(RecipeData recipe)
     {
-        foreach (var recipe in allRecipes)
-        {
-            if (IsMatch(recipe.requiredIngredients, cauldronContent))
-            {
-                return recipe.resultPotion;
-            }
-        }
-        return potionBasura; // referencia para poción fallida / Falta agregar...
-    }
+        // 1. Verificación básica: ¿Misma cantidad de tipos de ingredientes?
+        if (recipe.requiredIngredients.Count != currentIngredients.Count) return false;
 
-    private bool IsMatch(List<InventoryManager.InventorySlot> recipeReq, List<InventoryManager.InventorySlot> cauldron)
-    {
-        if (recipeReq.Count != cauldron.Count) return false;
-
-        // Comparamos ID y cantidad
-        foreach (var req in recipeReq)
+        // 2. Verificación detallada
+        foreach (var required in recipe.requiredIngredients)
         {
-            var found = cauldron.Find(c => c.item.id == req.item.id && c.quantity == req.quantity);
-            if (found == null) return false;
+            var inCauldron = currentIngredients.Find(x => x.item == required.item);
+
+            if (inCauldron == null || inCauldron.quantity != required.quantity)
+                return false;
         }
+
         return true;
+    }
+
+    private void FinalizeCraft(ItemData result)
+    {
+        currentIngredients.Clear();
+        // Aquí iría el spawn del objeto físico de la poción
+        Debug.Log($"Objeto generado: {result.itemName}");
     }
 }
