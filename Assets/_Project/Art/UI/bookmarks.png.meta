@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6d4ebc5a5d4b9db46b3bb25e45b1c2d2
+guid: e3ad9d7c2711e4c4cb4e1dce82692a2d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sells_full_0
+      name: bookmarks_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 49
-        width: 94
-        height: 94
+        x: 15
+        y: 120
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,20 +125,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d618ff3b0b2b17446a5e09299cfefdd3
-      internalID: -2080449234
+      spriteID: 79d9e409ec596a94e9c83a23166f4201
+      internalID: 334219090
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sells_full_1
+      name: bookmarks_1
       rect:
         serializedVersion: 2
-        x: 34
-        y: 123
-        width: 28
-        height: 20
+        x: 44
+        y: 120
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6f3e11be2eadcd4cb68685b855ca6f0
-      internalID: -626539080
+      spriteID: 99f15d424363d2f4cb82d1c15a422a80
+      internalID: -256905816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sells_full_2
+      name: bookmarks_2
       rect:
         serializedVersion: 2
-        x: 66
-        y: 123
-        width: 28
-        height: 20
+        x: 15
+        y: 97
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +169,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7bd184645e0b4d4eafa18a4bc3a70b7
-      internalID: 1950467615
+      spriteID: 63966fed650f802489ca718ae3f4beb4
+      internalID: -1389880274
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sells_full_3
+      name: bookmarks_3
       rect:
         serializedVersion: 2
-        x: 2
-        y: 99
-        width: 28
-        height: 20
+        x: 44
+        y: 97
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,20 +191,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc369409e51967f4da4786bee46c5b8e
-      internalID: 1087148128
+      spriteID: 7366563e81f1b3b4d8e543126d5008b3
+      internalID: -1866996188
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sells_full_4
+      name: bookmarks_4
       rect:
         serializedVersion: 2
-        x: 34
-        y: 99
-        width: 28
-        height: 20
+        x: 15
+        y: 74
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +213,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d2aaf0314b8dcb459aa2e9cc2686fc6
-      internalID: 11818652
+      spriteID: ecb744155f5e1524eb88ebe611a4abbc
+      internalID: 834530644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sells_full_5
+      name: bookmarks_5
       rect:
         serializedVersion: 2
-        x: 66
-        y: 99
-        width: 28
-        height: 20
+        x: 44
+        y: 74
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,20 +235,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cbe0d610b8647c43b84bf0af50dfa94
-      internalID: -747184077
+      spriteID: 9bf6e48855e74ed40a0a413cca4f1b44
+      internalID: 1021245372
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sells_full_6
+      name: bookmarks_6
       rect:
         serializedVersion: 2
-        x: 2
-        y: 75
-        width: 28
-        height: 20
+        x: 15
+        y: 35
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,20 +257,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29db5210b82e6894fa43466f97a37ba6
-      internalID: 1598803235
+      spriteID: 678c5145e7bfb4d4d955fa7aeb2c3d11
+      internalID: 17183815
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sells_full_7
+      name: bookmarks_7
       rect:
         serializedVersion: 2
-        x: 34
-        y: 75
-        width: 28
-        height: 20
+        x: 44
+        y: 35
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,20 +279,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f21fed1bed03db74899bdc54fb83d02e
-      internalID: -1724872910
+      spriteID: f324e55451253f249b4cea2f51f68f1c
+      internalID: 656595070
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sells_full_8
+      name: bookmarks_8
       rect:
         serializedVersion: 2
-        x: 66
-        y: 75
-        width: 28
-        height: 20
+        x: 15
+        y: 12
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -301,20 +301,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2858ee1db7b9cc644a33e50c3badfe2a
-      internalID: 1699424646
+      spriteID: 87cf1a08e445ba2408d1ceb2a58f0080
+      internalID: -713090532
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sells_full_9
+      name: bookmarks_9
       rect:
         serializedVersion: 2
-        x: 2
-        y: 51
-        width: 28
-        height: 20
+        x: 44
+        y: 12
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -323,184 +323,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69938c8ff2f33a14aa3b1689e9f32fa6
-      internalID: -1696772107
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sells_full_10
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 51
-        width: 28
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c423d5da7544ed248b58f129d3d92202
-      internalID: 551588214
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sells_full_11
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 51
-        width: 28
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 91e23c38f53951b4bb6c1510861de3fe
-      internalID: 1374706877
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sells_full_12
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 27
-        width: 28
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7723bf6c9f8cac641b2f7f5e490f7f0d
-      internalID: 1262882347
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sells_full_13
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 27
-        width: 28
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 425f46d8da2dfe14eb43f9f1a975cbb4
-      internalID: -1024558779
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sells_full_14
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 27
-        width: 28
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fd6faa506a82db64aa6888e84076f0ce
-      internalID: -2101916005
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sells_full_15
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 3
-        width: 28
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2c0f9b6cd3fd52248b3d48484bc060b9
-      internalID: 1175952787
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sells_full_16
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 3
-        width: 28
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5af93dfa099456e499f1e0079c38e9c7
-      internalID: -967239523
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sells_full_17
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 3
-        width: 28
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b01ee5708f580cc4e82accec08658aa2
-      internalID: -1009193791
+      spriteID: 11b46b05be0cef94396c02d28cfa7a24
+      internalID: -42545535
       vertices: []
       indices: 
       edges: []
@@ -509,7 +333,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: bf68cdb2b3f9cd74ebf43ae1abd27d77
+    spriteID: 3c02de26520f9f0439f9ebfdff2c49e0
     internalID: 0
     vertices: []
     indices: 
@@ -521,24 +345,16 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      sells_full_0: -2080449234
-      sells_full_1: -626539080
-      sells_full_10: 551588214
-      sells_full_11: 1374706877
-      sells_full_12: 1262882347
-      sells_full_13: -1024558779
-      sells_full_14: -2101916005
-      sells_full_15: 1175952787
-      sells_full_16: -967239523
-      sells_full_17: -1009193791
-      sells_full_2: 1950467615
-      sells_full_3: 1087148128
-      sells_full_4: 11818652
-      sells_full_5: -747184077
-      sells_full_6: 1598803235
-      sells_full_7: -1724872910
-      sells_full_8: 1699424646
-      sells_full_9: -1696772107
+      bookmarks_0: 334219090
+      bookmarks_1: -256905816
+      bookmarks_2: -1389880274
+      bookmarks_3: -1866996188
+      bookmarks_4: 834530644
+      bookmarks_5: 1021245372
+      bookmarks_6: 17183815
+      bookmarks_7: 656595070
+      bookmarks_8: -713090532
+      bookmarks_9: -42545535
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

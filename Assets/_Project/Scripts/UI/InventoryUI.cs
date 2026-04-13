@@ -4,18 +4,21 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     public GameObject inventoryPanel;
+    public GameObject itemGridPanel;
     public Transform itemGrid;
     public GameObject slotPrefab;
 
     public void Show()
     {
-        RefreshUI();
         inventoryPanel.SetActive(true);
+        itemGridPanel.SetActive(true);
+        RefreshUI();
     }
 
     public void Hide()
     {
         inventoryPanel.SetActive(false);
+        itemGridPanel.SetActive(false);
     }
    
 

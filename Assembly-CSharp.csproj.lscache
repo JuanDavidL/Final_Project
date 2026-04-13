@@ -59,24 +59,30 @@ Assets/
   Managers/
    ChangeScene.cs
    InventoryManager.cs
+  Systems/SaveSystem.cs
+ _Project/Scripts/Data/
+  ItemData.cs
+  ScriptableObject/
+   InventorySO.cs
+   ItemDataOld.cs
+ _Project/Scripts/Gameplay/Abilities/
+  AbilityManager.cs
+  BaseAbility.cs
+  Fireball.cs
+  FireballProjectile.cs
+  FrostNova.cs
+ _Project/Scripts/Gameplay/Enemies/
+  Destructible.cs
+  LootTable.cs
+ _Project/Scripts/Gameplay/
+  Environment/CollectOrb.cs
+  Player/
+   CollectAura.cs
+   MagicBook.cs
+   PlayerBlink.cs
+   PlayerMovement.cs
  _Project/Scripts/
-  Data/ItemData.cs
-  Gameplay/Abilities/
-   AbilityManager.cs
-   BaseAbility.cs
-   Fireball.cs
-   FireballProjectile.cs
-   FrostNova.cs
-  Gameplay/Enemies/
-   Destructible.cs
-   LootTable.cs
-  Gameplay/
-   Environment/CollectOrb.cs
-   Player/
-    CollectAura.cs
-    MagicBook.cs
-    PlayerBlink.cs
-    PlayerMovement.cs
+  TEST/InventoryTester.cs
   UI/
    BookAnimatorController.cs
    BookUI.cs
