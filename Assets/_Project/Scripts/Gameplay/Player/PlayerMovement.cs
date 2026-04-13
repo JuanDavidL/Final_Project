@@ -17,17 +17,18 @@ public class PlayerMovement : MonoBehaviour
     private InputAction moveAction;
     private Rigidbody rb;
     
-    // Referencia al SpriteRenderer que está en el objeto hijo (MageHoodMove)
+    // Referencias a componentes del hijo (MageHoodMove)
     private SpriteRenderer spriteRenderer;
+    private Animator anim;
 
     void Awake()
     {
-        // Obtener componentes en el objeto principal (Player)
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
 
-        // BUSCAR EL COMPONENTE EN EL HIJO (MageHoodMove)
+        // BUSCAR COMPONENTES EN EL HIJO
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        anim = GetComponentInChildren<Animator>();
 
         if (playerInput != null)
         {
@@ -35,44 +36,44 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void OnEnable()
-    {
-        moveAction?.Enable();
-    }
-
-    void OnDisable()
-    {
-        moveAction?.Disable();
-    }
+    void OnEnable() { moveAction?.Enable(); }
+    void OnDisable() { moveAction?.Disable(); }
 
     void FixedUpdate()
     {
-        // Leer entrada
         moveInput = moveAction.ReadValue<Vector2>();
         
-        // Aplicar velocidad al Rigidbody
         Vector3 moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
         rb.linearVelocity = new Vector3(moveDirection.x * moveSpeed, rb.linearVelocity.y, moveDirection.z * moveSpeed);
 
-        // Lógica para voltear el Sprite horizontalmente
+        // --- ACTUALIZACIÓN DE ANIMACIONES Y VISUALES ---
+        
+        // Comprobamos que existan los componentes en el hijo
+        if (anim != null)
+        {
+            // Calculamos la magnitud del movimiento (da un valor positivo si te mueves)
+            // Esto activará Speed > 0 en tu Animator
+            float currentSpeed = moveInput.magnitude; 
+            anim.SetFloat("Speed", currentSpeed);
+        }
+
         if (spriteRenderer != null) 
         {
+            // Voltear el sprite
             if (moveInput.x > 0.1f)
             {
-                spriteRenderer.flipX = false; // Mirar a la derecha
+                spriteRenderer.flipX = false; // Derecha
             }
             else if (moveInput.x < -0.1f)
             {
-                spriteRenderer.flipX = true;  // Mirar a la izquierda
+                spriteRenderer.flipX = true;  // Izquierda
             }
         }
     }
 
     void LateUpdate()
     {
-        // Seguimiento de cámara
         if (cameraTransform == null) return;
-
         Vector3 targetPosition = transform.position + cameraOffset;
         cameraTransform.position = Vector3.Lerp(cameraTransform.position, targetPosition, cameraSmooth * Time.deltaTime);
     }
