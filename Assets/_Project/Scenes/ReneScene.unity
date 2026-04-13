@@ -6154,6 +6154,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3288806680164033792, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f72bbf0c2a12cd040954bd6ada21fd48, type: 2}
     - target: {fileID: 4855903435295352071, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: magicBook
       value: 
