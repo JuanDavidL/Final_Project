@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95669384dc86f2a4397c353f49750447, type: 3}
-  m_Name: PlayerInventory
+  m_Name: PlayerInventoryOld
   m_EditorClassIdentifier: Assembly-CSharp::InventorySO
   slots:
   - item: {fileID: 11400000, guid: 8d954d9c40251cb4d9a4864db6e9726a, type: 2}
