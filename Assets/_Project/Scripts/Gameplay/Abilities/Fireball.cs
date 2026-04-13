@@ -62,9 +62,13 @@ public class Fireball : BaseAbility
             return;
 
         Vector3 mouseWorldPosition = GetMouseWorldPosition();
-        Vector3 spwanPosition = magicBook != null ? magicBook.GetBookPosition() : transform.position;
+        Vector3 spwanPosition = magicBook != null ? magicBook.GetBookPosition(): transform.position;
         Vector3 direction = (mouseWorldPosition - spwanPosition).normalized;
+        direction.y = 0f;
         direction.Normalize();
+
+        spwanPosition = spwanPosition + direction * 0.5f; // Adjust spawn height if needed
+
 
         Vector3 finalPosition = new Vector3(spwanPosition.x, transform.position.y, spwanPosition.z);
         GameObject projectile = Instantiate(projectilePrefab, finalPosition, Quaternion.identity);
