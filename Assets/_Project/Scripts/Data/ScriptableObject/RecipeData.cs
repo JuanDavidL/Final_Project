@@ -19,5 +19,9 @@ public class RecipeData : ScriptableObject
 
     [Header("Probabilidad")]
     [Range(0, 100)] public float successChance = 80f; // 80% de éxito por defecto
+
+    [Header("Procesamiento")]
+    public int requiredLeverPresses = 3; // Por defecto 3
+
     public float marketValue; // Cuántos creditos / recomepensa recibirá el jugador 
 }
