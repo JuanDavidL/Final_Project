@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Item_07
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 7
-  itemName: F 02
+  itemName: Frozen Flower
   itemIcon: {fileID: -501208460, guid: 36488b3fe35e2df45bb54d8535adb45c, type: 3}
-  itemDescription: 
+  itemDescription: Frozen Flower emits chilling energy, slowing enemies and reducing
+    damage taken. Its icy petals preserve life in harsh climates, offering protection
+    and resilience to those who carry it.

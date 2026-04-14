@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Item_06
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 6
-  itemName: F 01
+  itemName: Golden Flower
   itemIcon: {fileID: 595451726, guid: 10910ced84f467b4babdbf8ae96d7919, type: 3}
-  itemDescription: 
+  itemDescription: Golden Flower radiates warm energy, restoring health over time
+    and boosting vitality. A rare plant cherished by healers, it brings balance,
+    resilience, and gentle rejuvenation.
