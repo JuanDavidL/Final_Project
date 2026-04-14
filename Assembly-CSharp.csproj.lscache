@@ -74,8 +74,13 @@ Assets/
  _Project/Scripts/Gameplay/Enemies/
   Destructible.cs
   LootTable.cs
+ _Project/Scripts/Gameplay/Environment/
+  CollectOrb.cs
+  TableCraft/
+   CauldronLogic.cs
+   IngredientDispenser.cs
  _Project/Scripts/Gameplay/
-  Environment/CollectOrb.cs
+  Items/DraggableItem.cs
   Player/
    CollectAura.cs
    MagicBook.cs
