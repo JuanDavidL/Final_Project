@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2dc1c18ee74abe41a219e166a753ece, type: 3}
   m_Name: Re_FiltroMana
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
-  recipeID: 1
-  recipeName: FiltroMana
+  recipeID: 2
+  recipeName: Filtro de Mana
   resultPotion: {fileID: 0}
   requiredIngredients:
   - item: {fileID: 11400000, guid: ec3c10fda64830b49b7d0083c3932e56, type: 2}

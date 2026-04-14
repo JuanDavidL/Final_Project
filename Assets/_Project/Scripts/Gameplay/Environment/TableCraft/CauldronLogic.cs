@@ -7,14 +7,14 @@ public class CauldronLogic : MonoBehaviour
     [Header("Configuración de Recetas")]
     [SerializeField] private ItemData potionBasura;
     
-    // Esta es la receta que el jugador eligió en la UI o el libro // por definir
+    // esta es la receta que el jugador eligió en la UI o el libro // por definir
     private RecipeData selectedRecipe;
 
     [Header("Estado del Caldero")]
     // lista de ingredientes actualmente dentro del caldero
     private List<InventoryManager.InventorySlot> currentIngredients = new List<InventoryManager.InventorySlot>();
 
-    // MÉTODO NUEVO: Para cuando el jugador selecciona una receta en el menú
+    // cuando el jugador selecciona una receta en el menú
     public void SelectRecipe(RecipeData recipe)
     {
         selectedRecipe = recipe;
@@ -40,7 +40,7 @@ public class CauldronLogic : MonoBehaviour
             rb.isKinematic = true;
         }
 
-        // Efecto de encogimiento
+        // efecto de encogimiento -> opcional usarlos para transportar las pociones
         float duration = 0.5f;
         float elapsed = 0f;
         Vector3 initialScale = item.transform.localScale;
@@ -82,7 +82,6 @@ public class CauldronLogic : MonoBehaviour
         Debug.Log("Caldero vaciado y recursos devueltos.");
     }
 
-    // AHORA MUCHO MÁS SIMPLE: Solo comparamos contra la elegida
     public void TryCraft()
     {
         if (selectedRecipe == null)
@@ -124,7 +123,7 @@ public class CauldronLogic : MonoBehaviour
     private void FinalizeCraft(ItemData result)
     {
         currentIngredients.Clear();
-        // Aquí iría el spawn del objeto físico de la poción
+        // spawn del objeto físico de la poción // por definir
         Debug.Log($"Objeto generado: {result.itemName}");
     }
 }

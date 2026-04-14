@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2dc1c18ee74abe41a219e166a753ece, type: 3}
   m_Name: Re_SaludEstelar
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
-  recipeID: 0
+  recipeID: 1
   recipeName: Salud Estelar
   resultPotion: {fileID: 0}
   requiredIngredients:
