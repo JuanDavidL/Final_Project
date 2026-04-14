@@ -5,9 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ground
-  - Caldero
   - Ingredientes
-  - Mesa
+  - Deposito
+  - Estantes
   layers:
   - Default
   - TransparentFX
@@ -17,9 +17,9 @@ TagManager:
   - UI
   - 
   - 
-  - Caldero
+  - Deposito
   - Ingredientes
-  - Mesa
+  - Estantes
   - 
   - 
   - 

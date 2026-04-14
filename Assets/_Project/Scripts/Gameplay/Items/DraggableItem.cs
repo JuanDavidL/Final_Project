@@ -3,6 +3,11 @@ using UnityEngine.EventSystems;
 
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    [Header("Configuración de Datos")]
+    public ItemData itemContenido;
+
+    private Vector3 _posicionInicial;
+    private Quaternion _rotacionInicial;
     private Camera _mainCamera;
     private Rigidbody _rb;
     private float _zDistance;
@@ -11,6 +16,9 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         _mainCamera = Camera.main;
         _rb = GetComponent<Rigidbody>();
+        // posición inicial en el estante
+        _posicionInicial = transform.position;
+        _rotacionInicial = transform.rotation;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -21,27 +29,45 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnDrag(PointerEventData eventData)
     {
-        Vector3 mousePos = eventData.position; // El evento ya nos da la posición del mouse
+        Vector3 mousePos = eventData.position;
         mousePos.z = _zDistance;
         Vector3 worldPos = _mainCamera.ScreenToWorldPoint(mousePos);
 
-        transform.position = new Vector3(worldPos.x, worldPos.y + 0.5f, worldPos.z);
+        transform.position = new Vector3(worldPos.x, worldPos.y + 0.2f, worldPos.z);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         _rb.isKinematic = false;
-        CheckIfOverCauldron();
+
+        if (IsOverDeposit())
+        {
+            // Aquí notificaremos a la máquina que reste el material // PENDIENTE
+            Debug.Log($"Tarro de {itemContenido.itemName} usado.");
+        }
+
+        RegresarAlEstante();
     }
 
-    private void CheckIfOverCauldron()
+    private void RegresarAlEstante()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 5f))
+        transform.position = _posicionInicial;
+        transform.rotation = _rotacionInicial;
+        _rb.linearVelocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+    }
+
+    private bool IsOverDeposit()
+    {
+        // Lanzamos el rayo
+        bool hitSomething = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 2f);
+
+        // CRÍTICO: Primero verificamos si el rayo golpeó algo antes de preguntar por el Tag
+        if (hitSomething && hit.collider != null)
         {
-            if (hit.collider.CompareTag("Caldero"))
-            {
-                Debug.Log("Soltado con éxito sobre el caldero.");
-            }
+            return hit.collider.CompareTag("Deposito");
         }
+
+        return false;
     }
 }

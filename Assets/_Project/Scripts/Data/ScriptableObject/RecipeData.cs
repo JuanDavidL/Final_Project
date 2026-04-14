@@ -16,5 +16,8 @@ public class RecipeData : ScriptableObject
 
     [Header("Atributos de Juego")]
     [Range(1, 3)] public int difficulty; // 1 = Fácil, 5 = Legendaria / Posibles cambios
+
+    [Header("Probabilidad")]
+    [Range(0, 100)] public float successChance = 80f; // 80% de éxito por defecto
     public float marketValue; // Cuántos creditos / recomepensa recibirá el jugador 
 }
