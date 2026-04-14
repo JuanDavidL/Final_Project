@@ -3,20 +3,20 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
+    public GameObject menuPanel;
+    public Camera mainCamera;
 
     public void ChangeToScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public void ToggleMenu()
     {
-        
+        if (menuPanel != null)
+        {
+            menuPanel.SetActive(!menuPanel.activeSelf);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
