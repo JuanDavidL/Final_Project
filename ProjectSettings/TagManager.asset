@@ -8,6 +8,7 @@ TagManager:
   - Caldero
   - Ingredientes
   - Mesa
+  - Enemy
   layers:
   - Default
   - TransparentFX
