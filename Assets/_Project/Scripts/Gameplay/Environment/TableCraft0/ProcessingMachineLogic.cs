@@ -28,8 +28,8 @@ public class ProcessingMachineLogic : MonoBehaviour
     [SerializeField] private Transform deliveryPoint; // NUEVO: Punto donde aparece la poción
 
     // Distancias del contenedor (Ajusta estos valores según tu modelo)
-    private float zAbierto = 0f;
-    private float zCerrado = 1.5f;
+    private float zAbierto = 1.05f;
+    private float zCerrado = 2.5f;
 
     public void HandleButtonPress(MachineButton.ButtonType tipo)
     {

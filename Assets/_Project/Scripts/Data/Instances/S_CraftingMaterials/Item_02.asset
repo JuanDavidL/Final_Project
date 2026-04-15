@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 2
   itemName: Or 02
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 77945722, guid: 33357870b3a367a4185060d3bd3c59dc, type: 3}
   itemDescription: 

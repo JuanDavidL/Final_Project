@@ -183,10 +183,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LootTable
   CollectablePrefab: {fileID: 7863539330069029907, guid: c99172be5b612754daf9605ed31361ce, type: 3}
   drops:
-  - item: {fileID: 11400000, guid: a215784442437a448b19aba1abe61ffd, type: 2}
+  - item: {fileID: 11400000, guid: 8a74c0e6d30305e408e697469bdcde17, type: 2}
     amount: 1
     dropChance: 0.875
-  - item: {fileID: 11400000, guid: 0edb7b25430ce5c46824661103cf7e34, type: 2}
+  - item: {fileID: 11400000, guid: f64fdb1289db28d42a45e80bc0469c8d, type: 2}
     amount: 2
     dropChance: 0.571
   - item: {fileID: 11400000, guid: 8bf35bc26b2000c44bcd73b91638c038, type: 2}
@@ -1569,10 +1569,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LootTable
   CollectablePrefab: {fileID: 7863539330069029907, guid: c99172be5b612754daf9605ed31361ce, type: 3}
   drops:
-  - item: {fileID: 11400000, guid: a215784442437a448b19aba1abe61ffd, type: 2}
-    amount: 1
+  - item: {fileID: 11400000, guid: 8a74c0e6d30305e408e697469bdcde17, type: 2}
+    amount: 2
     dropChance: 0.875
-  - item: {fileID: 11400000, guid: 0edb7b25430ce5c46824661103cf7e34, type: 2}
+  - item: {fileID: 11400000, guid: f64fdb1289db28d42a45e80bc0469c8d, type: 2}
     amount: 2
     dropChance: 0.571
   - item: {fileID: 11400000, guid: 8bf35bc26b2000c44bcd73b91638c038, type: 2}
@@ -2862,10 +2862,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LootTable
   CollectablePrefab: {fileID: 7863539330069029907, guid: c99172be5b612754daf9605ed31361ce, type: 3}
   drops:
-  - item: {fileID: 11400000, guid: a215784442437a448b19aba1abe61ffd, type: 2}
+  - item: {fileID: 11400000, guid: 8a74c0e6d30305e408e697469bdcde17, type: 2}
     amount: 1
     dropChance: 0.875
-  - item: {fileID: 11400000, guid: 0edb7b25430ce5c46824661103cf7e34, type: 2}
+  - item: {fileID: 11400000, guid: f64fdb1289db28d42a45e80bc0469c8d, type: 2}
     amount: 2
     dropChance: 0.571
   - item: {fileID: 11400000, guid: 8bf35bc26b2000c44bcd73b91638c038, type: 2}
