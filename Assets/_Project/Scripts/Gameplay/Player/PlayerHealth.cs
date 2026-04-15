@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI; // NECESARIO para controlar el Slider
+using UnityEngine.UI; // Necesario para Image
 using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
     
     [Header("UI Integration")]
-    public Slider healthSlider;
+    public Image healthFillImage; // Arrastra aquí la imagen con el Fill rosa
 
     [Header("Damage Settings")]
     public float invulnerabilityDuration = 1f;
@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Regeneration Settings")]
     public float regenWaitTime = 5f;
-    public float regenRate = 10f;
+    public float regenRate = 5f; 
     private float lastDamageTime;
 
     private Animator anim;
@@ -27,13 +27,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         anim = GetComponentInChildren<Animator>();
-
-        // Inicializar la barra de vida
-        if (healthSlider != null)
-        {
-            healthSlider.maxValue = maxHealth;
-            healthSlider.value = currentHealth;
-        }
+        ActualizarUI();
     }
 
     void Update()
@@ -53,13 +47,9 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth -= damage;
         lastDamageTime = Time.time;
+        ActualizarUI();
 
-        ActualizarUI(); // Actualizar barra al recibir daño
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
+        if (currentHealth <= 0) Die();
         else
         {
             if (anim != null) anim.SetTrigger("Hurt");
@@ -71,22 +61,23 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth += regenRate * Time.deltaTime;
         currentHealth = Mathf.Min(currentHealth, maxHealth);
-        ActualizarUI(); // Actualizar barra mientras se cura
+        ActualizarUI();
     }
 
     private void ActualizarUI()
     {
-        if (healthSlider != null)
+        if (healthFillImage != null)
         {
-            healthSlider.value = currentHealth;
+            // El fillAmount espera un valor entre 0 y 1
+            healthFillImage.fillAmount = currentHealth / maxHealth;
         }
     }
 
     private IEnumerator BecomeInvulnerable()
     {
         isInvulnerable = true;
-        // Efecto visual de parpadeo (opcional)
         SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+        // Parpadeo simple
         for (float i = 0; i < invulnerabilityDuration; i += 0.2f)
         {
             if(sr) sr.enabled = !sr.enabled;
@@ -102,18 +93,11 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = 0;
         ActualizarUI();
         if (anim != null) anim.SetTrigger("Die");
-
         if (GetComponent<PlayerMovement>() != null) GetComponent<PlayerMovement>().enabled = false;
-    }
-
-    // Detectar contacto con enemigos
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy")) TakeDamage(10);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Enemy")) TakeDamage(10);
+        if (other.CompareTag("Enemy")) TakeDamage(10f);
     }
 }
