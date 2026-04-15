@@ -5,9 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ground
-  - Caldero
   - Ingredientes
-  - Mesa
+  - Deposito
+  - Estantes
   - Enemy
   layers:
   - Default
@@ -18,9 +18,9 @@ TagManager:
   - UI
   - 
   - 
-  - Caldero
+  - Deposito
   - Ingredientes
-  - Mesa
+  - Estantes
   - 
   - 
   - 

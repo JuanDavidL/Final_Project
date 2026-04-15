@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2dc1c18ee74abe41a219e166a753ece, type: 3}
+  m_Name: Re_SueroHipersalto
+  m_EditorClassIdentifier: Assembly-CSharp::RecipeData
+  recipeID: 3
+  recipeName: Suero de Hipersalto
+  resultPotion: {fileID: 11400000, guid: 5a9d461421c8fff4f9010650f94c289a, type: 2}
+  potionPrefab: {fileID: 4194181679092616756, guid: b4e245dc7b4bb19428f70372e893c123, type: 3}
+  requiredIngredients:
+  - item: {fileID: 11400000, guid: a215784442437a448b19aba1abe61ffd, type: 2}
+    quantity: 1
+  - item: {fileID: 11400000, guid: 0edb7b25430ce5c46824661103cf7e34, type: 2}
+    quantity: 1
+  difficulty: 2
+  successChance: 80
+  requiredLeverPresses: 5
+  marketValue: 120
