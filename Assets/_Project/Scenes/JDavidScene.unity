@@ -666,6 +666,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 312962019}
+  - {fileID: 497004998}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &244899671
@@ -709,7 +710,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2742321790074347042, guid: 126e15800cf4e47428194fbf100c8263, type: 3}
       propertyPath: inventory.Array.size
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2742321790074347042, guid: 126e15800cf4e47428194fbf100c8263, type: 3}
       propertyPath: inventory.Array.data[0].item
@@ -732,6 +733,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: a215784442437a448b19aba1abe61ffd, type: 2}
     - target: {fileID: 2742321790074347042, guid: 126e15800cf4e47428194fbf100c8263, type: 3}
+      propertyPath: inventory.Array.data[5].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 0edb7b25430ce5c46824661103cf7e34, type: 2}
+    - target: {fileID: 2742321790074347042, guid: 126e15800cf4e47428194fbf100c8263, type: 3}
+      propertyPath: inventory.Array.data[6].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 95352bdcd1f51fe4fbebdd323e2213c3, type: 2}
+    - target: {fileID: 2742321790074347042, guid: 126e15800cf4e47428194fbf100c8263, type: 3}
+      propertyPath: inventory.Array.data[7].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 383ef6a0db0397546a31fab7c7036345, type: 2}
+    - target: {fileID: 2742321790074347042, guid: 126e15800cf4e47428194fbf100c8263, type: 3}
       propertyPath: inventory.Array.data[0].quantity
       value: 10
       objectReference: {fileID: 0}
@@ -749,7 +762,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2742321790074347042, guid: 126e15800cf4e47428194fbf100c8263, type: 3}
       propertyPath: inventory.Array.data[4].quantity
-      value: 1
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742321790074347042, guid: 126e15800cf4e47428194fbf100c8263, type: 3}
+      propertyPath: inventory.Array.data[5].quantity
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742321790074347042, guid: 126e15800cf4e47428194fbf100c8263, type: 3}
+      propertyPath: inventory.Array.data[6].quantity
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742321790074347042, guid: 126e15800cf4e47428194fbf100c8263, type: 3}
+      propertyPath: inventory.Array.data[7].quantity
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8262214773352859969, guid: 126e15800cf4e47428194fbf100c8263, type: 3}
       propertyPath: m_Name
@@ -1000,7 +1025,7 @@ GameObject:
   - component: {fileID: 497004998}
   - component: {fileID: 497004997}
   m_Layer: 0
-  m_Name: IngredientPool
+  m_Name: PoolManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1018,9 +1043,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db67cc20d077b404bb954e0052c872b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IngredientPool
-  prefabCubo: {fileID: 2942784109722534772, guid: 443fcc862009ebf4ab88165a1e2f2e59, type: 3}
-  defaultCapacity: 20
-  maxSize: 50
+  defaultCapacity: 5
+  maxSize: 10
 --- !u!4 &497004998
 Transform:
   m_ObjectHideFlags: 0
@@ -1029,12 +1053,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497004996}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 234500707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &567316967
 GameObject:
@@ -1316,37 +1340,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1 &577668412
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 577668413}
-  m_Layer: 0
-  m_Name: ------ 5 ------
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &577668413
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 577668412}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &602257635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4284,7 +4277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MachineLever
   machine: {fileID: 7695493505116899254}
-  rotationOffset: {x: 45, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 90, z: 0}
   animationDuration: 0.2
 --- !u!114 &7695493505116899254
 MonoBehaviour:
@@ -4301,6 +4294,7 @@ MonoBehaviour:
   currentState: 0
   selectedRecipe: {fileID: 11400000, guid: 4b4297c9f3408fb4daffeea0cfd5c6c5, type: 2}
   potionBasura: {fileID: 11400000, guid: fe737a65e9d7fff47b29164e7587de91, type: 2}
+  potionBad: {fileID: 6210363796702675786, guid: 9204d2ee4afed7f438b9f3e6374804ad, type: 3}
   btnRojo: {fileID: 7695493505116899252}
   btnAmarillo: {fileID: 1376886521}
   btnVerde: {fileID: 1643369631}
@@ -4364,5 +4358,3 @@ SceneRoots:
   - {fileID: 234500707}
   - {fileID: 1829781774}
   - {fileID: 244899672}
-  - {fileID: 577668413}
-  - {fileID: 497004998}

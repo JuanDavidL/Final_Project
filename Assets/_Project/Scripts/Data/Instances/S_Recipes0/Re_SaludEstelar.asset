@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   recipeID: 1
   recipeName: Salud Estelar
-  resultPotion: {fileID: 11400000, guid: d18fb04e44cd0154598acb09011fd2f7, type: 2}
+  resultPotion: {fileID: 11400000, guid: 2a4588e7acd87844fa314f762288ca12, type: 2}
+  potionPrefab: {fileID: 7545619633915105429, guid: da66b08d28cca67448e43b54423a4030, type: 3}
   requiredIngredients:
   - item: {fileID: 11400000, guid: 8a74c0e6d30305e408e697469bdcde17, type: 2}
     quantity: 1

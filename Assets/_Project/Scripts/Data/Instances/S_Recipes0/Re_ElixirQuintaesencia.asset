@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   recipeID: 5
   recipeName: Elixir Quintaesencia
-  resultPotion: {fileID: 11400000, guid: 2a4588e7acd87844fa314f762288ca12, type: 2}
+  resultPotion: {fileID: 11400000, guid: ac6d7142fd2cea74caac48d701fac2c6, type: 2}
+  potionPrefab: {fileID: 3723720713480466164, guid: 7f58581256de6514987688e3a5c12522, type: 3}
   requiredIngredients:
   - item: {fileID: 11400000, guid: 95352bdcd1f51fe4fbebdd323e2213c3, type: 2}
     quantity: 1

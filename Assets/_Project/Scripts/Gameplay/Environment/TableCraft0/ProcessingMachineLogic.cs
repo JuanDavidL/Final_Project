@@ -107,7 +107,6 @@ public class ProcessingMachineLogic : MonoBehaviour
             StartCoroutine(ProcesoEnvioInventario(pocionVisual, prefabAFabricar));
 
             // Limpieza final
-            _lastResult = null;
             btnVerde.SetLight(false);
             currentState = MachineState.Cerrada;
         }
@@ -131,7 +130,7 @@ public class ProcessingMachineLogic : MonoBehaviour
         // 6. Devolver al Pool (Desactivar)
         PotionPool.Instance.Release(prefabUsado, itemVisual);
 
-        Debug.Log($"Poción {_lastResult.itemName} añadida al inventario y devuelta al Pool.");
+        Debug.Log($"Poción {_lastResult} añadida al inventario y devuelta al Pool.");
         _lastResult = null;
     }
 

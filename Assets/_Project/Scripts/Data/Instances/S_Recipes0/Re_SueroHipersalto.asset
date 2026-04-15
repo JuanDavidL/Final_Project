@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   recipeID: 3
   recipeName: Suero de Hipersalto
-  resultPotion: {fileID: 11400000, guid: ac6d7142fd2cea74caac48d701fac2c6, type: 2}
+  resultPotion: {fileID: 11400000, guid: 5a9d461421c8fff4f9010650f94c289a, type: 2}
+  potionPrefab: {fileID: 4194181679092616756, guid: b4e245dc7b4bb19428f70372e893c123, type: 3}
   requiredIngredients:
   - item: {fileID: 11400000, guid: a215784442437a448b19aba1abe61ffd, type: 2}
     quantity: 1
