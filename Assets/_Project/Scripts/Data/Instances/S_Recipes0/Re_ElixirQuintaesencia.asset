@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   recipeID: 5
   recipeName: Elixir Quintaesencia
-  resultPotion: {fileID: 0}
+  resultPotion: {fileID: 11400000, guid: 2a4588e7acd87844fa314f762288ca12, type: 2}
   requiredIngredients:
   - item: {fileID: 11400000, guid: 95352bdcd1f51fe4fbebdd323e2213c3, type: 2}
     quantity: 1
   - item: {fileID: 11400000, guid: 383ef6a0db0397546a31fab7c7036345, type: 2}
     quantity: 1
   difficulty: 3
+  successChance: 50
+  requiredLeverPresses: 12
   marketValue: 500

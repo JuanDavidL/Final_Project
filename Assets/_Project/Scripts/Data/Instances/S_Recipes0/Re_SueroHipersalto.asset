@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2dc1c18ee74abe41a219e166a753ece, type: 3}
-  m_Name: Re_EscudoMagnetico
+  m_Name: Re_SueroHipersalto
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
-  recipeID: 4
-  recipeName: Escudo Magnetico
-  resultPotion: {fileID: 0}
+  recipeID: 3
+  recipeName: Suero de Hipersalto
+  resultPotion: {fileID: 11400000, guid: ac6d7142fd2cea74caac48d701fac2c6, type: 2}
   requiredIngredients:
-  - item: {fileID: 11400000, guid: 8bf35bc26b2000c44bcd73b91638c038, type: 2}
+  - item: {fileID: 11400000, guid: a215784442437a448b19aba1abe61ffd, type: 2}
     quantity: 1
-  - item: {fileID: 11400000, guid: 8c412733f2eb90749b64eb9c93f92916, type: 2}
+  - item: {fileID: 11400000, guid: 0edb7b25430ce5c46824661103cf7e34, type: 2}
     quantity: 1
   difficulty: 2
-  marketValue: 150
+  successChance: 80
+  requiredLeverPresses: 5
+  marketValue: 120

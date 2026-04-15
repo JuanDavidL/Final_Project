@@ -7,7 +7,7 @@ public class MachineLever : MonoBehaviour, IPointerClickHandler
     [SerializeField] private ProcessingMachineLogic machine;
     
     [Header("Configuración de Animación")]
-    [SerializeField] private Vector3 rotationOffset = new Vector3(45f, 0, 0); // Cuánto baja
+    [SerializeField] private Vector3 rotationOffset = new Vector3(0, 90, -90); // Cuánto baja
     [SerializeField] private float animationDuration = 0.2f;
 
     private int _currentPresses = 0;

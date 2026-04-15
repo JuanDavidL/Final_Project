@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2dc1c18ee74abe41a219e166a753ece, type: 3}
-  m_Name: Re_FiltroMana
+  m_Name: Re_EscudoMagnetico
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
-  recipeID: 2
-  recipeName: Filtro de Mana
-  resultPotion: {fileID: 0}
+  recipeID: 4
+  recipeName: Escudo Magnetico
+  resultPotion: {fileID: 11400000, guid: 2a05be332c4c049499e6a730c4bd11a9, type: 2}
   requiredIngredients:
-  - item: {fileID: 11400000, guid: ec3c10fda64830b49b7d0083c3932e56, type: 2}
+  - item: {fileID: 11400000, guid: 8bf35bc26b2000c44bcd73b91638c038, type: 2}
     quantity: 1
-  - item: {fileID: 11400000, guid: b97313eaeabd29e42807aad539fd7aa4, type: 2}
+  - item: {fileID: 11400000, guid: 8c412733f2eb90749b64eb9c93f92916, type: 2}
     quantity: 1
-  difficulty: 1
-  marketValue: 50
+  difficulty: 2
+  successChance: 80
+  requiredLeverPresses: 8
+  marketValue: 150

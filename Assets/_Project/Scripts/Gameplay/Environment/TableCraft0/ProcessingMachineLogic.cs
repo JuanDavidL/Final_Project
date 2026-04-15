@@ -12,6 +12,8 @@ public class ProcessingMachineLogic : MonoBehaviour
     [Header("Configuración de Recetas")]
     [SerializeField] private RecipeData selectedRecipe;
     [SerializeField] private ItemData potionBasura;
+    [SerializeField] private GameObject potionBad;
+    private ItemData _lastResult; // NUEVO: Para guardar la poción obtenida
 
     [Header("Ingredientes en el Contenedor")]
     private List<InventoryManager.InventorySlot> currentIngredients = new List<InventoryManager.InventorySlot>();
@@ -22,7 +24,12 @@ public class ProcessingMachineLogic : MonoBehaviour
     [SerializeField] private MachineButton btnVerde;
 
     [Header("Animaciones/Objetos")]
-    [SerializeField] private GameObject contenedorFisico; // El cajón que sale/entra
+    [SerializeField] private GameObject contenedorFisico;
+    [SerializeField] private Transform deliveryPoint; // NUEVO: Punto donde aparece la poción
+
+    // Distancias del contenedor (Ajusta estos valores según tu modelo)
+    private float zAbierto = 0f;
+    private float zCerrado = 1.5f;
 
     public void HandleButtonPress(MachineButton.ButtonType tipo)
     {
@@ -42,6 +49,7 @@ public class ProcessingMachineLogic : MonoBehaviour
 
     private void TryOpenMachine()
     {
+        // Solo abrimos si está cerrada o acabamos de sacar una poción
         if (currentState == MachineState.Cerrada || currentState == MachineState.Lista)
         {
             currentState = MachineState.Recibiendo;
@@ -49,11 +57,9 @@ public class ProcessingMachineLogic : MonoBehaviour
             btnAmarillo.SetLight(false);
             btnVerde.SetLight(false);
 
-            // Animación simple: Mover el contenedor hacia afuera
-            // LeanTween.moveLocalZ(contenedorFisico, 1.5f, 0.5f);
-            // Debug.Log("Contenedor abierto. Esperando materiales.");
-            // Reemplazo de LeanTween por Corrutina
-            StartCoroutine(MoverContenedor(0f));
+            StopAllCoroutines(); // Evita conflictos de movimiento
+            StartCoroutine(MoverContenedor(zAbierto)); // CORREGIDO: 1.5 es hacia afuera
+            Debug.Log("Máquina Abierta: Esperando materiales.");
         }
     }
 
@@ -61,88 +67,155 @@ public class ProcessingMachineLogic : MonoBehaviour
     {
         if (currentState == MachineState.Recibiendo && currentIngredients.Count > 0)
         {
-            currentState = MachineState.Procesando;
-            btnRojo.SetLight(false);
-            btnAmarillo.SetLight(true);
+            if (ValidarIngredientes())
+            {
+                currentState = MachineState.Procesando;
+                btnRojo.SetLight(false);
+                btnAmarillo.SetLight(true);
 
-            // Animación: El contenedor entra
-            // LeanTween.moveLocalZ(contenedorFisico, 0f, 0.5f);
-            // Debug.Log("Contenedor cerrado. ¡Hora de girar la palanca!");
-            StartCoroutine(MoverContenedor(1.5f));
+                StopAllCoroutines();
+                StartCoroutine(MoverContenedor(zCerrado));
+                Debug.Log("<color=cyan>Materiales correctos. ¡Usa la palanca!</color>");
+            }
+            else
+            {
+                Debug.LogError("Receta incorrecta. Revisa los ingredientes.");
+                // Opcional: Podrías devolver los materiales o abrir de nuevo
+            }
+        }
+        else if (currentIngredients.Count == 0)
+        {
+            Debug.LogWarning("¡No puedes procesar un contenedor vacío!");
         }
     }
 
     private void TryDeliverPotion()
     {
-        if (currentState == MachineState.Lista)
+        if (currentState == MachineState.Lista && _lastResult != null)
         {
+            GameObject prefabAFabricar = (_lastResult == potionBasura)
+                            ? potionBad
+                            : selectedRecipe.potionPrefab;
+
+            // 2. Le pedimos al Pool que nos de una instancia de ESE prefab específico
+            PoolableItem pocionVisual = PotionPool.Instance.Get(prefabAFabricar);
+
+            pocionVisual.transform.position = deliveryPoint.position;
+
+            Debug.Log($"Poción {_lastResult.itemName} entregada.");
+
+            StartCoroutine(ProcesoEnvioInventario(pocionVisual, prefabAFabricar));
+
+            // Limpieza final
+            _lastResult = null;
             btnVerde.SetLight(false);
             currentState = MachineState.Cerrada;
-            // Aquí llamarías al Pool para que el jugador recoja su poción
         }
     }
 
-    // --- MÉTODOS DE CONTROL (Fase 2 y 3) ---
-
-    public void SelectRecipe(RecipeData recipe)
+    private IEnumerator ProcesoEnvioInventario(PoolableItem itemVisual, GameObject prefabUsado)
     {
-        selectedRecipe = recipe;
-        Debug.Log($"Máquina configurada para: {recipe.recipeName}");
+        float timer = 0;
+        Vector3 startPos = itemVisual.transform.position;
+
+        while (timer < 2.0f)
+        {
+            itemVisual.transform.position = startPos + new Vector3(0, Mathf.Sin(Time.time * 5f) * 0.1f, 0);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // 5. Sumar al inventario real
+        InventoryManager.Instance.AddItem(_lastResult, 1);
+
+        // 6. Devolver al Pool (Desactivar)
+        PotionPool.Instance.Release(prefabUsado, itemVisual);
+
+        Debug.Log($"Poción {_lastResult.itemName} añadida al inventario y devuelta al Pool.");
+        _lastResult = null;
+    }
+
+    public void SeleccionarRecetaManual(RecipeData receta)
+    {
+        selectedRecipe = receta;
+        // Resetear el proceso para la nueva receta
+        currentIngredients.Clear();
+        GetComponentInChildren<MachineLever>()?.ResetLever();
+        Debug.Log($"Pantalla: Receta '{receta.recipeName}' seleccionada.");
     }
 
     public void AddIngredient(ItemData data)
     {
-        // Solo aceptamos ingredientes si la máquina está abierta (Botón Rojo pulsado)
         if (currentState != MachineState.Recibiendo) return;
 
         var existing = currentIngredients.Find(s => s.item == data);
         if (existing != null) existing.quantity++;
         else currentIngredients.Add(new InventoryManager.InventorySlot { item = data, quantity = 1 });
 
-        Debug.Log($"Máquina recibió: {data.itemName}");
+        Debug.Log($"Agregado al contenedor: {data.itemName}. Total tipos: {currentIngredients.Count}");
     }
 
-    // --- LÓGICA DE PROCESAMIENTO (Fase 4) ---
+    private bool ValidarIngredientes()
+    {
+        if (selectedRecipe == null) return false;
+
+        // 1. Verificar si la cantidad de tipos de ingredientes coincide
+        if (currentIngredients.Count != selectedRecipe.requiredIngredients.Count) return false;
+
+        // 2. Comparar cada ingrediente de la receta
+        foreach (var req in selectedRecipe.requiredIngredients)
+        {
+            // Buscamos si el ingrediente requerido está en el contenedor
+            var encontrado = currentIngredients.Find(i => i.item == req.item);
+
+            if (encontrado == null || encontrado.quantity != req.quantity)
+            {
+                Debug.LogWarning($"Falta o sobra cantidad de: {req.item.itemName}");
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     public void ProcessFinalPotion()
     {
         if (selectedRecipe == null) return;
 
-        // Aquí aplicamos la probabilidad que mencionaste
         float randomRoll = Random.Range(0f, 100f);
 
+        // Guardamos el resultado en la variable temporal
         if (randomRoll <= selectedRecipe.successChance)
         {
-            Debug.Log("<color=green>¡Éxito!</color>");
-            FinalizeProcess(selectedRecipe.resultPotion);
+            _lastResult = selectedRecipe.resultPotion;
+            Debug.Log("<color=green>¡Éxito en la alquimia!</color>");
         }
         else
         {
-            Debug.Log("<color=red>¡Fallo!</color>");
-            FinalizeProcess(potionBasura);
+            _lastResult = potionBasura;
+            Debug.Log("<color=red>La mezcla ha fallado.</color>");
         }
+
+        FinalizeProcess();
     }
 
-    private void FinalizeProcess(ItemData result)
+    private void FinalizeProcess()
     {
         currentIngredients.Clear();
-        currentState = MachineState.Lista; // Habilita el Botón Verde
+        currentState = MachineState.Lista;
 
-        // Aquí llamaríamos al Pool para spawnear la poción
-        Debug.Log($"Poción generada: {result.itemName}");
+        btnAmarillo.SetLight(false);
+        btnVerde.SetLight(true); // Se habilita la entrega
     }
 
     public void UpdateLeverProgress(int count)
     {
-        if (selectedRecipe == null) return;
+        if (selectedRecipe == null || currentState != MachineState.Procesando) return;
 
-        // Si alcanzamos los palancazos de la receta...
         if (count >= selectedRecipe.requiredLeverPresses)
         {
-            Debug.Log("¡Mecánica completada! Calculando poción...");
             ProcessFinalPotion();
-
-            // Reset de la palanca para la próxima vez
+            // Buscamos la palanca para resetear su contador interno
             GetComponentInChildren<MachineLever>()?.ResetLever();
         }
     }

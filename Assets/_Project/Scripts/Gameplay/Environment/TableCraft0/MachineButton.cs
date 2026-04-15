@@ -5,7 +5,7 @@ public class MachineButton : MonoBehaviour, IPointerClickHandler
 {
     public enum ButtonType { Rojo, Amarillo, Verde }
     public ButtonType tipo;
-    
+
     [SerializeField] private ProcessingMachineLogic machine;
     [SerializeField] private MeshRenderer buttonRenderer;
     [SerializeField] private Color activeColor;
@@ -24,7 +24,16 @@ public class MachineButton : MonoBehaviour, IPointerClickHandler
 
     public void SetLight(bool isOn)
     {
-        buttonRenderer.material.color = isOn ? activeColor : inactiveColor;
-        // Aquí podrías añadir un sonido de "Click" o "Beep"
+        // Cambia el color o la intensidad del material
+        if (isOn)
+        {
+            buttonRenderer.material.EnableKeyword("_EMISSION"); // Si usas materiales con emisión
+            buttonRenderer.material.color = activeColor;
+        }
+        else
+        {
+            buttonRenderer.material.DisableKeyword("_EMISSION");
+            buttonRenderer.material.color = inactiveColor;
+        }
     }
 }

@@ -11,6 +11,9 @@ public class RecipeData : ScriptableObject
     [Header("Resultado")]
     public ItemData resultPotion; // La poción que se obtiene
 
+    [Header("Resultado Visual")]
+    public GameObject potionPrefab; // El modelo 3D específico de esta poción
+
     [Header("Requisitos")]
     public List<InventoryManager.InventorySlot> requiredIngredients;
 

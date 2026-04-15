@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   recipeID: 1
   recipeName: Salud Estelar
-  resultPotion: {fileID: 0}
+  resultPotion: {fileID: 11400000, guid: d18fb04e44cd0154598acb09011fd2f7, type: 2}
   requiredIngredients:
   - item: {fileID: 11400000, guid: 8a74c0e6d30305e408e697469bdcde17, type: 2}
     quantity: 1
   - item: {fileID: 11400000, guid: f64fdb1289db28d42a45e80bc0469c8d, type: 2}
     quantity: 1
   difficulty: 1
+  successChance: 100
+  requiredLeverPresses: 3
   marketValue: 50
