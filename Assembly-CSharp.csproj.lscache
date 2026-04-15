@@ -61,7 +61,6 @@ Assets/
    InventoryManager.cs
   Systems/SaveSystem.cs
  _Project/Scripts/Data/
-  ItemContainer.cs
   ItemData.cs
   ScriptableObject/
    InventorySO.cs
@@ -79,10 +78,12 @@ Assets/
  _Project/Scripts/Gameplay/Environment/
   CollectOrb.cs
   TableCraft0/
-   CauldronLogic.cs
-   IngredientDispenser.cs
-   IngredientPool.cs
+   MachineButton.cs
+   MachineDeposit.cs
+   MachineLever.cs
    PoolableItem.cs
+   PotionPool.cs
+   ProcessingMachineLogic.cs
  _Project/Scripts/Gameplay/
   Items/DraggableItem.cs
   Player/
@@ -98,6 +99,7 @@ Assets/
    BookUI.cs
    CollectibleItem.cs
    InventoryUI.cs
+   ItemDetailUI.cs
    RotateCameraInShip.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 
