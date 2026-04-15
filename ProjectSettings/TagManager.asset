@@ -8,6 +8,7 @@ TagManager:
   - Ingredientes
   - Deposito
   - Estantes
+  - Enemy
   layers:
   - Default
   - TransparentFX

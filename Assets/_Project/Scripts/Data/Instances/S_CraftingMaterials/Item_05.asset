@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Item_05
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 5
-  itemName: Or 05
+  itemName: Darkness Potion
   itemIcon: {fileID: -47998441, guid: 295cf77750d4326439bc60ab61757640, type: 3}
-  itemDescription: 
+  itemDescription: Demon Potion grants temporary dark power, increasing strength
+    and speed while slowly draining health. Use wisely, as prolonged effects may
+    corrupt the user permanently.
