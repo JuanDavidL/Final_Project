@@ -1,73 +1,158 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using System.Collections;
 
-public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DraggableItem : MonoBehaviour
 {
-    [Header("Configuración de Datos")]
+    [Header("Datos")]
     public ItemData itemContenido;
 
-    private Vector3 _posicionInicial;
-    private Quaternion _rotacionInicial;
-    private Camera _mainCamera;
-    private Rigidbody _rb;
-    private float _zDistance;
+    [Header("Configuracion")]
+    public Transform dropPoint;
+    public float shakeDuration = 0.3f;
+    public float shakeIntensity = 15f;
+    public float returnDuration = 0.3f;
+
+    [Header("VFX")]
+    public GameObject pourVFX;
+
+    private Vector3 _startPosition;
+    private Quaternion _startRotation;
+    private Quaternion _dropRotation;
+    private bool _isAtDropPoint = false;
+    private bool _isAnimating = false;
+    private static bool _anyAnimating = false;
+    private int _currentUses = 0;
+    private int _requiredUses = 0;
+
+    private MachineDeposit _deposit;
+    private ProcessingMachineLogic _machine;
+    private MeshRenderer _meshRenderer;
 
     void Awake()
     {
-        _mainCamera = Camera.main;
-        _rb = GetComponent<Rigidbody>();
-        // posición inicial en el estante
-        _posicionInicial = transform.position;
-        _rotacionInicial = transform.rotation;
+        _startPosition = transform.position;
+        _startRotation = transform.rotation;
+        _dropRotation = Quaternion.Euler(180f, 0f, 0f);
+        _deposit = FindFirstObjectByType<MachineDeposit>();
+        _machine = FindFirstObjectByType<ProcessingMachineLogic>();
+        _meshRenderer = GetComponentInChildren<MeshRenderer>();
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    void Update()
     {
-        _rb.isKinematic = true;
-        _zDistance = _mainCamera.WorldToScreenPoint(transform.position).z;
+        if (Mouse.current.leftButton.wasPressedThisFrame && !_anyAnimating)
+            TryClick();
     }
 
-    public void OnDrag(PointerEventData eventData)
+    private void TryClick()
     {
-        Vector3 mousePos = eventData.position;
-        mousePos.z = _zDistance;
-        Vector3 worldPos = _mainCamera.ScreenToWorldPoint(mousePos);
+        if (_machine.currentState != ProcessingMachineLogic.MachineState.Recibiendo)
+            return;
 
-        transform.position = new Vector3(worldPos.x, worldPos.y + 0.2f, worldPos.z);
-    }
+        Vector2 mousePos = Mouse.current.position.ReadValue();
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        _rb.isKinematic = false;
-
-        if (IsOverDeposit())
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            // Aquí notificaremos a la máquina que reste el material // PENDIENTE
-            Debug.Log($"Tarro de {itemContenido.itemName} usado.");
+            if (hit.collider.gameObject == gameObject)
+            {
+                if (!_isAtDropPoint)
+                    StartCoroutine(GoToDropPoint());
+                else
+                    StartCoroutine(ShakeAndPour());
+            }
+        }
+    }
+
+    private IEnumerator GoToDropPoint()
+    {
+        _isAnimating = true;
+        _anyAnimating = true;
+
+        // Obtiene los usos requeridos de la receta
+        _requiredUses = GetRequiredUses();
+        _currentUses = 0;
+
+        // Desaparece del estante
+        _meshRenderer.enabled = false;
+
+        // Aparece en el dropPoint rotado 180 en X
+        transform.position = dropPoint.position;
+        transform.rotation = _dropRotation;
+        _meshRenderer.enabled = true;
+        _isAtDropPoint = true;
+
+        _isAnimating = false;
+        _anyAnimating = false;
+
+        yield return null;
+    }
+
+    private IEnumerator ShakeAndPour()
+    {
+        _isAnimating = true;
+        _anyAnimating = true;
+
+        // Shake tipo salero
+        yield return StartCoroutine(ShakeAnimation());
+
+        // VFX
+        if (pourVFX != null)
+        {
+            GameObject vfx = Instantiate(pourVFX, dropPoint.position, Quaternion.identity);
+            Destroy(vfx, 2f);
         }
 
-        RegresarAlEstante();
-    }
+        // Deposita un uso
+        _deposit?.TryDeposit(itemContenido);
+        _currentUses++;
 
-    private void RegresarAlEstante()
-    {
-        transform.position = _posicionInicial;
-        transform.rotation = _rotacionInicial;
-        _rb.linearVelocity = Vector3.zero;
-        _rb.angularVelocity = Vector3.zero;
-    }
-
-    private bool IsOverDeposit()
-    {
-        // Lanzamos el rayo
-        bool hitSomething = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 2f);
-
-        // CRÍTICO: Primero verificamos si el rayo golpeó algo antes de preguntar por el Tag
-        if (hitSomething && hit.collider != null)
+        // Si completó todos los usos regresa al estante
+        if (_currentUses >= _requiredUses)
         {
-            return hit.collider.CompareTag("Deposito");
+            _meshRenderer.enabled = false;
+            transform.position = _startPosition;
+            transform.rotation = _startRotation;
+
+            yield return new WaitForSeconds(returnDuration);
+
+            _meshRenderer.enabled = true;
+            _isAtDropPoint = false;
+            _currentUses = 0;
         }
 
-        return false;
+        _isAnimating = false;
+        _anyAnimating = false;
+    }
+
+    private IEnumerator ShakeAnimation()
+    {
+        float elapsed = 0f;
+        Quaternion baseRotation = _dropRotation;
+
+        while (elapsed < shakeDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / shakeDuration;
+            float shake = Mathf.Sin(t * Mathf.PI * 6f) * shakeIntensity * (1f - t);
+            transform.rotation = baseRotation * Quaternion.Euler(shake, shake * 0.5f, 0f);
+            yield return null;
+        }
+
+        transform.rotation = _dropRotation;
+    }
+
+    private int GetRequiredUses()
+    {
+        if (_machine.selectedRecipe == null) return 1;
+
+        foreach (var ingredient in _machine.selectedRecipe.requiredIngredients)
+        {
+            if (ingredient.item == itemContenido)
+                return ingredient.quantity;
+        }
+
+        return 1;
     }
 }

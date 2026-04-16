@@ -1,7 +1,7 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
-public class MachineButton : MonoBehaviour, IPointerClickHandler
+public class MachineButton : MonoBehaviour
 {
     public enum ButtonType { Rojo, Amarillo, Verde }
     public ButtonType tipo;
@@ -16,18 +16,26 @@ public class MachineButton : MonoBehaviour, IPointerClickHandler
         SetLight(false);
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    void Update()
     {
-        // Solo enviamos la orden a la máquina
-        machine.HandleButtonPress(tipo);
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            Vector2 mousePos = Mouse.current.position.ReadValue();
+            Ray ray = Camera.main.ScreenPointToRay(mousePos);
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                if (hit.collider.gameObject == gameObject)
+                    machine.HandleButtonPress(tipo);
+            }
+        }
     }
 
     public void SetLight(bool isOn)
     {
-        // Cambia el color o la intensidad del material
         if (isOn)
         {
-            buttonRenderer.material.EnableKeyword("_EMISSION"); // Si usas materiales con emisión
+            buttonRenderer.material.EnableKeyword("_EMISSION");
             buttonRenderer.material.color = activeColor;
         }
         else

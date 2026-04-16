@@ -8,6 +8,7 @@ public class RotateCameraInShip : MonoBehaviour
     [SerializeField] GameObject menuPanel;
 
     public float stepDegrees = -90f;
+    public bool _menuWasActive = true;
 
     void Start()
     {
@@ -15,16 +16,18 @@ public class RotateCameraInShip : MonoBehaviour
         btoLeft.SetActive(false);
         btoRigth.SetActive(false);
         GoToPlanetButton.SetActive(false);
+
     }
 
     void Update()
     {
         if (menuPanel != null && !menuPanel.activeSelf)
-        {
+        {   
             btoLeft.SetActive(true);
             btoRigth.SetActive(true);
             UpdateGoToPlanetButton();
         }
+    
     }
 
     private void UpdateGoToPlanetButton()
