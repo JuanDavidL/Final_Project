@@ -49,6 +49,7 @@ public class ClientSystem : MonoBehaviour
             AddClientsToQueue(Random.Range(2, 5));
         }
     }
+    
 
     void Update()
     {
@@ -168,31 +169,61 @@ public class ClientSystem : MonoBehaviour
     // ==========================================
     
     // Tu botón Verde de la máquina debe llamar a esta función pasando la poción que fabricó
-    public void ProcessDelivery(ItemData potionDelivered)
+   public void ProcessDelivery(ItemData potionDelivered)
     {
-        if (!isClientActive) return;
+        Debug.Log("--- INICIANDO ENTREGA ---");
+        
+        // 1. Revisar si hay un cliente vivo
+        Debug.Log("¿Hay cliente activo?: " + isClientActive);
+        if (!isClientActive) 
+        {
+            Debug.Log("ERROR LOGICO: No hay cliente. Abortando entrega.");
+            return;
+        }
 
-        isClientActive = false;
+        // 2. Revisar qué poción nos envió el botón
+        if (potionDelivered == null)
+        {
+            Debug.Log("ERROR LOGICO: El botón envió un ItemData vacío (Null). ¡Revisa el Inspector del botón!");
+            return;
+        }
+        Debug.Log("Poción entregada por el botón: " + potionDelivered.itemName + " (ID: " + potionDelivered.id + ")");
 
-        // Chequeo del Tutorial
+        // 3. Revisar qué poción está pidiendo el cliente
+        if (currentOrder == null)
+        {
+            Debug.Log("ERROR LOGICO: El cliente no tiene ningún pedido asignado.");
+            return;
+        }
+        Debug.Log("Poción que pide el cliente: " + currentOrder.itemName + " (ID: " + currentOrder.id + ")");
+
+        isClientActive = false; // Detenemos el tiempo
+
+        // 4. Comparación Final
         if (!isTutorialCompleted)
         {
-            if (potionDelivered != null && potionDelivered.id == tutorialPotionRequired.id)
+            Debug.Log("Modo: TUTORIAL. Validando...");
+            if (potionDelivered.id == tutorialPotionRequired.id)
             {
+                Debug.Log("¡ÉXITO EN TUTORIAL! Los IDs coinciden.");
                 CompleteTutorialTrade();
+            }
+            else
+            {
+                Debug.Log("FALLO EN TUTORIAL: Le entregaste el ID " + potionDelivered.id + " pero requiere el ID " + tutorialPotionRequired.id);
             }
             return;
         }
 
-        // Chequeo Normal
-        if (potionDelivered != null && potionDelivered.id == currentOrder.id)
+        Debug.Log("Modo: BUCLE NORMAL. Validando...");
+        if (potionDelivered.id == currentOrder.id)
         {
+            Debug.Log("¡ÉXITO EN MODO NORMAL! Los IDs coinciden.");
             CalculateDynamicPayout();
         }
         else
         {
-            Debug.Log("Pedido fallido o tiempo agotado.");
-            // Penalización opcional aquí
+            Debug.Log("FALLO MODO NORMAL: Le entregaste una poción equivocada. Pedía ID " + currentOrder.id);
         }
 
         StartCoroutine(ResolveClientAndCheckQueue());
