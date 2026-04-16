@@ -10,7 +10,7 @@ public class ProcessingMachineLogic : MonoBehaviour
     public MachineState currentState = MachineState.Cerrada;
 
     [Header("Configuración de Recetas")]
-    [SerializeField] private RecipeData selectedRecipe;
+    public RecipeData selectedRecipe;
     [SerializeField] private ItemData potionBasura;
     [SerializeField] private GameObject potionBad;
     private ItemData _lastResult; // NUEVO: Para guardar la poción obtenida
@@ -28,10 +28,16 @@ public class ProcessingMachineLogic : MonoBehaviour
     [SerializeField] private Transform deliveryPoint; // NUEVO: Punto donde aparece la poción
 
     // Distancias del contenedor (Ajusta estos valores según tu modelo)
-    private float zAbierto = 1.05f;
-    private float zCerrado = 2.5f;
+    private float zAbierto = -0.9f;
+    private float zCerrado = 0.11f;
+    private MachineUI _machineUI;
 
-    public void HandleButtonPress(MachineButton.ButtonType tipo)
+    private void Awake()
+    {
+        _machineUI = FindFirstObjectByType<MachineUI>();
+    }
+
+    public void  HandleButtonPress(MachineButton.ButtonType tipo)
     {
         switch (tipo)
         {
@@ -49,6 +55,12 @@ public class ProcessingMachineLogic : MonoBehaviour
 
     private void TryOpenMachine()
     {
+        Debug.Log($"selectedRecipe es: {selectedRecipe}");
+       if (selectedRecipe == null) // ← usa la variable local, no _machineUI
+        {
+            Debug.LogWarning("Selecciona una receta primero!");
+            return;
+        }
         // Solo abrimos si está cerrada o acabamos de sacar una poción
         if (currentState == MachineState.Cerrada || currentState == MachineState.Lista)
         {
@@ -58,8 +70,18 @@ public class ProcessingMachineLogic : MonoBehaviour
             btnVerde.SetLight(false);
 
             StopAllCoroutines(); // Evita conflictos de movimiento
-            StartCoroutine(MoverContenedor(zAbierto)); // CORREGIDO: 1.5 es hacia afuera
+            StartCoroutine(MoverContenedor(zAbierto)); // CORREGIDO: -0.8 es hacia afuera
             Debug.Log("Máquina Abierta: Esperando materiales.");
+            
+        }
+        else if (currentState == MachineState.Recibiendo)
+        {
+            currentState = MachineState.Cerrada;
+            btnRojo.SetLight(false);
+            currentIngredients.Clear();
+            StopAllCoroutines();
+            StartCoroutine(MoverContenedor(zCerrado));
+            Debug.Log("Máquina Cancelada.");
         }
     }
 
@@ -100,7 +122,8 @@ public class ProcessingMachineLogic : MonoBehaviour
             // 2. Le pedimos al Pool que nos de una instancia de ESE prefab específico
             PoolableItem pocionVisual = PotionPool.Instance.Get(prefabAFabricar);
 
-            pocionVisual.transform.position = deliveryPoint.position;
+            pocionVisual.Initialize(_lastResult, Color.white); // Configura el visual con los datos de la poción
+            pocionVisual.transform.position = deliveryPoint.position; // Aparece en el punto de entrega
 
             Debug.Log($"Poción {_lastResult.itemName} entregada.");
 
@@ -109,6 +132,7 @@ public class ProcessingMachineLogic : MonoBehaviour
             // Limpieza final
             btnVerde.SetLight(false);
             currentState = MachineState.Cerrada;
+            _machineUI.ResetUI();
         }
     }
 
@@ -151,6 +175,7 @@ public class ProcessingMachineLogic : MonoBehaviour
         if (existing != null) existing.quantity++;
         else currentIngredients.Add(new InventoryManager.InventorySlot { item = data, quantity = 1 });
 
+        _machineUI.OnIngredientDeposited(data); // Actualiza la UI con el nuevo ingrediente
         Debug.Log($"Agregado al contenedor: {data.itemName}. Total tipos: {currentIngredients.Count}");
     }
 
@@ -205,6 +230,7 @@ public class ProcessingMachineLogic : MonoBehaviour
 
         btnAmarillo.SetLight(false);
         btnVerde.SetLight(true); // Se habilita la entrega
+        _machineUI.ResetUI();
     }
 
     public void UpdateLeverProgress(int count)
