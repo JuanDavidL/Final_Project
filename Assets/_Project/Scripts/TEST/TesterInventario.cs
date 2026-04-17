@@ -1,31 +1,39 @@
 using UnityEngine;
-using UnityEngine.InputSystem; // Necesario para el nuevo sistema
+using UnityEngine.InputSystem;
 
 public class TesterInventario : MonoBehaviour
 {
-    public ItemData pocionPrueba; 
+    [Header("Catálogo de Pruebas")]
+    public ItemData pocionVida;
+    public ItemData pocionMana;
 
-void Update()
-{
-    if (Keyboard.current != null && Keyboard.current.tKey.wasPressedThisFrame)
+    void Update()
     {
-        // 1. Comprobamos si arrastraste la poción al Inspector
-        if (pocionPrueba == null)
+        if (Keyboard.current == null) return;
+
+        // Presiona V para Vida
+        if (Keyboard.current.vKey.wasPressedThisFrame)
         {
-            Debug.LogError("¡Oye! Olvidaste asignar la poción en el Inspector de TesterInventario.");
-            return;
+            AddWithCheck(pocionVida);
         }
 
-        // 2. Comprobamos si el Inventario existe en la escena
-        if (InventoryManager.Instance == null)
+        // Presiona M para Maná
+        if (Keyboard.current.mKey.wasPressedThisFrame)
         {
-            Debug.LogError("¡No hay ningún InventoryManager en la escena! Asegúrate de tener uno.");
-            return;
+            AddWithCheck(pocionMana);
         }
-
-        // Si todo está bien, procedemos
-        InventoryManager.Instance.AddItem(pocionPrueba, 1);
-        Debug.Log("Trampa exitosa: Añadida " + pocionPrueba.itemName);
     }
-}
+
+    private void AddWithCheck(ItemData item)
+    {
+        if (item != null && InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.AddItem(item, 1);
+            Debug.Log($"Añadida: {item.itemName} al inventario.");
+        }
+        else
+        {
+            Debug.LogWarning("Falta asignar el ítem en el Inspector o no hay InventoryManager.");
+        }
+    }
 }
