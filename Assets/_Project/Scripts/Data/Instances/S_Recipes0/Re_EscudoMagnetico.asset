@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   recipeID: 4
   recipeName: Escudo Magnetico
+  recipeIcon: {fileID: -1018900656, guid: 803a134d57dd95f4cbea4bec415b966f, type: 3}
   resultPotion: {fileID: 11400000, guid: d18fb04e44cd0154598acb09011fd2f7, type: 2}
   potionPrefab: {fileID: 3494102130692581086, guid: 2d21b1fbe6ff26948bfe4f7b3cf8369a, type: 3}
   requiredIngredients:

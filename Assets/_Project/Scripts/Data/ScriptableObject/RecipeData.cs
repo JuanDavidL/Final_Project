@@ -7,6 +7,7 @@ public class RecipeData : ScriptableObject
     [Header("Identificación")]
     public int recipeID;
     public string recipeName;
+    public Sprite recipeIcon; // Para mostrar en el UI
 
     [Header("Resultado")]
     public ItemData resultPotion; // La poción que se obtiene

@@ -5,21 +5,20 @@ public class MachineDeposit : MonoBehaviour
     // Referencia a la lógica de la máquina para avisarle que hay ingredientes nuevos
     [SerializeField] private ProcessingMachineLogic machineLogic;
 
-    private void OnTriggerEnter(Collider other)
+    public void TryDeposit(ItemData itemData)
     {
-        // Si el frasco entra en el área del depósito
-        if (other.TryGetComponent<DraggableItem>(out DraggableItem jar))
+
+        Debug.Log($"TryDeposit llamado con: {itemData?.itemName}");
+        Debug.Log($"machineLogic es: {machineLogic}");
+        Debug.Log($"InventoryManager es: {InventoryManager.Instance}");
+        if (InventoryManager.Instance.RemoveItem(itemData, 1))
         {
-            // Intentamos restar 1 unidad del inventario global
-            if (InventoryManager.Instance.RemoveItem(jar.itemContenido, 1))
-            {
-                Debug.Log($"Depositado: {jar.itemContenido.itemName}. Restando del inventario.");
-                machineLogic.AddIngredient(jar.itemContenido);
-            }
-            else
-            {
-                Debug.LogWarning("No queda suficiente material en este frasco.");
-            }
+            Debug.Log($"Depositado: {itemData.itemName}");
+            machineLogic.AddIngredient(itemData);
+        }
+        else
+        {
+            Debug.LogWarning("No hay suficiente material.");
         }
     }
 }
