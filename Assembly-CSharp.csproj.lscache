@@ -72,8 +72,12 @@ Assets/
   Fireball.cs
   FireballProjectile.cs
   FrostNova.cs
+  PlayerMana.cs
+  SkillSlot.cs
  _Project/Scripts/Gameplay/Enemies/
   Destructible.cs
+  EnemyAI.cs
+  EnemySpawner.cs
   LootTable.cs
  _Project/Scripts/Gameplay/Environment/
   CollectOrb.cs
