@@ -1,27 +1,38 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class MachineUI : MonoBehaviour
 {
-    [Header("Paneles")]
-    public GameObject panelMakePotion;
-    public GameObject panelChooseRecipe;
-    public GameObject panelYouNeed;
-    public GameObject textGiraLaPalanca;
+    [Header("Status")]
+    public TextMeshProUGUI statusText;
+
+    [Header("Make A Potion")]
+    public GameObject buttonMakeAPotion;
 
     [Header("Choose Recipe")]
-    public Image potionSprite;
-    public TextMeshProUGUI potionName;
-    public Button btnLeft;
-    public Button btnRight;
+    public GameObject buttonLeft;
+    public GameObject buttonRight;
+    public Image spritePotion;
+    public TextMeshProUGUI textNamePotion;
+    public GameObject buttonConfirmPotion;
+
+    [Header("How Many")]
+    public GameObject btnPlus;
+    public GameObject btnMinus;
+    public TextMeshProUGUI textQuantity;
+    private int _quantity = 1;
 
     [Header("You Need")]
     public Image spriteIngredient1;
     public Image spriteIngredient2;
     public TextMeshProUGUI quantityText1;
     public TextMeshProUGUI quantityText2;
-    public Button btnConfirm;
+
+    [Header("Lever")]
+    public GameObject textPullTheLever;
+    public TextMeshProUGUI textCountOfLever;
 
     [Header("Recetas")]
     public RecipeData[] recipes;
@@ -33,6 +44,7 @@ public class MachineUI : MonoBehaviour
     private ItemData _ingredient1;
     private ItemData _ingredient2;
     private int _currentRecipeIndex = 0;
+    private int _requiredPresses = 3;
     private ProcessingMachineLogic _machine;
 
     void Awake()
@@ -42,17 +54,53 @@ public class MachineUI : MonoBehaviour
 
     void Start()
     {
-        ShowPanel(panelMakePotion);
+        ResetToStart();
+    }
+
+    private void ResetToStart()
+    {
+        statusText.text = "Press to make a potion";
+
+        buttonMakeAPotion.SetActive(true);
+        buttonLeft.SetActive(false);
+        buttonRight.SetActive(false);
+        spritePotion.gameObject.SetActive(false);
+        textNamePotion.gameObject.SetActive(false);
+        buttonConfirmPotion.SetActive(false);
+        spriteIngredient1.gameObject.SetActive(false);
+        spriteIngredient2.gameObject.SetActive(false);
+        quantityText1.gameObject.SetActive(false);
+        quantityText2.gameObject.SetActive(false);
+        textPullTheLever.SetActive(false);
+        textCountOfLever.gameObject.SetActive(false);
+        btnPlus.SetActive(false);
+        btnMinus.SetActive(false);
+        textQuantity.gameObject.SetActive(false);
+
+        _quantity = 1;
+        textQuantity.text = "x1";
     }
 
     // Boton Make a Potion
     public void OnMakePotionClick()
     {
-        ShowPanel(panelChooseRecipe);
+        buttonMakeAPotion.SetActive(false);
+        buttonLeft.SetActive(true);
+        buttonRight.SetActive(true);
+        spritePotion.gameObject.SetActive(true);
+        textNamePotion.gameObject.SetActive(true);
+        buttonConfirmPotion.SetActive(true);
+        btnPlus.SetActive(true);
+        btnMinus.SetActive(true);
+        textQuantity.gameObject.SetActive(true);
+        statusText.text = "Choose a recipe";
         UpdateRecipeDisplay();
+
+        _quantity = 1;
+        textQuantity.text = "x1";
     }
 
-    // Flechas del carousel
+    // Flechas carousel
     public void OnLeftClick()
     {
         _currentRecipeIndex--;
@@ -73,65 +121,41 @@ public class MachineUI : MonoBehaviour
     public void OnConfirmClick()
     {
         RecipeData selected = recipes[_currentRecipeIndex];
-        _machine.SeleccionarRecetaManual(selected);
-        ShowPanel(panelYouNeed);
-        UpdateIngredientsDisplay(selected);
+        _machine.SeleccionarRecetaManual(selected,_quantity);
+
+        buttonLeft.SetActive(false);
+        buttonRight.SetActive(false);
+        spritePotion.gameObject.SetActive(false);
+        textNamePotion.gameObject.SetActive(false);
+        buttonConfirmPotion.SetActive(false);
+        btnPlus.SetActive(false);
+        btnMinus.SetActive(false);
+        textQuantity.gameObject.SetActive(false);
+        statusText.text = "Press RED button";
     }
 
-    // Llamado desde ProcessingMachineLogic cuando todos los ingredientes fueron echados
-    public void OnIngredientsComplete()
+    public void OnPlusClick()
     {
-        ShowPanel(textGiraLaPalanca);
+        if (_quantity >= 10) return;
+        _quantity++;
+        textQuantity.text = $"x{_quantity}";
     }
 
-    // Llamado cuando termina el proceso
-    public void ResetUI()
+    public void OnMinusClick()
     {
-        ShowPanel(panelMakePotion);
+        if (_quantity <= 1) return;
+        _quantity--;
+        textQuantity.text = $"x{_quantity}";
     }
 
-    private void UpdateRecipeDisplay()
+    // Llamado cuando se presiona boton rojo
+    public void OnRedButtonPressed()
     {
-        RecipeData recipe = recipes[_currentRecipeIndex];
-        potionName.text = recipe.recipeName;
-
-        if (recipe.recipeIcon != null)
-            potionSprite.sprite = recipe.recipeIcon;
-        else
-            Debug.LogWarning("recipeIcon es null!");
-    }
-    
-    private void UpdateIngredientsDisplay(RecipeData recipe)
-    {
-        if (recipe.requiredIngredients.Count > 0)
-        {
-            _ingredient1 = recipe.requiredIngredients[0].item;
-            _required1 = recipe.requiredIngredients[0].quantity;
-            _current1 = 0;
-            spriteIngredient1.gameObject.SetActive(true);
-            spriteIngredient1.sprite = _ingredient1.itemIcon;
-            quantityText1.text = $"0/{_required1}";
-        }
-        else
-        {
-            spriteIngredient1.gameObject.SetActive(false);
-        }
-
-        if (recipe.requiredIngredients.Count > 1)
-        {
-            _ingredient2 = recipe.requiredIngredients[1].item;
-            _required2 = recipe.requiredIngredients[1].quantity;
-            _current2 = 0;
-            spriteIngredient2.gameObject.SetActive(true);
-            spriteIngredient2.sprite = _ingredient2.itemIcon;
-            quantityText2.text = $"0/{_required2}";
-        }
-        else
-        {
-            spriteIngredient2.gameObject.SetActive(false);
-        }
+        UpdateIngredientsDisplay(_machine.selectedRecipe);
+        statusText.text = "Add ingredients";
     }
 
+    // Llamado cuando se deposita un ingrediente
     public void OnIngredientDeposited(ItemData item)
     {
         if (_ingredient1 != null && item == _ingredient1)
@@ -145,18 +169,100 @@ public class MachineUI : MonoBehaviour
             quantityText2.text = $"{_current2}/{_required2}";
         }
 
-        // Verifica si todos los ingredientes fueron depositados
         if (_current1 >= _required1 && _current2 >= _required2)
-            quantityText1.transform.parent.GetComponentInParent<TextMeshProUGUI>()?.gameObject.SetActive(false);
+            OnAllIngredientsDeposited();
     }
 
-    private void ShowPanel(GameObject panel)
+    public void OnAllIngredientsDeposited()
     {
-        panelMakePotion.SetActive(false);
-        panelChooseRecipe.SetActive(false);
-        panelYouNeed.SetActive(false);
-        textGiraLaPalanca.SetActive(false);
+        spriteIngredient1.gameObject.SetActive(false);
+        spriteIngredient2.gameObject.SetActive(false);
+        quantityText1.gameObject.SetActive(false);
+        quantityText2.gameObject.SetActive(false);
+        statusText.text = "Press yellow button";
+    }
 
-        panel.SetActive(true);
+    // Llamado cuando se presiona boton amarillo
+    public void OnYellowButtonPressed()
+    {
+        _requiredPresses = _machine.selectedRecipe.requiredLeverPresses;
+
+        spriteIngredient1.gameObject.SetActive(false);
+        spriteIngredient2.gameObject.SetActive(false);
+        quantityText1.gameObject.SetActive(false);
+        quantityText2.gameObject.SetActive(false);
+        textPullTheLever.SetActive(true);
+        textCountOfLever.gameObject.SetActive(true);
+        textCountOfLever.text = $"0/{_requiredPresses}";
+        statusText.text = "Pull the lever!";
+    }
+
+    // Actualiza contador de palanca
+    public void UpdateLeverCounter(int count)
+    {
+        textCountOfLever.text = $"{count}/{_requiredPresses}";
+    }
+
+    // Llamado cuando termina la palanca
+    public void OnLeverComplete()
+    {
+        textPullTheLever.SetActive(false);
+        textCountOfLever.gameObject.SetActive(false);
+        statusText.text = "Press green button";
+    }
+
+    // Llamado cuando se presiona boton verde
+    public void OnProcessComplete(bool success)
+    {
+        statusText.text = success ? "¡Exito!" : "¡Fallo!";
+        StartCoroutine(ResetAfterDelay());
+    }
+
+    private IEnumerator ResetAfterDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        ResetToStart();
+    }
+
+    public void ResetUI()
+    {
+        ResetToStart();
+    }
+
+    private void UpdateRecipeDisplay()
+    {
+        RecipeData recipe = recipes[_currentRecipeIndex];
+        textNamePotion.text = recipe.recipeName;
+        if (recipe.recipeIcon != null)
+            spritePotion.sprite = recipe.recipeIcon;
+    }
+
+    private void UpdateIngredientsDisplay(RecipeData recipe)
+    {
+        if (recipe.requiredIngredients.Count > 0)
+        {
+            _ingredient1 = recipe.requiredIngredients[0].item;
+            _required1 = recipe.requiredIngredients[0].quantity * _quantity;
+            _current1 = 0;
+            spriteIngredient1.gameObject.SetActive(true);
+            spriteIngredient1.sprite = _ingredient1.itemIcon;
+            quantityText1.gameObject.SetActive(true);
+            quantityText1.text = $"0/{_required1}";
+        }
+        else
+            spriteIngredient1.gameObject.SetActive(false);
+
+        if (recipe.requiredIngredients.Count > 1)
+        {
+            _ingredient2 = recipe.requiredIngredients[1].item;
+            _required2 = recipe.requiredIngredients[1].quantity * _quantity;
+            _current2 = 0;
+            spriteIngredient2.gameObject.SetActive(true);
+            spriteIngredient2.sprite = _ingredient2.itemIcon;
+            quantityText2.gameObject.SetActive(true);
+            quantityText2.text = $"0/{_required2}";
+        }
+        else
+            spriteIngredient2.gameObject.SetActive(false);
     }
 }
