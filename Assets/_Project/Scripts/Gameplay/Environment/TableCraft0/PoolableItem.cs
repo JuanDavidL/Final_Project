@@ -19,7 +19,10 @@ public class PoolableItem : MonoBehaviour
         _renderer.material.color = color;
         
         // Resetear física para que no herede velocidades viejas
-        _rb.linearVelocity = Vector3.zero;
-        _rb.angularVelocity = Vector3.zero;
+        if(_rb != null)
+        {
+            _rb.linearVelocity = Vector3.zero;
+            _rb.angularVelocity = Vector3.zero;
+        }
     }
 }
