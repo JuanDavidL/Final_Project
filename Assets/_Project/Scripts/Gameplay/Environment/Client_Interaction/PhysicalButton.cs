@@ -1,56 +1,49 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems; // ¡IMPORTANTE!
 using System.Collections;
 
-public class PhysicalButton : MonoBehaviour
+// Al agregar IPointerClickHandler, el EventSystem nos avisará del clic
+public class PhysicalButton : MonoBehaviour, IPointerClickHandler
 {
     public UnityEvent OnClicked;
 
     [Header("Ajustes de Animación")]
-    [SerializeField] private float pushDepth = 0.02f; // Qué tanto se hunde
-    [SerializeField] private float speed = 10f;       // Rapidez del movimiento
+    [SerializeField] private float pushDepth = 0.05f; 
+    [SerializeField] private float speed = 15f;       
     
-    private Vector3 originalLocalPos;
-    private bool isPushing = false;
+    private Vector3 originalPos;
+    private bool isMoving = false;
 
-    void Start()
+    void Start() => originalPos = transform.localPosition;
+
+    // Esta función reemplaza a OnMouseDown y es mucho más confiable
+    public void OnPointerClick(PointerEventData eventData)
     {
-        originalLocalPos = transform.localPosition;
+        if (isMoving) return;
+
+        Debug.Log("¡Clic detectado por IPointerClickHandler en: " + gameObject.name);
+        
+        OnClicked?.Invoke();
+        StartCoroutine(AnimatePress());
     }
 
-    private void OnMouseDown()
+    IEnumerator AnimatePress()
     {
-        if (isPushing) return; // Evita clics múltiples mientras se mueve
+        isMoving = true;
+        Vector3 targetPos = originalPos + (Vector3.down * pushDepth); 
 
-        if (OnClicked != null)
-        {
-            OnClicked.Invoke();
-            StartCoroutine(PushAnimation());
-        }
-    }
-
-    IEnumerator PushAnimation()
-    {
-        isPushing = true;
-
-        // Definimos la posición hacia abajo (usando el eje local del botón)
-        Vector3 targetPos = originalLocalPos + (Vector3.down * pushDepth);
-
-        // Movimiento hacia ABAJO
         while (Vector3.Distance(transform.localPosition, targetPos) > 0.001f)
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, Time.deltaTime * speed);
             yield return null;
         }
-
-        // Movimiento hacia ARRIBA (Volver al original)
-        while (Vector3.Distance(transform.localPosition, originalLocalPos) > 0.001f)
+        while (Vector3.Distance(transform.localPosition, originalPos) > 0.001f)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, originalLocalPos, Time.deltaTime * speed);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, originalPos, Time.deltaTime * speed);
             yield return null;
         }
-
-        transform.localPosition = originalLocalPos;
-        isPushing = false;
+        transform.localPosition = originalPos;
+        isMoving = false;
     }
 }

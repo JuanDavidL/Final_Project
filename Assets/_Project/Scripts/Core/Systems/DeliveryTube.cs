@@ -21,6 +21,7 @@ public class DeliveryTube3D : MonoBehaviour
 
     public void OnMainTubeButtonClicked()
     {
+        Debug.Log("Botón presionado");
         if (currentState == TubeState.Idle)
         {
             OpenTube();
@@ -60,45 +61,69 @@ public class DeliveryTube3D : MonoBehaviour
 
     private void UpdateVisuals()
     {
-        if (currentVisualPotion != null) Destroy(currentVisualPotion);
+    if (currentVisualPotion != null) Destroy(currentVisualPotion);
 
-        // Acceso a tu InventoryManager real
-        var inv = InventoryManager.Instance.inventory; 
+    var inv = InventoryManager.Instance.inventory; 
 
-        if (inv.Count == 0)
-        {
-            currentVisualPotion = Instantiate(forbiddenSignPrefab, spawnPoint);
-            return;
-        }
-
+    if (inv.Count == 0)
+    {
+        // Instanciamos la X
+        currentVisualPotion = Instantiate(forbiddenSignPrefab, spawnPoint);
+        Debug.Log("Inventario vacío: Aplicando holograma a la X");
+    }
+    else
+    {
+        // Instanciamos la poción
         currentIndex = Mathf.Clamp(currentIndex, 0, inv.Count - 1);
-        ItemData selectedItem = inv[currentIndex].item; // Extraemos el ItemData del Slot
-        
+        ItemData selectedItem = inv[currentIndex].item;
         currentVisualPotion = Instantiate(selectedItem.potionPrefab, spawnPoint);
-
-        // Aplicar efecto Holograma
-        MeshRenderer renderer = currentVisualPotion.GetComponentInChildren<MeshRenderer>();
-        if (renderer != null)
-        {
-            originalMaterials = renderer.materials;
-            Material[] holoMats = new Material[originalMaterials.Length];
-            for (int i = 0; i < holoMats.Length; i++) holoMats[i] = hologramMaterial;
-            renderer.materials = holoMats;
-        }
+        Debug.Log("Mostrando holograma de: " + selectedItem.itemName);
     }
 
-    private void LockAndSendPotion()
-    {
-        currentState = TubeState.Locked;
+    // LLAMADA UNIFICADA: Ahora se aplica a lo que sea que esté en el spawnPoint
+    ApplyHologramEffect(); 
+    }
+private void ApplyHologramEffect()
+{
+    if (currentVisualPotion == null) return;
 
-        // Quitar efecto holograma
-        MeshRenderer renderer = currentVisualPotion.GetComponentInChildren<MeshRenderer>();
-        if (renderer != null && originalMaterials != null)
+    // Buscamos el renderizador en el modelo (puede estar en un hijo)
+    MeshRenderer renderer = currentVisualPotion.GetComponentInChildren<MeshRenderer>();
+    
+    if (renderer != null)
+    {
+        // Guardamos los materiales originales para poder restaurarlos después
+        originalMaterials = renderer.materials;
+
+        // Creamos un array del mismo tamaño pero lleno con el material de holograma
+        Material[] holoMats = new Material[originalMaterials.Length];
+        for (int i = 0; i < holoMats.Length; i++)
         {
-            renderer.materials = originalMaterials; 
+            holoMats[i] = hologramMaterial;
         }
 
-        Invoke("ExecuteDelivery", 0.5f); 
+        // Aplicamos los materiales de holograma
+        renderer.materials = holoMats;
+    }
+    else
+    {
+        Debug.LogWarning("No se encontró MeshRenderer en el prefab de la poción.");
+    }
+}
+    private void LockAndSendPotion()
+    {
+    currentState = TubeState.Locked;
+
+    MeshRenderer renderer = currentVisualPotion.GetComponentInChildren<MeshRenderer>();
+    if (renderer != null && originalMaterials != null)
+    {
+        // Devolvemos los materiales reales (vidrio, líquido, corcho)
+        renderer.materials = originalMaterials; 
+        Debug.Log("Poción solidificada: Lista para envío.");
+    }
+
+    // Esperamos un momento para que el jugador aprecie su creación sólida
+    Invoke("ExecuteDelivery", 0.6f); 
     }
 
     private void ExecuteDelivery()
