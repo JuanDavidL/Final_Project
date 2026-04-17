@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI; // Necesario para Image
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
@@ -9,7 +9,8 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
     
     [Header("UI Integration")]
-    public Image healthFillImage; // Arrastra aquí la imagen con el Fill rosa
+    [Tooltip("Arrastra aquí la imagen que tiene el color rosa (Fill)")]
+    public Image healthFillImage; 
 
     [Header("Damage Settings")]
     public float invulnerabilityDuration = 1f;
@@ -21,12 +22,16 @@ public class PlayerHealth : MonoBehaviour
     private float lastDamageTime;
 
     private Animator anim;
+    private SpriteRenderer spriteRenderer; // Para el efecto de parpadeo
     private bool isDead = false;
 
     void Awake()
     {
         currentHealth = maxHealth;
+        // Buscamos componentes en los hijos
         anim = GetComponentInChildren<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        
         ActualizarUI();
     }
 
@@ -34,7 +39,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (isDead) return;
 
-        // Lógica de Regeneración
+        // Lógica de Regeneración (solo si ha pasado el tiempo suficiente)
         if (Time.time - lastDamageTime >= regenWaitTime && currentHealth < maxHealth)
         {
             RegenerateHealth();
@@ -49,7 +54,10 @@ public class PlayerHealth : MonoBehaviour
         lastDamageTime = Time.time;
         ActualizarUI();
 
-        if (currentHealth <= 0) Die();
+        if (currentHealth <= 0) 
+        {
+            Die();
+        }
         else
         {
             if (anim != null) anim.SetTrigger("Hurt");
@@ -60,7 +68,7 @@ public class PlayerHealth : MonoBehaviour
     private void RegenerateHealth()
     {
         currentHealth += regenRate * Time.deltaTime;
-        currentHealth = Mathf.Min(currentHealth, maxHealth);
+        currentHealth = Mathf.Min(currentHealth, maxHealth); // No exceder el máximo
         ActualizarUI();
     }
 
@@ -68,7 +76,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (healthFillImage != null)
         {
-            // El fillAmount espera un valor entre 0 y 1
+            // Importante: Asegúrate de que healthFillImage tenga Image Type: Filled
             healthFillImage.fillAmount = currentHealth / maxHealth;
         }
     }
@@ -76,14 +84,18 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator BecomeInvulnerable()
     {
         isInvulnerable = true;
-        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
-        // Parpadeo simple
-        for (float i = 0; i < invulnerabilityDuration; i += 0.2f)
+        
+        float timer = 0;
+        while (timer < invulnerabilityDuration)
         {
-            if(sr) sr.enabled = !sr.enabled;
+            if (spriteRenderer != null)
+                spriteRenderer.enabled = !spriteRenderer.enabled; // Efecto parpadeo
+            
             yield return new WaitForSeconds(0.1f);
+            timer += 0.1f;
         }
-        if(sr) sr.enabled = true;
+
+        if (spriteRenderer != null) spriteRenderer.enabled = true;
         isInvulnerable = false;
     }
 
@@ -92,12 +104,22 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
         currentHealth = 0;
         ActualizarUI();
+        
         if (anim != null) anim.SetTrigger("Die");
-        if (GetComponent<PlayerMovement>() != null) GetComponent<PlayerMovement>().enabled = false;
+        
+        // Desactivamos el script de movimiento para que no se deslice muerto
+        PlayerMovement moveScript = GetComponent<PlayerMovement>();
+        if (moveScript != null) moveScript.enabled = false;
+        
+        Debug.Log("Game Over");
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Enemy")) TakeDamage(10f);
+        // Asegúrate de que tus enemigos tengan el Tag "Enemy"
+        if (other.CompareTag("Enemy")) 
+        {
+            TakeDamage(10f); 
+        }
     }
 }
