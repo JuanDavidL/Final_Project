@@ -1,16 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Settings")]
     public float maxHealth = 100f;
     public float currentHealth;
-    
+
     [Header("UI Integration")]
-    [Tooltip("Arrastra aquí la imagen que tiene el color rosa (Fill)")]
-    public Image healthFillImage; 
+    public Image healthFillImage;
+    public TextMeshProUGUI HPNumbers;
+    [Tooltip("Arrastra aquí el objeto de la UI que tiene el Animator de la cara.")]
+    public Animator faceUIAnimator; // Referencia para la animación del retrato
 
     [Header("Damage Settings")]
     public float invulnerabilityDuration = 1f;
@@ -18,20 +21,18 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Regeneration Settings")]
     public float regenWaitTime = 5f;
-    public float regenRate = 5f; 
+    public float regenRate = 5f;
     private float lastDamageTime;
 
-    private Animator anim;
-    private SpriteRenderer spriteRenderer; // Para el efecto de parpadeo
+    private Animator anim; // Animator del personaje en el mundo
+    private SpriteRenderer spriteRenderer;
     private bool isDead = false;
 
     void Awake()
     {
         currentHealth = maxHealth;
-        // Buscamos componentes en los hijos
         anim = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        
         ActualizarUI();
     }
 
@@ -39,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (isDead) return;
 
-        // Lógica de Regeneración (solo si ha pasado el tiempo suficiente)
+        // Lógica de regeneración automática
         if (Time.time - lastDamageTime >= regenWaitTime && currentHealth < maxHealth)
         {
             RegenerateHealth();
@@ -54,13 +55,22 @@ public class PlayerHealth : MonoBehaviour
         lastDamageTime = Time.time;
         ActualizarUI();
 
-        if (currentHealth <= 0) 
+        // --- FEEDBACK VISUAL EN LA UI ---
+        if (faceUIAnimator != null)
+        {
+            faceUIAnimator.SetTrigger("Hurt"); // Activa la transición a MageHurtFace
+        }
+
+        if (currentHealth <= 0)
         {
             Die();
         }
         else
         {
+            // Animación de daño en el personaje físico (3D/2D World)
             if (anim != null) anim.SetTrigger("Hurt");
+
+            // Iniciar parpadeo de invulnerabilidad
             StartCoroutine(BecomeInvulnerable());
         }
     }
@@ -68,29 +78,34 @@ public class PlayerHealth : MonoBehaviour
     private void RegenerateHealth()
     {
         currentHealth += regenRate * Time.deltaTime;
-        currentHealth = Mathf.Min(currentHealth, maxHealth); // No exceder el máximo
+        currentHealth = Mathf.Min(currentHealth, maxHealth);
         ActualizarUI();
     }
 
     private void ActualizarUI()
     {
+        // Actualizar barra de vida
         if (healthFillImage != null)
         {
-            // Importante: Asegúrate de que healthFillImage tenga Image Type: Filled
             healthFillImage.fillAmount = currentHealth / maxHealth;
+        }
+
+        // Actualizar texto de vida (sin decimales)
+        if (HPNumbers != null)
+        {
+            HPNumbers.text = Mathf.FloorToInt(currentHealth).ToString();
         }
     }
 
     private IEnumerator BecomeInvulnerable()
     {
         isInvulnerable = true;
-        
         float timer = 0;
+
+        // Efecto de parpadeo visual
         while (timer < invulnerabilityDuration)
         {
-            if (spriteRenderer != null)
-                spriteRenderer.enabled = !spriteRenderer.enabled; // Efecto parpadeo
-            
+            if (spriteRenderer != null) spriteRenderer.enabled = !spriteRenderer.enabled;
             yield return new WaitForSeconds(0.1f);
             timer += 0.1f;
         }
@@ -101,25 +116,35 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
+        if (isDead) return; // Evita que se ejecute varias veces
         isDead = true;
         currentHealth = 0;
         ActualizarUI();
-        
+
+        // 1. Disparar animaciones de muerte
         if (anim != null) anim.SetTrigger("Die");
-        
-        // Desactivamos el script de movimiento para que no se deslice muerto
-        PlayerMovement moveScript = GetComponent<PlayerMovement>();
-        if (moveScript != null) moveScript.enabled = false;
-        
-        Debug.Log("Game Over");
+        if (faceUIAnimator != null) faceUIAnimator.SetTrigger("Die");
+
+        // 2. DESACTIVAR CONTROLES
+
+        // Desactiva el script de movimiento
+        if (GetComponent<PlayerMovement>() != null)
+            GetComponent<PlayerMovement>().enabled = false;
+        if (GetComponent<PlayerBlink>() != null)
+            GetComponent<PlayerBlink>().enabled = false;
+        // Desactiva cualquier habilidad adicional que tengas (si las hay)
+        BaseAbility[] habilidades = GetComponents<BaseAbility>();
+        foreach (BaseAbility habilidad in habilidades)
+        {
+            habilidad.enabled = false;
+        }
+
+        Debug.Log("El jugador ha muerto. Controles desactivados.");
     }
 
     private void OnTriggerStay(Collider other)
     {
-        // Asegúrate de que tus enemigos tengan el Tag "Enemy"
-        if (other.CompareTag("Enemy")) 
-        {
-            TakeDamage(10f); 
-        }
+        // Daño por contacto continuo con enemigos
+        if (other.CompareTag("Enemy")) TakeDamage(10f);
     }
 }
