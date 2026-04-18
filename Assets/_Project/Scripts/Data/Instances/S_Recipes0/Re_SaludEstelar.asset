@@ -20,7 +20,7 @@ MonoBehaviour:
   requiredIngredients:
   - item: {fileID: 11400000, guid: 8a74c0e6d30305e408e697469bdcde17, type: 2}
     quantity: 2
-  - item: {fileID: 11400000, guid: f64fdb1289db28d42a45e80bc0469c8d, type: 2}
+  - item: {fileID: 11400000, guid: 0edb7b25430ce5c46824661103cf7e34, type: 2}
     quantity: 1
   difficulty: 1
   successChance: 100

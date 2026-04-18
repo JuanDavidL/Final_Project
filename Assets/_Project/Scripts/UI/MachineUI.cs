@@ -34,6 +34,9 @@ public class MachineUI : MonoBehaviour
     public GameObject textPullTheLever;
     public TextMeshProUGUI textCountOfLever;
 
+    [Header("Cancel")]
+    public GameObject buttonCancel;
+
     [Header("Recetas")]
     public RecipeData[] recipes;
 
@@ -62,6 +65,7 @@ public class MachineUI : MonoBehaviour
         statusText.text = "Press to make a potion";
 
         buttonMakeAPotion.SetActive(true);
+        buttonCancel.SetActive(true);
         buttonLeft.SetActive(false);
         buttonRight.SetActive(false);
         spritePotion.gameObject.SetActive(false);
@@ -147,6 +151,25 @@ public class MachineUI : MonoBehaviour
         _quantity--;
         textQuantity.text = $"x{_quantity}";
     }
+
+    public void OnCancelClick()
+    {
+        _machine.CancelProcess();
+        ResetToStart();
+    }
+
+    public void OnWrongIngredient()
+    {
+        statusText.text = "Wrong ingredient! Try again.";
+        StartCoroutine(ResetStatusAfterDelay());
+    }
+
+    private IEnumerator ResetStatusAfterDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        statusText.text = "Press RED button";
+    }
+
 
     // Llamado cuando se presiona boton rojo
     public void OnRedButtonPressed()

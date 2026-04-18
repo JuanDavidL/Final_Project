@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2278226448d84084ea6cb033ac528f4d, type: 3}
-  m_Name: Item_06
+  m_Name: CrystalClaw
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 6
-  itemName: Golden Flower
-  itemIcon: {fileID: 595451726, guid: 10910ced84f467b4babdbf8ae96d7919, type: 3}
-  itemDescription: Golden Flower radiates warm energy, restoring health over time
-    and boosting vitality. A rare plant cherished by healers, it brings balance,
-    resilience, and gentle rejuvenation.
+  id: 9
+  itemName: Garra de Cristal
+  itemIcon: {fileID: 1101383809, guid: e4bd23bdc9fb22248b2d25eb8c98bf28, type: 3}
+  potionPrefab: {fileID: 0}
+  itemDescription: 

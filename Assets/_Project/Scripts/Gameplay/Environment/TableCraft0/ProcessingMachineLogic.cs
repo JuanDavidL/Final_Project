@@ -29,7 +29,7 @@ public class ProcessingMachineLogic : MonoBehaviour
 
     private float zAbierto = -0.9f;
     private float zCerrado = 0.11f;
-    private int _selectedQuantity = 1;
+    public int _selectedQuantity = 1;
     private MachineUI _machineUI;
 
     private void Awake()
@@ -57,31 +57,34 @@ public class ProcessingMachineLogic : MonoBehaviour
     {
         if (selectedRecipe == null)
         {
-            Debug.LogWarning("Selecciona una receta primero!");
-            return;
+        Debug.LogWarning("Selecciona una receta primero!");
+        return;
         }
 
-        if (currentState == MachineState.Cerrada || currentState == MachineState.Lista)
+        // ← bloquea si está procesando o lista
+        if (currentState == MachineState.Procesando || currentState == MachineState.Lista) return;
+
+        if (currentState == MachineState.Cerrada)
         {
-            currentState = MachineState.Recibiendo;
-            btnRojo.SetLight(true);
-            btnAmarillo.SetLight(false);
-            btnVerde.SetLight(false);
-            StopAllCoroutines();
-            StartCoroutine(MoverContenedor(zAbierto));
-            _machineUI?.OnRedButtonPressed();
-            Debug.Log("Máquina Abierta: Esperando materiales.");
+        currentState = MachineState.Recibiendo;
+        btnRojo.SetLight(true);
+        btnAmarillo.SetLight(false);
+        btnVerde.SetLight(false);
+        StopAllCoroutines();
+        StartCoroutine(MoverContenedor(zAbierto));
+        _machineUI?.OnRedButtonPressed();
+        Debug.Log("Máquina Abierta: Esperando materiales.");
         }
         else if (currentState == MachineState.Recibiendo)
         {
-            currentState = MachineState.Cerrada;
-            btnRojo.SetLight(false);
-            currentIngredients.Clear();
-            StopAllCoroutines();
-            StartCoroutine(MoverContenedor(zCerrado));
-            Debug.Log("Máquina Cancelada.");
+        currentState = MachineState.Cerrada;
+        btnRojo.SetLight(false);
+        currentIngredients.Clear();
+        StopAllCoroutines();
+        StartCoroutine(MoverContenedor(zCerrado));
+        Debug.Log("Máquina Cancelada.");
         }
-    }
+}
 
     private void TryCloseAndLock()
     {
@@ -143,9 +146,10 @@ public class ProcessingMachineLogic : MonoBehaviour
             yield return null;
         }
 
-        InventoryManager.Instance.AddItem(_lastResult, 1);
+        InventoryManager.Instance.AddItem(_lastResult, _selectedQuantity);
         PotionPool.Instance.Release(prefabUsado, itemVisual);
         _lastResult = null;
+        _selectedQuantity = 1;
     }
 
     public void SeleccionarRecetaManual(RecipeData receta, int quantity = 1)
@@ -161,12 +165,24 @@ public class ProcessingMachineLogic : MonoBehaviour
     {
         if (currentState != MachineState.Recibiendo) return;
 
+        // Verifica si este ingrediente pertenece a la receta
+        bool isCorrect = selectedRecipe.requiredIngredients
+        .Exists(i => i.item == data);
+
+        if (!isCorrect)
+        {
+        // Se descarta → ya fue descontado del inventario en TryDeposit
+        _machineUI?.OnWrongIngredient();
+        Debug.LogWarning($"{data.itemName} no pertenece a esta receta. Descartado.");
+        return;
+        }
+
         var existing = currentIngredients.Find(s => s.item == data);
         if (existing != null) existing.quantity++;
         else currentIngredients.Add(new InventoryManager.InventorySlot { item = data, quantity = 1 });
 
         _machineUI?.OnIngredientDeposited(data);
-        Debug.Log($"Agregado: {data.itemName}. Total: {currentIngredients.Count}");
+        Debug.Log($"Agregado: {data.itemName}");
     }
 
     private bool ValidarIngredientes()
@@ -238,5 +254,18 @@ public class ProcessingMachineLogic : MonoBehaviour
             yield return null;
         }
         contenedorFisico.transform.localPosition = endPos;
+    }
+
+    public void CancelProcess()
+    {
+        currentIngredients.Clear();
+        selectedRecipe = null;
+        _selectedQuantity = 1;
+        currentState = MachineState.Cerrada;
+        btnRojo.SetLight(false);
+        btnAmarillo.SetLight(false);
+        btnVerde.SetLight(false);
+        StopAllCoroutines();
+        StartCoroutine(MoverContenedor(zCerrado));
     }
 }

@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2278226448d84084ea6cb033ac528f4d, type: 3}
-  m_Name: Item_07
+  m_Name: radioactiveMushroom
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 7
-  itemName: Frozen Flower
-  itemIcon: {fileID: -501208460, guid: 36488b3fe35e2df45bb54d8535adb45c, type: 3}
-  itemDescription: Frozen Flower emits chilling energy, slowing enemies and reducing
-    damage taken. Its icy petals preserve life in harsh climates, offering protection
-    and resilience to those who carry it.
+  id: 2
+  itemName: Hongo Radioactivo
+  itemIcon: {fileID: 167809667, guid: 06994b066211aba419fda48282d6e458, type: 3}
+  potionPrefab: {fileID: 0}
+  itemDescription: 
