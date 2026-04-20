@@ -5,9 +5,9 @@ public abstract class BaseAbility : MonoBehaviour
     [Header("Habilidad")]
     public string abilityName;
     public Sprite abilityIcon;
-    public float cooldown = 2f;
-    //public float manaCost = 10f;
-    public float damage = 10f;
+    public float cooldown;
+    public float manaCost;
+    public float damage;
 
     protected float lastUsedTime = -10f;
     protected bool isIndicatorActive = false;

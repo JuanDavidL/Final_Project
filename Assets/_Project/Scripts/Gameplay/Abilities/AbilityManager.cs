@@ -3,19 +3,24 @@ using UnityEngine.InputSystem;
 
 public class AbilityManager : MonoBehaviour
 {
+    [Header("UI Slots")]
+    public SkillSlot uiSlot1;
+    public SkillSlot uiSlot2;
+    public SkillSlot blinkSlot;
     public BaseAbility abilitySlot1;
     public BaseAbility abilitySlot2;
+    private PlayerBlink playerBlink;
     public MagicBook magicBook;
-
     private BaseAbility activeAbility;
     private PlayerInput playerInput;
     private InputAction ability1Action;
     private InputAction ability2Action;
     private InputAction fireAction;
 
-    // Referencia al Animator en el hijo
+    // Referencias nuevas
     private Animator anim;
-    // Variable para saber qué animación usar (1 o 2)
+    private PlayerMana playerMana;
+
     private int currentAttackID = 0;
 
     void Awake()
@@ -26,6 +31,18 @@ public class AbilityManager : MonoBehaviour
         fireAction = playerInput.actions["Attack"];
 
         anim = GetComponentInChildren<Animator>();
+        playerMana = GetComponent<PlayerMana>();
+        playerBlink = GetComponent<PlayerBlink>();
+    }
+    void Start()
+    {
+        // Al iniciar (o al bajar al planeta), asignamos las visuales
+        if (uiSlot1 != null) uiSlot1.SetupSlot(abilitySlot1);
+        if (uiSlot2 != null) uiSlot2.SetupSlot(abilitySlot2);
+        if (blinkSlot != null && playerBlink != null)
+        {
+            blinkSlot.SetupSlot(playerBlink);
+        }
     }
 
     void OnEnable()
@@ -44,13 +61,13 @@ public class AbilityManager : MonoBehaviour
 
     private void OnAbility1(InputAction.CallbackContext context)
     {
-        currentAttackID = 1; // ID para la primera habilidad
+        currentAttackID = 1;
         SelectAbility(abilitySlot1, MagicBook.BookState.Ability1);
     }
 
     private void OnAbility2(InputAction.CallbackContext context)
     {
-        currentAttackID = 2; // ID para la segunda habilidad
+        currentAttackID = 2;
         SelectAbility(abilitySlot2, MagicBook.BookState.Ability2);
     }
 
@@ -58,6 +75,13 @@ public class AbilityManager : MonoBehaviour
     {
         if (ability == null) return;
         if (ability.IsOnCooldown()) return;
+
+        // --- CHEQUEO DE MANÁ AL SELECCIONAR ---
+        if (playerMana != null && !playerMana.CanAfford(ability.manaCost))
+        {
+            Debug.Log("No tienes suficiente maná para seleccionar esta habilidad");
+            return;
+        }
 
         if (activeAbility != null && activeAbility != ability)
         {
@@ -68,7 +92,7 @@ public class AbilityManager : MonoBehaviour
         {
             activeAbility.HideIndicator();
             activeAbility = null;
-            currentAttackID = 0; // Reset ID
+            currentAttackID = 0;
             magicBook.SetState(MagicBook.BookState.Orbiting);
             return;
         }
@@ -86,11 +110,27 @@ public class AbilityManager : MonoBehaviour
         if (activeAbility == null) return;
         if (activeAbility.IsOnCooldown()) return;
 
-        // --- DISPARAR ANIMACIÓN SEGÚN LA HABILIDAD ---
+        // --- CHEQUEO DE MANÁ AL DISPARAR ---
+        if (playerMana != null && !playerMana.CanAfford(activeAbility.manaCost))
+        {
+            Debug.Log("Maná insuficiente!");
+            // Opcional: Ocultar indicador si ya no puede costearlo
+            activeAbility.HideIndicator();
+            activeAbility = null;
+            return;
+        }
+
+        // --- DISPARAR ANIMACIÓN Y CONSUMIR RECURSOS ---
         if (anim != null && currentAttackID != 0)
         {
-            anim.SetInteger("AttackType", currentAttackID); // Decimos cuál es (1 o 2)
-            anim.SetTrigger("Attack"); // Disparamos el ataque
+            anim.SetInteger("AttackType", currentAttackID);
+            anim.SetTrigger("Attack");
+        }
+
+        // Restamos el maná antes de usar la habilidad
+        if (playerMana != null)
+        {
+            playerMana.UseMana(activeAbility.manaCost);
         }
 
         activeAbility.Use();

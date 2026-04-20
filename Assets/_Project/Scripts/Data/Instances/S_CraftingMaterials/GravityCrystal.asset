@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2278226448d84084ea6cb033ac528f4d, type: 3}
-  m_Name: Item_04
+  m_Name: GravityCrystal
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 4
-  itemName: Or 04
-  itemIcon: {fileID: 0}
-  itemDescription: 
+  id: 5
+  itemName: Cristal de Gravedad
+  itemIcon: {fileID: -1172514035, guid: 33357870b3a367a4185060d3bd3c59dc, type: 3}
+  potionPrefab: {fileID: 0}
+  itemDescription: Demon Potion grants temporary dark power, increasing strength
+    and speed while slowly draining health. Use wisely, as prolonged effects may
+    corrupt the user permanently.

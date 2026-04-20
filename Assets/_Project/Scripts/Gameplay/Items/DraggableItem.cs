@@ -104,23 +104,20 @@ public class DraggableItem : MonoBehaviour
             Destroy(vfx, 2f);
         }
 
-        // Deposita un uso
+         // Deposita TODOS los usos de una vez
+        for (int i = 0; i < _requiredUses; i++)
         _deposit?.TryDeposit(itemContenido);
-        _currentUses++;
 
-        // Si completó todos los usos regresa al estante
-        if (_currentUses >= _requiredUses)
-        {
-            _meshRenderer.enabled = false;
-            transform.position = _startPosition;
-            transform.rotation = _startRotation;
+        // Regresa al estante directamente
+        _meshRenderer.enabled = false;
+        transform.position = _startPosition;
+        transform.rotation = _startRotation;
 
-            yield return new WaitForSeconds(returnDuration);
+        yield return new WaitForSeconds(returnDuration);
 
-            _meshRenderer.enabled = true;
-            _isAtDropPoint = false;
-            _currentUses = 0;
-        }
+        _meshRenderer.enabled = true;
+        _isAtDropPoint = false;
+        _currentUses = 0;
 
         _isAnimating = false;
         _anyAnimating = false;
@@ -150,7 +147,7 @@ public class DraggableItem : MonoBehaviour
         foreach (var ingredient in _machine.selectedRecipe.requiredIngredients)
         {
             if (ingredient.item == itemContenido)
-                return ingredient.quantity;
+                return ingredient.quantity * _machine._selectedQuantity;
         }
 
         return 1;

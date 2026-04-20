@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2278226448d84084ea6cb033ac528f4d, type: 3}
-  m_Name: Item_03
+  m_Name: GasViscera
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 3
-  itemName: Or 03
-  itemIcon: {fileID: 0}
+  id: 8
+  itemName: Visera de Gas
+  itemIcon: {fileID: -38373400, guid: 7891f12fa16e8a346b2b8d8c8172356b, type: 3}
+  potionPrefab: {fileID: 0}
   itemDescription: 

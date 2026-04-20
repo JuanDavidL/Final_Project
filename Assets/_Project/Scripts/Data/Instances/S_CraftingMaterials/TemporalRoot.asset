@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2278226448d84084ea6cb033ac528f4d, type: 3}
-  m_Name: Item_01
+  m_Name: TemporalRoot
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 1
-  itemName: Or 01
-  itemIcon: {fileID: 1539214846, guid: 33357870b3a367a4185060d3bd3c59dc, type: 3}
+  id: 3
+  itemName: Raiz Temporal
+  itemIcon: {fileID: 849140387, guid: 0b1cfb2189c30bb4987cb4d1d65fa44d, type: 3}
+  potionPrefab: {fileID: 0}
   itemDescription: 
