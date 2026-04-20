@@ -235,9 +235,15 @@ public class MachineUI : MonoBehaviour
     }
 
     // Llamado cuando se presiona boton verde
-    public void OnProcessComplete(bool success)
+    public void OnProcessComplete(bool success, int successCount, int failCount)
     {
-        statusText.text = success ? "¡Exito!" : "¡Fallo!";
+        if (failCount == 0)
+            statusText.text = $"¡Éxito! {successCount} pociones";
+        else if (successCount == 0)
+            statusText.text = $"¡Fallo! {failCount} fallaron";
+        else
+            statusText.text = $"{successCount} éxito / {failCount} fallo";
+
         StartCoroutine(ResetAfterDelay());
     }
 

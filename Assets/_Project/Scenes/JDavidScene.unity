@@ -2581,6 +2581,71 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &400883406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400883408}
+  - component: {fileID: 400883407}
+  m_Layer: 0
+  m_Name: InventoryManagerTemporal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &400883407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400883406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4e3ae2909c70c47b20f3c754ec24a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
+  inventory:
+  - item: {fileID: 11400000, guid: 0edb7b25430ce5c46824661103cf7e34, type: 2}
+    quantity: 1000
+  - item: {fileID: 11400000, guid: 95352bdcd1f51fe4fbebdd323e2213c3, type: 2}
+    quantity: 1000
+  - item: {fileID: 11400000, guid: 8c412733f2eb90749b64eb9c93f92916, type: 2}
+    quantity: 1000
+  - item: {fileID: 11400000, guid: a215784442437a448b19aba1abe61ffd, type: 2}
+    quantity: 1000
+  - item: {fileID: 11400000, guid: 8a74c0e6d30305e408e697469bdcde17, type: 2}
+    quantity: 1000
+  - item: {fileID: 11400000, guid: 383ef6a0db0397546a31fab7c7036345, type: 2}
+    quantity: 1000
+  - item: {fileID: 11400000, guid: b97313eaeabd29e42807aad539fd7aa4, type: 2}
+    quantity: 1000
+  - item: {fileID: 11400000, guid: 8bf35bc26b2000c44bcd73b91638c038, type: 2}
+    quantity: 1000
+  - item: {fileID: 11400000, guid: f64fdb1289db28d42a45e80bc0469c8d, type: 2}
+    quantity: 1000
+  - item: {fileID: 11400000, guid: ec3c10fda64830b49b7d0083c3932e56, type: 2}
+    quantity: 1000
+--- !u!4 &400883408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400883406}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.51421, y: 2.84474, z: 0.12768}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &409040558
 GameObject:
   m_ObjectHideFlags: 0
@@ -13467,3 +13532,4 @@ SceneRoots:
   - {fileID: 649339155}
   - {fileID: 1169736603}
   - {fileID: 288088158}
+  - {fileID: 400883408}
