@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2278226448d84084ea6cb033ac528f4d, type: 3}
-  m_Name: Item_Potion05
+  m_Name: P-ManaFilter
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 15
-  itemName: 'Quintessence Elixir '
-  itemIcon: {fileID: 0}
+  id: 12
+  itemName: 'Mana Filter '
+  itemIcon: {fileID: 808283809, guid: 48bc666768b1f824ca3d767934ee70c9, type: 3}
+  potionPrefab: {fileID: 168195955495753916, guid: 79e33206469443347af2c675a31f249c, type: 3}
   itemDescription: Placeholder
