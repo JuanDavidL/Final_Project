@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2278226448d84084ea6cb033ac528f4d, type: 3}
-  m_Name: Item_Potion04
+  m_Name: P-StellarHealth
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 14
-  itemName: 'Magnetic Shield '
-  itemIcon: {fileID: 0}
+  id: 11
+  itemName: 'Stellar Health '
+  itemIcon: {fileID: 1408746737, guid: 6835cdb5b5d3d404eb41d0eb92e365fa, type: 3}
+  potionPrefab: {fileID: 7545619633915105429, guid: da66b08d28cca67448e43b54423a4030, type: 3}
   itemDescription: Placeholder

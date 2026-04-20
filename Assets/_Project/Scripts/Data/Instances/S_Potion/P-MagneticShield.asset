@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2278226448d84084ea6cb033ac528f4d, type: 3}
-  m_Name: Item_Potion03
+  m_Name: P-MagneticShield
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 13
-  itemName: 'Hyperjump Serum  '
-  itemIcon: {fileID: 0}
+  id: 14
+  itemName: 'Magnetic Shield '
+  itemIcon: {fileID: -1018900656, guid: 803a134d57dd95f4cbea4bec415b966f, type: 3}
+  potionPrefab: {fileID: 3494102130692581086, guid: 2d21b1fbe6ff26948bfe4f7b3cf8369a, type: 3}
   itemDescription: Placeholder

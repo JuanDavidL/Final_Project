@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2278226448d84084ea6cb033ac528f4d, type: 3}
-  m_Name: Item_Potion01
+  m_Name: P-HyperJumpSerum
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 11
-  itemName: 'Stellar Health '
-  itemIcon: {fileID: 1408746737, guid: 6835cdb5b5d3d404eb41d0eb92e365fa, type: 3}
-  potionPrefab: {fileID: 919132149155446097, guid: 3d6f5c8827f10474b937d47cd065d2d1, type: 3}
+  id: 13
+  itemName: 'Hyperjump Serum  '
+  itemIcon: {fileID: -2038327522, guid: fb5b57fd7d137b947884eff9d2df49e9, type: 3}
+  potionPrefab: {fileID: 4194181679092616756, guid: b4e245dc7b4bb19428f70372e893c123, type: 3}
   itemDescription: Placeholder
