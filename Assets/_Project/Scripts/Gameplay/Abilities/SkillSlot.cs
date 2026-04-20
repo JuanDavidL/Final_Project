@@ -11,7 +11,7 @@ public class SkillSlot : MonoBehaviour
     public TextMeshProUGUI nameText; // En caso de agregarle nombre a la habilidad luego
 
     private BaseAbility linkedAbility;
-    private bool isCooldownActive = false;
+    //private bool isCooldownActive = false;
 
     // Configura el slot con la habilidad seleccionada
     public void SetupSlot(BaseAbility ability)
