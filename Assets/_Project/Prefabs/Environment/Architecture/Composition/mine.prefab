@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7055161254553199320}
   - component: {fileID: 1957307343597355610}
+  - component: {fileID: 1447136979341039585}
   m_Layer: 0
   m_Name: mine
   m_TagString: Untagged
@@ -91,3 +92,24 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!65 &1447136979341039585
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922873403608418933}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.27999997, y: 0.24999999, z: 0.19999999}
+  m_Center: {x: 0, y: 0, z: 0}
