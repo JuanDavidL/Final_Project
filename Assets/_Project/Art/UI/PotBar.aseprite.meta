@@ -102,7 +102,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639121541541332589
+  platformSettingsDirtyTick: 639122982075858933
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -139,7 +139,7 @@ ScriptedImporter:
       y: 4
       width: 30
       height: 30
-    spriteID: fe5e87a4463ad3a49a5844b95a163a11
+    spriteID: 90bfd1822c9e8f34a8e8ad013fb19058
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -162,7 +162,7 @@ ScriptedImporter:
       y: 40
       width: 22
       height: 22
-    spriteID: 329f4c1690be0234e9103e731c6f5fce
+    spriteID: a5094a39c40e16642a07d81431fb0242
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -183,7 +183,7 @@ ScriptedImporter:
       y: 4
       width: 28
       height: 28
-    spriteID: c5f20005d4753e1428e93f1078d53487
+    spriteID: 5e46d1d14721fcc4bb5d946c756692f6
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -194,7 +194,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: ManaCost
     originalName: 
-    pivot: {x: 2, y: 2}
+    pivot: {x: 1.4545455, y: 2}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -202,9 +202,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 40
       y: 4
-      width: 8
+      width: 11
       height: 8
-    spriteID: 85b61f0ba811b0a43a83ee7e9991a33d
+    spriteID: 724b91bbae4a3ee4e8b615fb4e441867
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -234,7 +234,7 @@ ScriptedImporter:
         y: 5
         width: 22
         height: 22
-      spriteId: 329f4c1690be0234e9103e731c6f5fce
+      spriteId: a5094a39c40e16642a07d81431fb0242
     linkedCells: []
     tileCells: []
     tileSetIndex: 0
@@ -259,7 +259,7 @@ ScriptedImporter:
         y: 2
         width: 28
         height: 28
-      spriteId: c5f20005d4753e1428e93f1078d53487
+      spriteId: 5e46d1d14721fcc4bb5d946c756692f6
     linkedCells: []
     tileCells: []
     tileSetIndex: 0
@@ -280,11 +280,11 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 24
+        x: 21
         y: 0
-        width: 8
+        width: 11
         height: 8
-      spriteId: 85b61f0ba811b0a43a83ee7e9991a33d
+      spriteId: 724b91bbae4a3ee4e8b615fb4e441867
     linkedCells: []
     tileCells: []
     tileSetIndex: 0
