@@ -22,12 +22,14 @@ public class DraggableItem : MonoBehaviour
     private bool _isAtDropPoint = false;
     private bool _isAnimating = false;
     private static bool _anyAnimating = false;
+    private static DraggableItem _itemAtDropPoint = null;
     private int _currentUses = 0;
     private int _requiredUses = 0;
 
     private MachineDeposit _deposit;
     private ProcessingMachineLogic _machine;
     private MeshRenderer _meshRenderer;
+    private Rigidbody _rb;
 
     void Awake()
     {
@@ -37,6 +39,7 @@ public class DraggableItem : MonoBehaviour
         _deposit = FindFirstObjectByType<MachineDeposit>();
         _machine = FindFirstObjectByType<ProcessingMachineLogic>();
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -47,6 +50,11 @@ public class DraggableItem : MonoBehaviour
 
     private void TryClick()
     {
+        Debug.Log($"TryClick llamado en {gameObject.name}");
+    Debug.Log($"currentState: {_machine.currentState}");
+    Debug.Log($"_anyAnimating: {_anyAnimating}");
+    Debug.Log($"_itemAtDropPoint: {(_itemAtDropPoint == null ? "NULL" : _itemAtDropPoint.gameObject.name)}");
+        
         if (_machine.currentState != ProcessingMachineLogic.MachineState.Recibiendo)
             return;
 
@@ -63,6 +71,10 @@ public class DraggableItem : MonoBehaviour
                     StartCoroutine(ShakeAndPour());
             }
         }
+        else
+        {
+            Debug.Log("Raycast no golpeo nada");
+        }
     }
 
     private IEnumerator GoToDropPoint()
@@ -71,22 +83,31 @@ public class DraggableItem : MonoBehaviour
         _anyAnimating = true;
 
         // Obtiene los usos requeridos de la receta
+        if (_itemAtDropPoint != null && _itemAtDropPoint != this)
+        {
+            _isAnimating = false;
+            _anyAnimating = false;
+            yield break;
+        }
+
         _requiredUses = GetRequiredUses();
         _currentUses = 0;
 
         // Desaparece del estante
         _meshRenderer.enabled = false;
+        _rb.isKinematic = true;
 
-        // Aparece en el dropPoint rotado 180 en X
         transform.position = dropPoint.position;
         transform.rotation = _dropRotation;
+
+        yield return new WaitForFixedUpdate();
+        
         _meshRenderer.enabled = true;
         _isAtDropPoint = true;
+        _itemAtDropPoint = this;
 
         _isAnimating = false;
         _anyAnimating = false;
-
-        yield return null;
     }
 
     private IEnumerator ShakeAndPour()
@@ -112,12 +133,18 @@ public class DraggableItem : MonoBehaviour
         _meshRenderer.enabled = false;
         transform.position = _startPosition;
         transform.rotation = _startRotation;
+        
+        yield return new WaitForFixedUpdate();
 
         yield return new WaitForSeconds(returnDuration);
 
+        _rb.isKinematic = false;
+
         _meshRenderer.enabled = true;
         _isAtDropPoint = false;
+        _itemAtDropPoint = null;
         _currentUses = 0;
+        
 
         _isAnimating = false;
         _anyAnimating = false;

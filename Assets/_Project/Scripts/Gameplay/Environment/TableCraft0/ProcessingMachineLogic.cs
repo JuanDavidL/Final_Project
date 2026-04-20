@@ -31,6 +31,10 @@ public class ProcessingMachineLogic : MonoBehaviour
     private float zCerrado = 0.11f;
     public int _selectedQuantity = 1;
     private MachineUI _machineUI;
+    private bool _waitingForYellow = false;
+    private int _successCount = 0;
+    private int _failCount = 0;
+    
 
     private void Awake()
     {
@@ -61,6 +65,8 @@ public class ProcessingMachineLogic : MonoBehaviour
         return;
         }
 
+        if (_waitingForYellow) return;
+
         // ← bloquea si está procesando o lista
         if (currentState == MachineState.Procesando || currentState == MachineState.Lista) return;
 
@@ -84,6 +90,8 @@ public class ProcessingMachineLogic : MonoBehaviour
         StartCoroutine(MoverContenedor(zCerrado));
         Debug.Log("Máquina Cancelada.");
         }
+
+        
 }
 
     private void TryCloseAndLock()
@@ -127,10 +135,12 @@ public class ProcessingMachineLogic : MonoBehaviour
 
             StartCoroutine(ProcesoEnvioInventario(pocionVisual, prefabAFabricar));
 
-            _machineUI?.OnProcessComplete(success);
+            _machineUI?.OnProcessComplete(success, _successCount, _failCount);
             btnVerde.SetLight(false);
             currentState = MachineState.Cerrada;
+            _waitingForYellow = false;
             selectedRecipe = null;
+
         }
     }
 
@@ -147,9 +157,10 @@ public class ProcessingMachineLogic : MonoBehaviour
         }
 
         InventoryManager.Instance.AddItem(_lastResult, _selectedQuantity);
+        if (_failCount > 0)
+           InventoryManager.Instance.AddItem(potionBasura, _failCount);
+
         PotionPool.Instance.Release(prefabUsado, itemVisual);
-        _lastResult = null;
-        _selectedQuantity = 1;
     }
 
     public void SeleccionarRecetaManual(RecipeData receta, int quantity = 1)
@@ -182,6 +193,7 @@ public class ProcessingMachineLogic : MonoBehaviour
         else currentIngredients.Add(new InventoryManager.InventorySlot { item = data, quantity = 1 });
 
         _machineUI?.OnIngredientDeposited(data);
+        _waitingForYellow = true;
         Debug.Log($"Agregado: {data.itemName}");
     }
 
@@ -204,17 +216,22 @@ public class ProcessingMachineLogic : MonoBehaviour
 
     public void ProcessFinalPotion()
     {
-        if (selectedRecipe == null) return;
+           if (selectedRecipe == null) return;
 
-        float randomRoll = Random.Range(0f, 100f);
-        _lastResult = randomRoll <= selectedRecipe.successChance
-            ? selectedRecipe.resultPotion
-            : potionBasura;
+        int successCount = 0;
 
-        Debug.Log(randomRoll <= selectedRecipe.successChance
-            ? "<color=green>¡Éxito!</color>"
-            : "<color=red>¡Fallo!</color>");
+        for (int i = 0; i < _selectedQuantity; i++)
+        {
+            float roll = Random.Range(0f, 100f);
+             if (roll <= selectedRecipe.successChance)
+            successCount++;
+        }
 
+        _lastResult = selectedRecipe.resultPotion;
+        _successCount = successCount;
+        _failCount = _selectedQuantity - successCount;
+
+        Debug.Log($"Éxito: {successCount}/{_selectedQuantity}");
         FinalizeProcess();
     }
 
@@ -268,4 +285,6 @@ public class ProcessingMachineLogic : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(MoverContenedor(zCerrado));
     }
+
+    
 }
