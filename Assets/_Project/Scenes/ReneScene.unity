@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: c8c29e6a7a3700a478fb879fd023333f, type: 2}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -1299,6 +1299,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 368009542}
     m_Modifications:
+    - target: {fileID: 1922873403608418933, guid: 5c85eb7d86b49ac4e9b279bd56675657, type: 3}
+      propertyPath: m_Name
+      value: mine (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 7055161254553199320, guid: 5c85eb7d86b49ac4e9b279bd56675657, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.889999
@@ -1338,10 +1342,6 @@ PrefabInstance:
     - target: {fileID: 7055161254553199320, guid: 5c85eb7d86b49ac4e9b279bd56675657, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1922873403608418933, guid: 5c85eb7d86b49ac4e9b279bd56675657, type: 3}
-      propertyPath: m_Name
-      value: mine (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3413,7 +3413,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: JDavidScene
+          m_StringArgument: JuanScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &858268175
@@ -3807,7 +3807,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &915562592
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9611,9 +9611,9 @@ RectTransform:
   - {fileID: 858268173}
   m_Father: {fileID: 1079966490}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 613.53, y: -57.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 77, y: 115}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2046666197
@@ -9705,9 +9705,9 @@ RectTransform:
   - {fileID: 2051698765}
   m_Father: {fileID: 1079966490}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 38.5, y: -57.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 77, y: 115}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2051550811
@@ -10159,6 +10159,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 368009542}
     m_Modifications:
+    - target: {fileID: 1922873403608418933, guid: 5c85eb7d86b49ac4e9b279bd56675657, type: 3}
+      propertyPath: m_Name
+      value: mine (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 7055161254553199320, guid: 5c85eb7d86b49ac4e9b279bd56675657, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -10198,10 +10202,6 @@ PrefabInstance:
     - target: {fileID: 7055161254553199320, guid: 5c85eb7d86b49ac4e9b279bd56675657, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1922873403608418933, guid: 5c85eb7d86b49ac4e9b279bd56675657, type: 3}
-      propertyPath: m_Name
-      value: mine (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10296,15 +10296,15 @@ PrefabInstance:
       objectReference: {fileID: 615793356}
     - target: {fileID: 5879427928219578267, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.2
+      value: 3.518
       objectReference: {fileID: 0}
     - target: {fileID: 5879427928219578267, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.29
+      value: 0.865
       objectReference: {fileID: 0}
     - target: {fileID: 5879427928219578267, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.81
+      value: 2.83
       objectReference: {fileID: 0}
     - target: {fileID: 5879427928219578267, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: m_LocalRotation.w
