@@ -15,6 +15,7 @@ public class DeliveryTube3D : MonoBehaviour
 
     [Header("Referencias del Sistema")]
     public ClientSystem tradeManager;
+    public MonitorSwitch powerSwitch;
     public Animator tubeAnimator;
     public Transform spawnPoint;
 
@@ -26,12 +27,17 @@ public class DeliveryTube3D : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI nameDisplayText;
 
+    [SerializeField]
+    private Color normalTextColor = new Color(0.576f, 0.972f, 0.443f);
+
     private int currentIndex = 0;
     private GameObject currentVisualPotion;
     private Material[] originalMaterials;
 
     public void OnMainTubeButtonClicked()
     {
+        if (powerSwitch == null || !powerSwitch.IsOn)
+            return;
         if (currentState == TubeState.Idle)
         {
             OpenTube();
@@ -60,6 +66,8 @@ public class DeliveryTube3D : MonoBehaviour
         List<ItemData> validPotions = GetValidPotions();
         currentIndex = 0;
 
+        UpdateVisuals();
+
         if (validPotions.Count > 0)
         {
             ItemData neededPotion = tradeManager.GetCurrentOrder();
@@ -82,6 +90,8 @@ public class DeliveryTube3D : MonoBehaviour
 
     public void OnLeftArrowClicked()
     {
+        if (powerSwitch == null || !powerSwitch.IsOn)
+            return;
         if (currentState != TubeState.Selecting)
             return;
 
@@ -112,6 +122,8 @@ public class DeliveryTube3D : MonoBehaviour
     // ARREGLO: La flecha derecha ahora usa la lista filtrada igual que la izquierda
     public void OnRightArrowClicked()
     {
+        if (powerSwitch == null || !powerSwitch.IsOn)
+            return;
         if (currentState != TubeState.Selecting)
             return;
 
@@ -135,11 +147,23 @@ public class DeliveryTube3D : MonoBehaviour
     }
 
     // ARREGLO: UpdateVisuals limpio. Sin redundancias ni variables duplicadas.
+    // Modifica este método en DeliveryTube3D.cs
     private void UpdateVisuals()
     {
+        // Limpieza de hologramas anteriores
         if (currentVisualPotion != null)
             Destroy(currentVisualPotion);
 
+        // --- 1. PRIORIDAD MÁXIMA: ¿DÍA TERMINADO? ---
+        if (tradeManager.IsShiftComplete())
+        {
+            nameDisplayText.text = "SHIFT COMPLETE. POWER OFF CONSOLE.";
+            nameDisplayText.color = normalTextColor;
+            currentVisualPotion = null;
+            return; // Salimos para no mostrar nada más
+        }
+
+        // --- 2. PRIORIDAD MEDIA: ¿SIN POCIONES? ---
         List<ItemData> validPotions = GetValidPotions();
 
         if (validPotions.Count == 0)
@@ -150,7 +174,8 @@ public class DeliveryTube3D : MonoBehaviour
             return;
         }
 
-        //nameDisplayText.color = Color.white;
+        // --- 3. ESTADO NORMAL: MOSTRAR POCIÓN ---
+        nameDisplayText.color = normalTextColor;
 
         if (currentIndex >= validPotions.Count)
             currentIndex = 0;
@@ -161,7 +186,6 @@ public class DeliveryTube3D : MonoBehaviour
         nameDisplayText.text = selectedItem.itemName.ToUpper();
 
         currentVisualPotion = Instantiate(selectedItem.potionPrefab, spawnPoint);
-
         ApplyHologramEffect();
     }
 
@@ -201,8 +225,23 @@ public class DeliveryTube3D : MonoBehaviour
         Invoke("ExecuteDelivery", 0.6f);
     }
 
-    // ARREGLO CRÍTICO: La entrega ahora saca el ítem correcto de la lista filtrada,
-    // evitando que le entregues a B.E.L. una raíz creyendo que es una poción.
+    void Update()
+    {
+        if (powerSwitch != null && !powerSwitch.IsOn && currentState != TubeState.Idle)
+        {
+            CloseTubeForcefully();
+        }
+    }
+
+    private void CloseTubeForcefully()
+    {
+        if (currentVisualPotion != null)
+            Destroy(currentVisualPotion);
+        nameDisplayText.text = ""; // Pantalla a negro
+        tubeAnimator.SetTrigger("SendUp"); // O el trigger que lo suba
+        currentState = TubeState.Idle;
+    }
+
     private void ExecuteDelivery()
     {
         List<ItemData> validPotions = GetValidPotions();

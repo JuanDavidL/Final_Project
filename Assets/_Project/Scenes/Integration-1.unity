@@ -4200,9 +4200,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3276376619794898626, guid: 334fdaca33bcf9d43a6b5b5cb7cd9e14, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276376619794898626, guid: 334fdaca33bcf9d43a6b5b5cb7cd9e14, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4280690214
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276376619794898626, guid: 334fdaca33bcf9d43a6b5b5cb7cd9e14, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208218017655438717, guid: 334fdaca33bcf9d43a6b5b5cb7cd9e14, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 293.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208218017655438717, guid: 334fdaca33bcf9d43a6b5b5cb7cd9e14, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -394.6
+      objectReference: {fileID: 0}
     - target: {fileID: 7611764903690424994, guid: 334fdaca33bcf9d43a6b5b5cb7cd9e14, type: 3}
       propertyPath: m_Name
       value: Canvas-Trade
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937493923334302327, guid: 334fdaca33bcf9d43a6b5b5cb7cd9e14, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937493923334302327, guid: 334fdaca33bcf9d43a6b5b5cb7cd9e14, type: 3}
+      propertyPath: m_margin.z
+      value: -17.38095
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13364,7 +13392,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d18fb04e44cd0154598acb09011fd2f7, type: 2}
   - {fileID: 11400000, guid: ac6d7142fd2cea74caac48d701fac2c6, type: 2}
   powerSwitch: {fileID: 1815235314}
-  timeToNextClient: 5
   maxPatienceTime: 45
   playerCredits: 0
 --- !u!1 &3576099225998298484
