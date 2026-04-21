@@ -15,5 +15,5 @@ MonoBehaviour:
   id: 15
   itemName: 'Quintessence Elixir '
   itemIcon: {fileID: -1984058655, guid: 26ba2685f58fb2449a52cc977ddcaac1, type: 3}
-  potionPrefab: {fileID: 3723720713480466164, guid: 7f58581256de6514987688e3a5c12522, type: 3}
+  potionPrefab: {fileID: 919132149155446097, guid: 6a46078bf9a64d8409b80bcacc83a981, type: 3}
   itemDescription: Placeholder

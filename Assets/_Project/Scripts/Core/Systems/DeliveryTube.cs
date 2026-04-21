@@ -32,7 +32,7 @@ public class DeliveryTube3D : MonoBehaviour
 
     public void OnMainTubeButtonClicked()
     {
-        Debug.Log("Botón presionado");
+        
         if (currentState == TubeState.Idle)
         {
             OpenTube();
@@ -50,6 +50,31 @@ public class DeliveryTube3D : MonoBehaviour
     {
         currentState = TubeState.Selecting;
         tubeAnimator.SetTrigger("LowerTube");
+
+        var inv = InventoryManager.Instance.inventory;
+
+        if (inv != null && inv.Count > 0)
+        {
+            currentIndex = 0; // Valor por defecto por si no la tenemos
+
+            // 1. Le preguntamos a B.E.L. qué quiere el cliente
+            ItemData neededPotion = tradeManager.GetCurrentOrder();
+
+            if (neededPotion != null)
+            {
+                // 2. Buscamos esa poción específica en nuestra mochila
+                for (int i = 0; i < inv.Count; i++)
+                {
+                    // Comparamos los IDs para estar seguros de que es la misma
+                    if (inv[i].item.id == neededPotion.id)
+                    {
+                        currentIndex = i; // ¡La encontramos!
+                        break; // Detenemos la búsqueda
+                    }
+                }
+            }
+        }
+
         UpdateVisuals();
     }
 
@@ -76,6 +101,7 @@ public class DeliveryTube3D : MonoBehaviour
             currentIndex = 0;
         UpdateVisuals();
     }
+    
 
     private void UpdateSelectionUI()
     {
@@ -114,6 +140,15 @@ public class DeliveryTube3D : MonoBehaviour
         {
             currentIndex = Mathf.Clamp(currentIndex, 0, inv.Count - 1);
             ItemData selectedItem = inv[currentIndex].item;
+            // --- AÑADE ESTO ---
+            if (selectedItem.potionPrefab == null)
+            {
+                Debug.LogError(
+                    $"¡ALERTA ROJA! El ítem '{selectedItem.itemName}' está en el inventario, pero su PotionPrefab es NULL. Revisa cómo se añadió este ítem al inventario."
+                );
+                return; // Detenemos el código para que no explote
+            }
+            // ------------------
             currentVisualPotion = Instantiate(selectedItem.potionPrefab, spawnPoint);
         }
 
