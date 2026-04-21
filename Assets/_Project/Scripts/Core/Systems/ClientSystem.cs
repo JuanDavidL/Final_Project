@@ -272,20 +272,28 @@ public class ClientSystem : MonoBehaviour
     private IEnumerator ResolveClientAndCheckQueue()
     {
         isCallingNext = true;
-        yield return new WaitForSeconds(2f); // Tiempo para ver el feedback
+        yield return new WaitForSeconds(2f); // Tiempo del feedback de "Vendido"
 
-        ClearScreens(); // Limpiamos la pantalla del cliente viejo
-        isClientActive = false;
+        ClearScreens();
+        isClientActive = false; // <--- IMPORTANTE: Aquí marcamos que ya no hay nadie
 
-        // Solo si quedan clientes, llamamos al siguiente DESPUÉS de limpiar
         if (clientsInQueue > 0)
         {
-            yield return new WaitForSeconds(0.5f); // Breve pausa dramática
-            StartCoroutine(CallNextClient());
+            yield return new WaitForSeconds(1f);
+            clientsInQueue--;
+            UpdateQueueUI();
+            GenerateDynamicClient();
+            isCallingNext = false;
         }
         else
         {
+            UpdateQueueUI();
             isCallingNext = false;
+
+            // Ahora sí, el IsShiftComplete será True y el tubo mostrará el mensaje
+            DeliveryTube3D tube = FindObjectOfType<DeliveryTube3D>();
+            if (tube != null)
+                tube.SendMessage("UpdateVisuals");
         }
     }
 
@@ -295,6 +303,18 @@ public class ClientSystem : MonoBehaviour
         orderScreenImage.color = Color.clear;
         patienceBar.fillAmount = 0;
         currentOrder = null;
-        // IMPORTANTE: No toques isClientActive aquí, ya lo manejamos en la corrutina
+    }
+
+    // --- EN TU SCRIPT ClientSystem.cs ---
+
+    public bool IsShiftComplete()
+    {
+        // El día termina SOLO si:
+        // 1. Ya pasó el tutorial.
+        // 2. No hay nadie en la fila.
+        // 3. NO hay un cliente siendo atendido actualmente (isClientActive).
+        // 4. No estamos en proceso de llamar a otro (isCallingNext).
+
+        return isTutorialCompleted && clientsInQueue == 0 && !isClientActive && !isCallingNext;
     }
 }
