@@ -5,17 +5,19 @@ using TMPro;
 
 public class PotionQuickBar : MonoBehaviour
 {
-    [Header("Configuración de Salud (Poción 1)")]
+    [Header("Salud (Poción 1)")]
     public ItemData healthPotionItem;
-    public Image healthIcon;
+    public Image healthBackgroundIcon; // La imagen oscura de fondo
+    public Image healthCooldownImage; // La imagen clara de encima (con el reloj)
     public TextMeshProUGUI healthCountText;
     public float healthRecoverAmount = 50f;
     public float healthCooldown = 15f;
     private float healthTimer = 0f;
 
-    [Header("Configuración de Maná (Poción 2)")]
+    [Header("Maná (Poción 2)")]
     public ItemData manaPotionItem;
-    public Image manaIcon;
+    public Image manaBackgroundIcon; // La imagen oscura de fondo
+    public Image manaCooldownImage; // La imagen que va delante
     public TextMeshProUGUI manaCountText;
     public float manaRecoverAmount = 30f;
     public float manaCooldown = 5f;
@@ -32,63 +34,60 @@ public class PotionQuickBar : MonoBehaviour
 
     void Start()
     {
-        if (healthPotionItem != null && healthIcon != null) 
-            healthIcon.sprite = healthPotionItem.itemIcon;
+        // Asignar el sprite a ambas imágenes (fondo y frente)
+        if (healthPotionItem != null)
+        {
+            if (healthBackgroundIcon != null) healthBackgroundIcon.sprite = healthPotionItem.itemIcon;
+            if (healthCooldownImage != null) healthCooldownImage.sprite = healthPotionItem.itemIcon;
+        }
         
-        if (manaPotionItem != null && manaIcon != null) 
-            manaIcon.sprite = manaPotionItem.itemIcon;
+        if (manaPotionItem != null)
+        {
+            if (manaBackgroundIcon != null) manaBackgroundIcon.sprite = manaPotionItem.itemIcon;
+            if (manaCooldownImage != null) manaCooldownImage.sprite = manaPotionItem.itemIcon;
+        }
 
         if (InventoryManager.Instance != null)
             InventoryManager.Instance.OnInventoryUpdated += UpdatePotionUI;
         
         UpdatePotionUI();
         
-        // Inicializar los iconos como llenos
-        if (healthIcon != null) healthIcon.fillAmount = 1;
-        if (manaIcon != null) manaIcon.fillAmount = 1;
+        // Empezar con el reloj lleno (disponible)
+        if (healthCooldownImage != null) healthCooldownImage.fillAmount = 1;
+        if (manaCooldownImage != null) manaCooldownImage.fillAmount = 1;
     }
 
     void OnDestroy()
     {
-        if (InventoryManager.Instance != null)
-            InventoryManager.Instance.OnInventoryUpdated -= UpdatePotionUI;
+        if (InventoryManager.Instance != null) InventoryManager.Instance.OnInventoryUpdated -= UpdatePotionUI;
     }
 
     void Update()
     {
         if (Time.timeScale == 0) return;
 
-        // Manejo de Cooldown Salud
+        // Lógica Visual Salud
         if (healthTimer > 0)
         {
             healthTimer -= Time.deltaTime;
-            if (healthIcon != null)
-            {
-                // El fillAmount va de 0 a 1 conforme pasa el tiempo
-                healthIcon.fillAmount = 1 - (healthTimer / healthCooldown);
-                healthIcon.color = new Color(0.3f, 0.3f, 0.3f, 1f); // Oscuro mientras carga
-            }
+            if (healthCooldownImage != null)
+                healthCooldownImage.fillAmount = 1 - (healthTimer / healthCooldown);
         }
-        else if (healthIcon != null && healthIcon.fillAmount < 1)
+        else if (healthCooldownImage != null && healthCooldownImage.fillAmount < 1)
         {
-            healthIcon.fillAmount = 1;
-            healthIcon.color = Color.white; // Color normal cuando está lista
+            healthCooldownImage.fillAmount = 1;
         }
 
-        // Manejo de Cooldown Maná
+        // Lógica Visual Maná
         if (manaTimer > 0)
         {
             manaTimer -= Time.deltaTime;
-            if (manaIcon != null)
-            {
-                manaIcon.fillAmount = 1 - (manaTimer / manaCooldown);
-                manaIcon.color = new Color(0.3f, 0.3f, 0.3f, 1f);
-            }
+            if (manaCooldownImage != null)
+                manaCooldownImage.fillAmount = 1 - (manaTimer / manaCooldown);
         }
-        else if (manaIcon != null && manaIcon.fillAmount < 1)
+        else if (manaCooldownImage != null && manaCooldownImage.fillAmount < 1)
         {
-            manaIcon.fillAmount = 1;
-            manaIcon.color = Color.white;
+            manaCooldownImage.fillAmount = 1;
         }
 
         var keyboard = Keyboard.current;
@@ -107,6 +106,7 @@ public class PotionQuickBar : MonoBehaviour
             healthSystem.currentHealth = Mathf.Min(healthSystem.currentHealth + healthRecoverAmount, healthSystem.maxHealth);
             healthSystem.SendMessage("ActualizarUI", SendMessageOptions.DontRequireReceiver);
             healthTimer = healthCooldown;
+            if (healthCooldownImage != null) healthCooldownImage.fillAmount = 0; // Reiniciar reloj
         }
     }
 
@@ -119,6 +119,7 @@ public class PotionQuickBar : MonoBehaviour
             manaSystem.currentMana = Mathf.Min(manaSystem.currentMana + manaRecoverAmount, manaSystem.maxMana);
             manaSystem.SendMessage("ActualizarUI", SendMessageOptions.DontRequireReceiver);
             manaTimer = manaCooldown;
+            if (manaCooldownImage != null) manaCooldownImage.fillAmount = 0; // Reiniciar reloj
         }
     }
 
