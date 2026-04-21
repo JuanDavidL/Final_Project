@@ -62,7 +62,7 @@ public class MachineUI : MonoBehaviour
 
     private void ResetToStart()
     {
-        statusText.text = "Press to make a potion";
+        statusText.text = "Press this button to make a potion ↓↓↓";
 
         buttonMakeAPotion.SetActive(true);
         buttonCancel.SetActive(true);
