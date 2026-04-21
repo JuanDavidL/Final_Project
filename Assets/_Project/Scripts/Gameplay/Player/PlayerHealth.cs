@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class PlayerHealth : MonoBehaviour
     public Image healthFillImage;
     public TextMeshProUGUI HPNumbers;
     [Tooltip("Arrastra aquí el objeto de la UI que tiene el Animator de la cara.")]
-    public Animator faceUIAnimator; // Referencia para la animación del retrato
+    public Animator faceUIAnimator;
+    [Tooltip("Arrastra aquí el Panel de Muerte que contiene el botón de volver.")]
+    public GameObject deathPanel;
 
     [Header("Damage Settings")]
     public float invulnerabilityDuration = 1f;
@@ -33,6 +36,10 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         anim = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        // Asegurarnos de que el panel de muerte esté oculto al iniciar
+        if (deathPanel != null) deathPanel.SetActive(false);
+
         ActualizarUI();
     }
 
@@ -58,7 +65,7 @@ public class PlayerHealth : MonoBehaviour
         // --- FEEDBACK VISUAL EN LA UI ---
         if (faceUIAnimator != null)
         {
-            faceUIAnimator.SetTrigger("Hurt"); // Activa la transición a MageHurtFace
+            faceUIAnimator.SetTrigger("Hurt");
         }
 
         if (currentHealth <= 0)
@@ -67,7 +74,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
-            // Animación de daño en el personaje físico (3D/2D World)
+            // Animación de daño en el personaje físico
             if (anim != null) anim.SetTrigger("Hurt");
 
             // Iniciar parpadeo de invulnerabilidad
@@ -84,13 +91,11 @@ public class PlayerHealth : MonoBehaviour
 
     private void ActualizarUI()
     {
-        // Actualizar barra de vida
         if (healthFillImage != null)
         {
             healthFillImage.fillAmount = currentHealth / maxHealth;
         }
 
-        // Actualizar texto de vida (sin decimales)
         if (HPNumbers != null)
         {
             HPNumbers.text = Mathf.FloorToInt(currentHealth).ToString();
@@ -102,7 +107,6 @@ public class PlayerHealth : MonoBehaviour
         isInvulnerable = true;
         float timer = 0;
 
-        // Efecto de parpadeo visual
         while (timer < invulnerabilityDuration)
         {
             if (spriteRenderer != null) spriteRenderer.enabled = !spriteRenderer.enabled;
@@ -116,7 +120,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        if (isDead) return; // Evita que se ejecute varias veces
+        if (isDead) return;
         isDead = true;
         currentHealth = 0;
         ActualizarUI();
@@ -125,26 +129,66 @@ public class PlayerHealth : MonoBehaviour
         if (anim != null) anim.SetTrigger("Die");
         if (faceUIAnimator != null) faceUIAnimator.SetTrigger("Die");
 
-        // 2. DESACTIVAR CONTROLES
+        // 2. DESACTIVAR CONTROLES Y SISTEMAS
 
         // Desactiva el script de movimiento
         if (GetComponent<PlayerMovement>() != null)
             GetComponent<PlayerMovement>().enabled = false;
+
+        // Desactiva el blink
         if (GetComponent<PlayerBlink>() != null)
             GetComponent<PlayerBlink>().enabled = false;
-        // Desactiva cualquier habilidad adicional que tengas (si las hay)
+
+        // Desactiva el Manager de habilidades (para que no procese más Inputs)
+        if (GetComponent<AbilityManager>() != null)
+            GetComponent<AbilityManager>().enabled = false;
+
+        // Desactiva cada script de habilidad individualmente y oculta indicadores
         BaseAbility[] habilidades = GetComponents<BaseAbility>();
         foreach (BaseAbility habilidad in habilidades)
         {
+            habilidad.HideIndicator();
             habilidad.enabled = false;
         }
 
-        Debug.Log("El jugador ha muerto. Controles desactivados.");
+        Debug.Log("Jugador muerto. Sistemas desactivados.");
+
+        // 3. Mostrar Panel de UI tras un breve retraso
+        StartCoroutine(ShowDeathPanelRoutine());
+    }
+
+    private IEnumerator ShowDeathPanelRoutine()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+
+        if (deathPanel != null)
+        {
+            deathPanel.SetActive(true);
+
+            // PAUSAR EL JUEGO
+            Time.timeScale = 0f;
+
+            // Liberar el mouse
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
+    // IMPORTANTE: Debemos devolver el tiempo a la normalidad al cambiar de escena
+    public void RegresarALaNave()
+    {
+        Time.timeScale = 1f; // REANUDAR EL TIEMPO
+        SceneManager.LoadScene("JuanScene");
+    }
+
+    // Función para el botón "Volver a la nave"
+    public void BackToShip()
+    {
+        SceneManager.LoadScene("JDavidScene");
     }
 
     private void OnTriggerStay(Collider other)
     {
-        // Daño por contacto continuo con enemigos
         if (other.CompareTag("Enemy")) TakeDamage(10f);
     }
 }

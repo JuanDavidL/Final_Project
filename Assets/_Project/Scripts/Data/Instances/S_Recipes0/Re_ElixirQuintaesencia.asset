@@ -18,10 +18,10 @@ MonoBehaviour:
   resultPotion: {fileID: 11400000, guid: ac6d7142fd2cea74caac48d701fac2c6, type: 2}
   potionPrefab: {fileID: 3723720713480466164, guid: 7f58581256de6514987688e3a5c12522, type: 3}
   requiredIngredients:
-  - item: {fileID: 11400000, guid: 95352bdcd1f51fe4fbebdd323e2213c3, type: 2}
-    quantity: 1
   - item: {fileID: 11400000, guid: 383ef6a0db0397546a31fab7c7036345, type: 2}
-    quantity: 1
+    quantity: 3
+  - item: {fileID: 11400000, guid: b97313eaeabd29e42807aad539fd7aa4, type: 2}
+    quantity: 3
   difficulty: 3
   successChance: 50
   requiredLeverPresses: 12

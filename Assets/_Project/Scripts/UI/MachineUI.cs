@@ -34,6 +34,9 @@ public class MachineUI : MonoBehaviour
     public GameObject textPullTheLever;
     public TextMeshProUGUI textCountOfLever;
 
+    [Header("Cancel")]
+    public GameObject buttonCancel;
+
     [Header("Recetas")]
     public RecipeData[] recipes;
 
@@ -62,6 +65,7 @@ public class MachineUI : MonoBehaviour
         statusText.text = "Press to make a potion";
 
         buttonMakeAPotion.SetActive(true);
+        buttonCancel.SetActive(true);
         buttonLeft.SetActive(false);
         buttonRight.SetActive(false);
         spritePotion.gameObject.SetActive(false);
@@ -148,6 +152,25 @@ public class MachineUI : MonoBehaviour
         textQuantity.text = $"x{_quantity}";
     }
 
+    public void OnCancelClick()
+    {
+        _machine.CancelProcess();
+        ResetToStart();
+    }
+
+    public void OnWrongIngredient()
+    {
+        statusText.text = "Wrong ingredient! Try again.";
+        StartCoroutine(ResetStatusAfterDelay());
+    }
+
+    private IEnumerator ResetStatusAfterDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        statusText.text = "Press RED button";
+    }
+
+
     // Llamado cuando se presiona boton rojo
     public void OnRedButtonPressed()
     {
@@ -212,9 +235,15 @@ public class MachineUI : MonoBehaviour
     }
 
     // Llamado cuando se presiona boton verde
-    public void OnProcessComplete(bool success)
+    public void OnProcessComplete(bool success, int successCount, int failCount)
     {
-        statusText.text = success ? "¡Exito!" : "¡Fallo!";
+        if (failCount == 0)
+            statusText.text = $"¡Éxito! {successCount} pociones";
+        else if (successCount == 0)
+            statusText.text = $"¡Fallo! {failCount} fallaron";
+        else
+            statusText.text = $"{successCount} éxito / {failCount} fallo";
+
         StartCoroutine(ResetAfterDelay());
     }
 

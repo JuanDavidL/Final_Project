@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class Fireball : BaseAbility
 {
@@ -14,20 +15,19 @@ public class Fireball : BaseAbility
     private Camera mainCamera;
     private MagicBook magicBook;
     private Mouse mouse;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         mainCamera = Camera.main;
         mouse = Mouse.current;
+        magicBook = FindFirstObjectByType<MagicBook>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        base.Update();
         if (isIndicatorActive)
-        {
             UpdateIndicator();
-        }
     }
 
     public override void ShowIndicator()
@@ -47,7 +47,6 @@ public class Fireball : BaseAbility
         Vector3 mouseWorldPosition = GetMouseWorldPosition();
         Vector3 direction = (mouseWorldPosition - transform.position).normalized;
         direction.y = 0f;
-        direction.Normalize();
 
         Vector3 startPos = new Vector3(transform.position.x, 0.05f, transform.position.z);
         Vector3 endPos = new Vector3(transform.position.x + direction.x * 20f, 0.05f, transform.position.z + direction.z * 20f);
@@ -58,38 +57,43 @@ public class Fireball : BaseAbility
 
     public override void Use()
     {
-        if (IsOnCooldown())
-            return;
+        if (!TryConsumeCharge()) return;
+
+        // Lanza 'quantity' bolas con 0.2s de pausa entre cada una
+        StartCoroutine(LaunchSequence());
+    }
+
+    private IEnumerator LaunchSequence()
+    {
+        Debug.Log($"LaunchSequence iniciada. Quantity: {quantity}");
 
         Vector3 mouseWorldPosition = GetMouseWorldPosition();
-        Vector3 spwanPosition = magicBook != null ? magicBook.GetBookPosition(): transform.position;
-        Vector3 direction = (mouseWorldPosition - spwanPosition).normalized;
+        Vector3 spawnPosition = magicBook != null ? magicBook.GetBookPosition() : transform.position;
+        Vector3 direction = (mouseWorldPosition - spawnPosition).normalized;
         direction.y = 0f;
-        direction.Normalize();
 
-        spwanPosition = spwanPosition + direction * 0.5f; // Adjust spawn height if needed
+        for (int i = 0; i < quantity; i++)
+        {
+            Vector3 finalSpawn = spawnPosition + direction * 0.5f;
+            finalSpawn = new Vector3(finalSpawn.x, transform.position.y, finalSpawn.z);
 
+            GameObject projectile = Instantiate(projectilePrefab, finalSpawn, Quaternion.identity);
+            FireballProjectile fp = projectile.GetComponent<FireballProjectile>();
+            fp.Init(direction, projectileSpeed, explosionRadius, damage);
 
-        Vector3 finalPosition = new Vector3(spwanPosition.x, transform.position.y, spwanPosition.z);
-        GameObject projectile = Instantiate(projectilePrefab, finalPosition, Quaternion.identity);
-        
-        FireballProjectile fp = projectile.GetComponent<FireballProjectile>();
-        fp.Init(direction, projectileSpeed, explosionRadius, damage);
-    
+            // Si hay más de una bola, espera 0.2s antes de la siguiente
+            if (i < quantity - 1)
+                yield return new WaitForSeconds(0.2f);
+        }
+
         HideIndicator();
-        lastUsedTime = Time.time;
     }
 
     private Vector3 GetMouseWorldPosition()
     {
-        Vector3 mouseScreen = mouse.position.ReadValue();
-        Ray ray = mainCamera.ScreenPointToRay(mouseScreen);
-
+        Ray ray = mainCamera.ScreenPointToRay(mouse.position.ReadValue());
         if (Physics.Raycast(ray, out RaycastHit hit))
-        {
             return hit.point;
-        }
-
         return transform.position;
     }
 }

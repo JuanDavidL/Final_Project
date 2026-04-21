@@ -1,6 +1,6 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
 
 public class DraggableItem : MonoBehaviour
 {
@@ -22,12 +22,13 @@ public class DraggableItem : MonoBehaviour
     private bool _isAtDropPoint = false;
     private bool _isAnimating = false;
     private static bool _anyAnimating = false;
-    private int _currentUses = 0;
+    private static DraggableItem _itemAtDropPoint = null;
     private int _requiredUses = 0;
 
     private MachineDeposit _deposit;
     private ProcessingMachineLogic _machine;
     private MeshRenderer _meshRenderer;
+    private Rigidbody _rb;
 
     void Awake()
     {
@@ -37,6 +38,7 @@ public class DraggableItem : MonoBehaviour
         _deposit = FindFirstObjectByType<MachineDeposit>();
         _machine = FindFirstObjectByType<ProcessingMachineLogic>();
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -71,22 +73,30 @@ public class DraggableItem : MonoBehaviour
         _anyAnimating = true;
 
         // Obtiene los usos requeridos de la receta
+        if (_itemAtDropPoint != null && _itemAtDropPoint != this)
+        {
+            _isAnimating = false;
+            _anyAnimating = false;
+            yield break;
+        }
+
         _requiredUses = GetRequiredUses();
-        _currentUses = 0;
 
         // Desaparece del estante
         _meshRenderer.enabled = false;
+        _rb.isKinematic = true;
 
-        // Aparece en el dropPoint rotado 180 en X
         transform.position = dropPoint.position;
         transform.rotation = _dropRotation;
+
+        yield return new WaitForFixedUpdate();
+
         _meshRenderer.enabled = true;
         _isAtDropPoint = true;
+        _itemAtDropPoint = this;
 
         _isAnimating = false;
         _anyAnimating = false;
-
-        yield return null;
     }
 
     private IEnumerator ShakeAndPour()
@@ -104,23 +114,24 @@ public class DraggableItem : MonoBehaviour
             Destroy(vfx, 2f);
         }
 
-        // Deposita un uso
-        _deposit?.TryDeposit(itemContenido);
-        _currentUses++;
+        // Deposita TODOS los usos de una vez
+        for (int i = 0; i < _requiredUses; i++)
+            _deposit?.TryDeposit(itemContenido);
 
-        // Si completó todos los usos regresa al estante
-        if (_currentUses >= _requiredUses)
-        {
-            _meshRenderer.enabled = false;
-            transform.position = _startPosition;
-            transform.rotation = _startRotation;
+        // Regresa al estante directamente
+        _meshRenderer.enabled = false;
+        transform.position = _startPosition;
+        transform.rotation = _startRotation;
 
-            yield return new WaitForSeconds(returnDuration);
+        yield return new WaitForFixedUpdate();
 
-            _meshRenderer.enabled = true;
-            _isAtDropPoint = false;
-            _currentUses = 0;
-        }
+        yield return new WaitForSeconds(returnDuration);
+
+        _rb.isKinematic = false;
+
+        _meshRenderer.enabled = true;
+        _isAtDropPoint = false;
+        _itemAtDropPoint = null;
 
         _isAnimating = false;
         _anyAnimating = false;
@@ -145,12 +156,13 @@ public class DraggableItem : MonoBehaviour
 
     private int GetRequiredUses()
     {
-        if (_machine.selectedRecipe == null) return 1;
+        if (_machine.selectedRecipe == null)
+            return 1;
 
         foreach (var ingredient in _machine.selectedRecipe.requiredIngredients)
         {
             if (ingredient.item == itemContenido)
-                return ingredient.quantity;
+                return ingredient.quantity * _machine._selectedQuantity;
         }
 
         return 1;

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2278226448d84084ea6cb033ac528f4d, type: 3}
+  m_Name: PlasmaScale
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  id: 7
+  itemName: Escama de Plasma
+  itemIcon: {fileID: 1783027246, guid: b2efc4e9243ec8644b19ade7fe7654d0, type: 3}
+  potionPrefab: {fileID: 0}
+  itemDescription: Frozen Flower emits chilling energy, slowing enemies and reducing
+    damage taken. Its icy petals preserve life in harsh climates, offering protection
+    and resilience to those who carry it.
