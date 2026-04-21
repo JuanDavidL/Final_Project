@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c267d89e600b6b247b77dbbccac8eb27, type: 3}
   m_Name: Upgrade_Fireball_Unlock
   m_EditorClassIdentifier: Assembly-CSharp::AbilityUpgrade
-  upgradeName: 
-  description: 
-  upgradeIcon: {fileID: 0}
+  upgradeName: Bola de Fuego
+  description: Un hechizo basico pero muy poderoso
+  upgradeIcon: {fileID: -11105855, guid: 2323e71a120dd824fa768004434c0dcd, type: 3}
   cost: 0
   upgradeType: 0
   value: 0

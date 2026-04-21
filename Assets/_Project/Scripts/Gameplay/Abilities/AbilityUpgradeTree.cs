@@ -2,121 +2,134 @@ using UnityEngine;
 
 public class AbilityUpgradeTree : MonoBehaviour
 {
-    [Header("Habilidad objetivo")]
+    public enum TreeType { Fireball, FrostNova }
+
+    [Header("Tipo de árbol")]
+    public TreeType treeType;
+
+    [Header("Habilidad objetivo (solo en escena Planeta)")]
     public BaseAbility targetAbility;
 
     [Header("Mejoras en orden secuencial")]
     public AbilityUpgrade[] upgrades;
 
-    // Cuántas mejoras están compradas
+    [Header("Valores base Originales")]
+    public float baseDamage;
+    public float baseManaCost;
+    public float baseRadius;
+
     private int _purchasedCount = 0;
 
-    // Valores base originales para no perderlos
+    // Valores base
     private float _baseDamage;
     private float _baseManaCost;
-    private float _baseExplosionRadius; // solo Fireball
-    private float _baseNovaRadius;      // solo FrostNova
+    private float _baseRadius;
 
     void Awake()
     {
-        // Guarda los valores base originales
-        if (targetAbility != null)
+        // Carga cuántas mejoras ya compró del GameManager
+        if (GameManager.Instance != null)
         {
-            _baseDamage = targetAbility.damage;
-            _baseManaCost = targetAbility.manaCost;
-
-            if (targetAbility is Fireball fb)
-                _baseExplosionRadius = fb.explosionRadius;
-            else if (targetAbility is FrostNova fn)
-                _baseNovaRadius = fn.novaRadius;
+            _purchasedCount = treeType == TreeType.Fireball
+                ? GameManager.Instance.fireballUpgradesPurchased
+                : GameManager.Instance.frostNovaUpgradesPurchased;
         }
     }
 
-    // ─── Comprar la siguiente mejora ──────────────────────────────
+    void Start()
+    {
+        // Si hay habilidad asignada (estamos en el planeta), aplica todas las mejoras compradas
+        if (targetAbility != null)
+        {
+            GuardarValoresBase();
+            AplicarTodasLasMejoras();
+        }
+    }
+
+    private void GuardarValoresBase()
+    {
+        _baseDamage = baseDamage > 0 ? baseDamage : targetAbility.damage;
+        _baseManaCost = baseManaCost > 0 ? baseManaCost : targetAbility.manaCost;
+
+        Debug.Log($"[{treeType}] Base guardado → ManaCost: {_baseManaCost} | Damage: {_baseDamage} | Radius: {_baseRadius}");
+
+        if (targetAbility is Fireball fb)
+            _baseRadius = baseRadius > 0 ? baseRadius : fb.explosionRadius;
+        else if (targetAbility is FrostNova fn)
+            _baseRadius = baseRadius > 0 ? baseRadius : fn.novaRadius;
+    }
+
+    // Aplica todas las mejoras compradas al cargar la escena planeta
+    private void AplicarTodasLasMejoras()
+    {
+        for (int i = 0; i < _purchasedCount && i < upgrades.Length; i++)
+            ApplyUpgrade(upgrades[i]);
+
+        Debug.Log($"{treeType}: {_purchasedCount} mejoras aplicadas al cargar escena.");
+    }
+
+    // ─── Comprar ──────────────────────────────────────────────────
 
     public bool TryPurchaseNext()
     {
-        if (!CanPurchaseNext())
-        {
-            Debug.LogWarning("No se puede comprar la siguiente mejora.");
-            return false;
-        }
+        if (!CanPurchaseNext()) return false;
 
         AbilityUpgrade upgrade = upgrades[_purchasedCount];
-
-        // Descuenta créditos
         GameManager.Instance.totalCredits -= upgrade.cost;
-        GameManager.Instance.SaveGlobalProgress();
-
-        // Aplica la mejora
-        ApplyUpgrade(upgrade);
         _purchasedCount++;
 
-        Debug.Log($"Mejora '{upgrade.upgradeName}' aplicada! Mejoras compradas: {_purchasedCount}/{upgrades.Length}");
+        // Guarda en GameManager
+        if (treeType == TreeType.Fireball)
+            GameManager.Instance.fireballUpgradesPurchased = _purchasedCount;
+        else
+            GameManager.Instance.frostNovaUpgradesPurchased = _purchasedCount;
+
+        GameManager.Instance.SaveGlobalProgress();
+
+        Debug.Log($"{treeType}: mejora '{upgrade.upgradeName}' comprada. Total: {_purchasedCount}/{upgrades.Length}");
         return true;
     }
 
     public bool CanPurchaseNext()
     {
-        // Ya compró todas
         if (_purchasedCount >= upgrades.Length) return false;
-
-        // No hay créditos suficientes
-        AbilityUpgrade next = upgrades[_purchasedCount];
-        if (GameManager.Instance.totalCredits < next.cost) return false;
-
-        return true;
+        if (GameManager.Instance == null) return false;
+        return GameManager.Instance.totalCredits >= upgrades[_purchasedCount].cost;
     }
 
-    // ─── Aplica la mejora al targetAbility ────────────────────────
+    // ─── Aplica una mejora ────────────────────────────────────────
 
     private void ApplyUpgrade(AbilityUpgrade upgrade)
     {
+        // Si no hay habilidad asignada (escena nave) no aplica nada
+        if (targetAbility == null) return;
+
         switch (upgrade.upgradeType)
         {
             case AbilityUpgrade.UpgradeType.UnlockAbility:
-                // Activa el GameObject de la habilidad
                 targetAbility.gameObject.SetActive(true);
-                Debug.Log($"{targetAbility.abilityName} desbloqueada!");
                 break;
 
             case AbilityUpgrade.UpgradeType.ReduceManaCost:
-                // Reduce en % sobre el valor base
                 targetAbility.manaCost = _baseManaCost * (1f - upgrade.value / 100f);
-                Debug.Log($"ManaCost reducido a: {targetAbility.manaCost}");
                 break;
 
             case AbilityUpgrade.UpgradeType.IncreaseDamage:
-                // Aumenta en % sobre el valor base
                 targetAbility.damage = _baseDamage * (1f + upgrade.value / 100f);
-                Debug.Log($"Damage aumentado a: {targetAbility.damage}");
                 break;
 
             case AbilityUpgrade.UpgradeType.IncreaseRadius:
                 if (targetAbility is Fireball fb)
-                {
-                    fb.explosionRadius = _baseExplosionRadius * (1f + upgrade.value / 100f);
-                    Debug.Log($"ExplosionRadius aumentado a: {fb.explosionRadius}");
-                }
+                    fb.explosionRadius = _baseRadius * (1f + upgrade.value / 100f);
                 else if (targetAbility is FrostNova fn)
-                {
-                    fn.novaRadius = _baseNovaRadius * (1f + upgrade.value / 100f);
-                    Debug.Log($"NovaRadius aumentado a: {fn.novaRadius}");
-                }
+                    fn.novaRadius = _baseRadius * (1f + upgrade.value / 100f);
                 break;
 
             case AbilityUpgrade.UpgradeType.IncreaseQuantity:
-                // Aumenta quantity para Fireball o maxCharge para FrostNova
                 if (targetAbility is Fireball fireball)
-                {
                     fireball.quantity += (int)upgrade.value;
-                    Debug.Log($"Fireball quantity: {fireball.quantity}");
-                }
                 else if (targetAbility is FrostNova frostNova)
-                {
                     frostNova.maxCharge += (int)upgrade.value;
-                    Debug.Log($"FrostNova maxCharge: {frostNova.maxCharge   }");
-                }
                 break;
         }
     }
@@ -127,6 +140,12 @@ public class AbilityUpgradeTree : MonoBehaviour
     {
         if (_purchasedCount >= upgrades.Length) return null;
         return upgrades[_purchasedCount];
+    }
+
+    public AbilityUpgrade GetUpgradeAt(int index)
+    {
+        if (index < 0 || index >= upgrades.Length) return null;
+        return upgrades[index];
     }
 
     public int GetPurchasedCount() => _purchasedCount;
