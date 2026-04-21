@@ -36,13 +36,19 @@ public class DeliveryTube3D : MonoBehaviour
 
     public void OnMainTubeButtonClicked()
     {
+        // 1. El único "seguro" que dejamos es el del switch de energía
         if (powerSwitch == null || !powerSwitch.IsOn)
             return;
+
+        // 2. Si el tubo está arriba (Idle), lo bajamos y TERMINAMOS el proceso de este clic
         if (currentState == TubeState.Idle)
         {
             OpenTube();
+            return; // <-- Este 'return' es vital para que no se envíe solo
         }
-        else if (currentState == TubeState.Selecting)
+
+        // 3. Si el tubo YA está abajo (Selecting), entonces procesamos el envío
+        if (currentState == TubeState.Selecting)
         {
             List<ItemData> validPotions = GetValidPotions();
 
@@ -52,8 +58,7 @@ public class DeliveryTube3D : MonoBehaviour
             }
             else
             {
-                // Si intenta enviar y no hay nada, refrescamos el aviso de error
-                UpdateVisuals();
+                UpdateVisuals(); // Refresca por si ya hay pociones
             }
         }
     }
