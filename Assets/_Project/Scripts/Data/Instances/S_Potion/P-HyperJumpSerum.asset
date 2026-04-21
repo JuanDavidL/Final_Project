@@ -15,5 +15,5 @@ MonoBehaviour:
   id: 13
   itemName: 'Hyperjump Serum  '
   itemIcon: {fileID: -2038327522, guid: fb5b57fd7d137b947884eff9d2df49e9, type: 3}
-  potionPrefab: {fileID: 4194181679092616756, guid: b4e245dc7b4bb19428f70372e893c123, type: 3}
+  potionPrefab: {fileID: 919132149155446097, guid: 8a380890ea49a704eb4539f2cfa5fe77, type: 3}
   itemDescription: Placeholder
