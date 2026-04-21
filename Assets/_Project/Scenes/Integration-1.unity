@@ -3292,6 +3292,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4233458567683738278, guid: 6522094a4b38e634dbfa77f33a1805c7, type: 3}
+      propertyPath: powerSwitch
+      value: 
+      objectReference: {fileID: 1815235314}
+    - target: {fileID: 4233458567683738278, guid: 6522094a4b38e634dbfa77f33a1805c7, type: 3}
       propertyPath: tradeManager
       value: 
       objectReference: {fileID: 3564710556910204147}
@@ -5765,6 +5769,18 @@ PrefabInstance:
     - target: {fileID: 2198545242638589271, guid: 334fdaca33bcf9d43a6b5b5cb7cd9e14, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208218017655438717, guid: 334fdaca33bcf9d43a6b5b5cb7cd9e14, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 399.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208218017655438717, guid: 334fdaca33bcf9d43a6b5b5cb7cd9e14, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208218017655438717, guid: 334fdaca33bcf9d43a6b5b5cb7cd9e14, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -395
       objectReference: {fileID: 0}
     - target: {fileID: 7611764903690424994, guid: 334fdaca33bcf9d43a6b5b5cb7cd9e14, type: 3}
       propertyPath: m_Name
@@ -17193,7 +17209,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a05be332c4c049499e6a730c4bd11a9, type: 2}
   - {fileID: 11400000, guid: 5a9d461421c8fff4f9010650f94c289a, type: 2}
   - {fileID: 11400000, guid: d18fb04e44cd0154598acb09011fd2f7, type: 2}
-  - {fileID: 11400000, guid: ac6d7142fd2cea74caac48d701fac2c6, type: 2}
   powerSwitch: {fileID: 1815235314}
   maxPatienceTime: 45
   playerCredits: 0
