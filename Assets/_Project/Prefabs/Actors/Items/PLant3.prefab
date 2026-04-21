@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5046956425352302473}
   m_Layer: 0
   m_Name: PLant3
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
