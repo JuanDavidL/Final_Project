@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   recipeID: 2
   recipeName: Filtro de Mana
-  recipeIcon: {fileID: -1104959637169969761, guid: 4677e1b6a9c97c840b7076995e4059a1, type: 3}
+  recipeIcon: {fileID: -6923940485407251254, guid: 4677e1b6a9c97c840b7076995e4059a1, type: 3}
   resultPotion: {fileID: 11400000, guid: 2a05be332c4c049499e6a730c4bd11a9, type: 2}
   potionPrefab: {fileID: 168195955495753916, guid: 79e33206469443347af2c675a31f249c, type: 3}
   requiredIngredients:
