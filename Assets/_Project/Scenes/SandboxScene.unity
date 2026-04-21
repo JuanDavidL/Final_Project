@@ -1452,6 +1452,7 @@ MonoBehaviour:
   healthFillImage: {fileID: 0}
   HPNumbers: {fileID: 0}
   faceUIAnimator: {fileID: 0}
+  deathPanel: {fileID: 0}
   invulnerabilityDuration: 1
   regenWaitTime: 5
   regenRate: 10
@@ -1490,6 +1491,9 @@ MonoBehaviour:
   cooldown: 1
   manaCost: 0
   damage: 0
+  quantity: 1
+  maxCharge: 1
+  isIndicatorActive: 0
   blinkDistance: 2
   blinkDelay: 0.1
   blinkVFX: {fileID: 5531895628249144561, guid: 0bb644701eecc5140aa4dbc9acf5424c, type: 3}
@@ -2167,6 +2171,9 @@ MonoBehaviour:
   cooldown: 5
   manaCost: 30
   damage: 25
+  quantity: 1
+  maxCharge: 1
+  isIndicatorActive: 0
   novaRadius: 5
   frostNovaVFX: {fileID: 6794006628998027646, guid: 9881f1423b3e18f46a3bd4ebb0e564f8, type: 3}
   circleIndicator: {fileID: 0}
@@ -3761,6 +3768,9 @@ MonoBehaviour:
   cooldown: 2
   manaCost: 15
   damage: 10
+  quantity: 1
+  maxCharge: 1
+  isIndicatorActive: 0
   projectilePrefab: {fileID: 8267417148194857484, guid: 5477f083022441843880dffc3cc5479e, type: 3}
   projectileSpeed: 10
   explosionRadius: 2
@@ -4523,7 +4533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3263382590982242550, guid: 28513584f1b18fe41a4a5044586282c5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4584,7 +4594,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8244069323594703723, guid: 607366d5b81a2304a882bf1dfc11e81b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
