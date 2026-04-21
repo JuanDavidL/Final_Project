@@ -36,9 +36,7 @@ public class ClientSystem : MonoBehaviour
     public MonitorSwitch powerSwitch; // Arrastra tu switch aquí
 
     [SerializeField]
-    private float timeToNextClient = 2f; // ¡NUEVO! Tiempo entre clientes
-
-    [SerializeField]
+    //private float timeToNextClient = 2f;
     private float maxPatienceTime = 45f;
 
     [Header("Economía")]
@@ -55,16 +53,23 @@ public class ClientSystem : MonoBehaviour
 
     void Start()
     {
-        // 1. Quita los comentarios de estas líneas:
-        //PlayerPrefs.DeleteKey("TutorialCompleted");
-        //PlayerPrefs.DeleteKey("TotalCredits");
-        //PlayerPrefs.Save(); // Forzamos el borrado inmediato
+        // Usamos una pequeña comprobación de seguridad
+        if (GameManager.Instance != null)
+        {
+            isTutorialCompleted = GameManager.Instance.isTutorialCompleted;
+        }
+        else
+        {
+            // Si por alguna razón el Singleton no está listo, lo leemos del disco directamente
+            isTutorialCompleted = PlayerPrefs.GetInt("TutorialCompleted", 0) == 1;
+        }
 
-        // 2. Dale al Play una vez.
-        // 3. Detén el juego y vuelve a comentar las líneas anteriores.
+        ClearScreens();
 
-        isTutorialCompleted = GameManager.Instance.isTutorialCompleted;
-        // ...
+        if (isTutorialCompleted)
+        {
+            GenerateSessionClients();
+        }
     }
 
     private void CalculateDynamicPayout()
@@ -82,38 +87,55 @@ public class ClientSystem : MonoBehaviour
 
     void Update()
     {
+        // Si el monitor está apagado, no hay servicio
         if (powerSwitch == null || !powerSwitch.IsOn)
             return;
 
         if (!isTutorialCompleted)
         {
-            if (!isClientActive && !isCallingNext) // Añadimos semáforo
+            if (!isClientActive && !isCallingNext)
                 StartTutorialMode();
             return;
         }
 
+        // Lógica post-tutorial
         if (isClientActive)
         {
             HandlePatienceTimer();
         }
-        // ELIMINAMOS el "else if" que llamaba al cliente desde aquí para evitar el bug
+        else if (clientsInQueue > 0 && !isCallingNext)
+        {
+            // Esto se disparará apenas cargue la escena si clientsInQueue > 0
+            StartCoroutine(CallNextClient());
+        }
     }
 
     public void CompleteTutorialTrade()
     {
-        // Avisamos al sistema global que el tutorial fue un éxito
+        // 1. Actualizamos el Singleton persistente
         GameManager.Instance.isTutorialCompleted = true;
-        GameManager.Instance.AddCredits(50);
+        GameManager.Instance.totalCredits += 50;
+
+        // 2. Forzamos el guardado físico en disco inmediatamente
         GameManager.Instance.SaveGlobalProgress();
 
         isTutorialCompleted = true;
-
-        // IMPORTANTE: Dejamos la cola en 0 para que no aparezca nadie más
-        clientsInQueue = 0;
+        clientsInQueue = 0; // O la cantidad que desees
         UpdateQueueUI();
 
-        Debug.Log("Tutorial finalizado. Nave en espera de exploración.");
         StartCoroutine(ResolveClientAndCheckQueue());
+    }
+
+    public ItemData GetCurrentOrder()
+    {
+        // 1. Si NO hemos pasado el tutorial, el tubo debe buscar la poción del tutorial
+        if (!isTutorialCompleted)
+        {
+            return tutorialPotionRequired;
+        }
+
+        // 2. Si ya estamos en el flujo normal, devuelve la orden del cliente actual
+        return currentOrder;
     }
 
     private void GenerateSessionClients()

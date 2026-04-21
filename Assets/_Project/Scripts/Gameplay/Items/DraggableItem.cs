@@ -1,6 +1,6 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
 
 public class DraggableItem : MonoBehaviour
 {
@@ -23,7 +23,6 @@ public class DraggableItem : MonoBehaviour
     private bool _isAnimating = false;
     private static bool _anyAnimating = false;
     private static DraggableItem _itemAtDropPoint = null;
-    private int _currentUses = 0;
     private int _requiredUses = 0;
 
     private MachineDeposit _deposit;
@@ -50,11 +49,6 @@ public class DraggableItem : MonoBehaviour
 
     private void TryClick()
     {
-        Debug.Log($"TryClick llamado en {gameObject.name}");
-    Debug.Log($"currentState: {_machine.currentState}");
-    Debug.Log($"_anyAnimating: {_anyAnimating}");
-    Debug.Log($"_itemAtDropPoint: {(_itemAtDropPoint == null ? "NULL" : _itemAtDropPoint.gameObject.name)}");
-        
         if (_machine.currentState != ProcessingMachineLogic.MachineState.Recibiendo)
             return;
 
@@ -70,10 +64,6 @@ public class DraggableItem : MonoBehaviour
                 else
                     StartCoroutine(ShakeAndPour());
             }
-        }
-        else
-        {
-            Debug.Log("Raycast no golpeo nada");
         }
     }
 
@@ -91,7 +81,6 @@ public class DraggableItem : MonoBehaviour
         }
 
         _requiredUses = GetRequiredUses();
-        _currentUses = 0;
 
         // Desaparece del estante
         _meshRenderer.enabled = false;
@@ -101,7 +90,7 @@ public class DraggableItem : MonoBehaviour
         transform.rotation = _dropRotation;
 
         yield return new WaitForFixedUpdate();
-        
+
         _meshRenderer.enabled = true;
         _isAtDropPoint = true;
         _itemAtDropPoint = this;
@@ -125,15 +114,15 @@ public class DraggableItem : MonoBehaviour
             Destroy(vfx, 2f);
         }
 
-         // Deposita TODOS los usos de una vez
+        // Deposita TODOS los usos de una vez
         for (int i = 0; i < _requiredUses; i++)
-        _deposit?.TryDeposit(itemContenido);
+            _deposit?.TryDeposit(itemContenido);
 
         // Regresa al estante directamente
         _meshRenderer.enabled = false;
         transform.position = _startPosition;
         transform.rotation = _startRotation;
-        
+
         yield return new WaitForFixedUpdate();
 
         yield return new WaitForSeconds(returnDuration);
@@ -143,8 +132,6 @@ public class DraggableItem : MonoBehaviour
         _meshRenderer.enabled = true;
         _isAtDropPoint = false;
         _itemAtDropPoint = null;
-        _currentUses = 0;
-        
 
         _isAnimating = false;
         _anyAnimating = false;
@@ -169,7 +156,8 @@ public class DraggableItem : MonoBehaviour
 
     private int GetRequiredUses()
     {
-        if (_machine.selectedRecipe == null) return 1;
+        if (_machine.selectedRecipe == null)
+            return 1;
 
         foreach (var ingredient in _machine.selectedRecipe.requiredIngredients)
         {
