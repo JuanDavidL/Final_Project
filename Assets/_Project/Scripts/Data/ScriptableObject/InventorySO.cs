@@ -41,6 +41,20 @@ public class InventorySO : ScriptableObject
         OnInventoryChanged?.Invoke();
         return remaining; // 0 si se guardó todo, > 0 si quedó algo fuera
     }
+    public bool RemoveItem(ItemData data, int amount)
+    {
+        InventorySlot slot = slots.Find(s => s.item == data);
+
+        if (slot != null && slot.quantity >= amount)
+        {
+            slot.quantity -= amount;
+            if (slot.quantity <= 0) slots.Remove(slot);
+
+            OnInventoryChanged?.Invoke();
+            return true;
+        }
+        return false;
+    }
 }
 
 [Serializable]

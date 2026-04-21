@@ -2,12 +2,10 @@ version=1
 
 # This file caches language service data to improve the performance of C# Dev Kit.
 # It is not intended for manual editing. It can safely be deleted and will be
-# regenerated automatically.
+# regenerated automatically. For more information, see https://aka.ms/lscache
 #
-# To exclude from version control, add *.lscache to your .gitignore file.
-#
-# To disable caching, add the following to your VS Code settings:
-#   "dotnet.projectsystem.enableLanguageServiceCache": false
+# To control where cache files are stored, use the following VS Code setting:
+#   "dotnet.projectsystem.cacheInProjectFolder": true
 
 [project]
 language=C#
@@ -347,14 +345,27 @@ Library/PackageCache/
   Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll
 Library/ScriptAssemblies/
  PPv2URPConverters.dll
+ PsdPlugin.dll
+ Unity.2D.Animation.Editor.dll
+ Unity.2D.Animation.Runtime.dll
  Unity.2D.Aseprite.Common.dll
  Unity.2D.Aseprite.Editor.dll
  Unity.2D.Common.Editor.dll
  Unity.2D.Common.Path.Editor.dll
  Unity.2D.Common.Runtime.dll
+ Unity.2D.IK.Editor.dll
+ Unity.2D.IK.Runtime.dll
+ Unity.2D.PixelPerfect.dll
+ Unity.2D.PixelPerfect.Editor.dll
+ Unity.2D.Psdimporter.Editor.dll
  Unity.2D.Sprite.AIIntegration.Editor.dll
  Unity.2D.Sprite.Editor.dll
+ Unity.2D.SpriteShape.Editor.dll
+ Unity.2D.SpriteShape.Runtime.dll
  Unity.2D.Tilemap.Editor.dll
+ Unity.2D.Tilemap.Extras.dll
+ Unity.2D.Tilemap.Extras.Editor.dll
+ Unity.2D.Tooling.Editor.dll
  Unity.AI.Navigation.dll
  Unity.AI.Navigation.Editor.ConversionSystem.dll
  Unity.AI.Navigation.Editor.dll

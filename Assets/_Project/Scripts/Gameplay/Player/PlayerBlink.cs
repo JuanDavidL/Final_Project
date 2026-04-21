@@ -46,8 +46,7 @@ public class PlayerBlink : BaseAbility
 
     private IEnumerator BlinkSequence()
     {
-        // Seteamos el tiempo de uso para que el cooldown empiece a contar
-        lastUsedTime = Time.time; 
+        TryConsumeCharge(); // Esto también reduce la carga disponible
 
         // 1. Iniciar Animación de Dash
         if (anim != null)
