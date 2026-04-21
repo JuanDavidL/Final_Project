@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2080552294950998675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2674078675558648749}
+  - component: {fileID: 6231605247527330466}
+  m_Layer: 0
+  m_Name: AbilityUpgradeTree_FrostNova
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2674078675558648749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080552294950998675}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.95406, y: 0, z: 0.60391}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6231605247527330466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080552294950998675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80872d1a39573bb42a8e601be5a2a8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AbilityUpgradeTree
+  targetAbility: {fileID: 0}
+  upgrades:
+  - {fileID: 11400000, guid: 2e37855aa9ec29c4c96ccdd6c8ac2919, type: 2}
+  - {fileID: 11400000, guid: dde9f8b6ade622947a5f94da00b889f5, type: 2}
+  - {fileID: 11400000, guid: 4c8ca3c0b9ef48e4e8fbb5c9783088a5, type: 2}
+  - {fileID: 11400000, guid: a3b0f9c2bc25c3c4193e13fefb377f8a, type: 2}
+  - {fileID: 11400000, guid: 28dd23771b207c54fa63948e2d4e1279, type: 2}

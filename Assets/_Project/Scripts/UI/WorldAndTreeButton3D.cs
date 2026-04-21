@@ -48,11 +48,14 @@ public class WorldAndTreeButton3D : MonoBehaviour
     }
 
     private void TryClick()
+{
+    Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+    if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == gameObject)
     {
-        Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == gameObject)
-        {
-            _menuManager.OnMainButtonPressed(buttonType);
-        }
+        if (buttonType == ButtonType.TravelToOtherWorld)
+            _menuManager.OnViajaMundosPressed();
+        else
+            _menuManager.OnArbolHabilidadesPressed();
     }
+}
 }
