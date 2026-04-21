@@ -282,6 +282,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LayerMapBase
       objectReference: {fileID: 0}
+    - target: {fileID: 841433315850152047, guid: 23decb17e1cbda14988aeb39d11577b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5649859898010008858, guid: 23decb17e1cbda14988aeb39d11577b3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -95.5868
@@ -1128,15 +1132,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5879427928219578267, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -81
       objectReference: {fileID: 0}
     - target: {fileID: 5879427928219578267, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5879427928219578267, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.38
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5879427928219578267, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2632,7 +2636,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 1
-  m_Color: {r: 0.24377, g: 0.6226415, b: 0.46672612, a: 1}
+  m_Color: {r: 0.05860147, g: 0.6792453, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -3171,7 +3175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5246940325977538655, guid: fccfdeaa7e3ff214eb6f22752530e36e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7444002095616652566, guid: fccfdeaa7e3ff214eb6f22752530e36e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4418,7 +4422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 407480136614227785, guid: dba8ca13650521e46a1e64e70d09cd95, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2177820778687894651, guid: dba8ca13650521e46a1e64e70d09cd95, type: 3}
       propertyPath: m_LocalPosition.x
