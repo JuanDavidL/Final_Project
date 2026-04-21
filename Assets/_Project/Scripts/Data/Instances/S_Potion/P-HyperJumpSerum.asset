@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 13
   itemName: 'Hyperjump Serum  '
-  itemIcon: {fileID: -2038327522, guid: fb5b57fd7d137b947884eff9d2df49e9, type: 3}
+  itemIcon: {fileID: -4271612727259767089, guid: 4677e1b6a9c97c840b7076995e4059a1, type: 3}
   potionPrefab: {fileID: 919132149155446097, guid: 8a380890ea49a704eb4539f2cfa5fe77, type: 3}
   itemDescription: Placeholder

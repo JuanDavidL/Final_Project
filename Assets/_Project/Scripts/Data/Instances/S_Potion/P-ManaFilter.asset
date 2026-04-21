@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 12
   itemName: 'Mana Filter '
-  itemIcon: {fileID: 808283809, guid: 48bc666768b1f824ca3d767934ee70c9, type: 3}
+  itemIcon: {fileID: 4407645254556149804, guid: 4677e1b6a9c97c840b7076995e4059a1, type: 3}
   potionPrefab: {fileID: 919132149155446097, guid: e0d07a80d99587340b9d1b5f4c6caaaf, type: 3}
   itemDescription: Placeholder
