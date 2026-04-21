@@ -32,17 +32,23 @@ public class DeliveryTube3D : MonoBehaviour
 
     public void OnMainTubeButtonClicked()
     {
-        
         if (currentState == TubeState.Idle)
         {
             OpenTube();
         }
-        else if (
-            currentState == TubeState.Selecting
-            && InventoryManager.Instance.inventory.Count > 0
-        )
+        else if (currentState == TubeState.Selecting)
         {
-            LockAndSendPotion();
+            List<ItemData> validPotions = GetValidPotions();
+
+            if (validPotions.Count > 0)
+            {
+                LockAndSendPotion();
+            }
+            else
+            {
+                // Si intenta enviar y no hay nada, refrescamos el aviso de error
+                UpdateVisuals();
+            }
         }
     }
 
@@ -51,25 +57,21 @@ public class DeliveryTube3D : MonoBehaviour
         currentState = TubeState.Selecting;
         tubeAnimator.SetTrigger("LowerTube");
 
-        var inv = InventoryManager.Instance.inventory;
+        List<ItemData> validPotions = GetValidPotions();
+        currentIndex = 0;
 
-        if (inv != null && inv.Count > 0)
+        if (validPotions.Count > 0)
         {
-            currentIndex = 0; // Valor por defecto por si no la tenemos
-
-            // 1. Le preguntamos a B.E.L. qué quiere el cliente
             ItemData neededPotion = tradeManager.GetCurrentOrder();
 
             if (neededPotion != null)
             {
-                // 2. Buscamos esa poción específica en nuestra mochila
-                for (int i = 0; i < inv.Count; i++)
+                for (int i = 0; i < validPotions.Count; i++)
                 {
-                    // Comparamos los IDs para estar seguros de que es la misma
-                    if (inv[i].item.id == neededPotion.id)
+                    if (validPotions[i].id == neededPotion.id)
                     {
-                        currentIndex = i; // ¡La encontramos!
-                        break; // Detenemos la búsqueda
+                        currentIndex = i;
+                        break;
                     }
                 }
             }
@@ -80,80 +82,87 @@ public class DeliveryTube3D : MonoBehaviour
 
     public void OnLeftArrowClicked()
     {
-        var inv = InventoryManager.Instance.inventory;
-        if (currentState != TubeState.Selecting || inv.Count == 0)
+        if (currentState != TubeState.Selecting)
             return;
 
-        currentIndex--;
-        if (currentIndex < 0)
-            currentIndex = inv.Count - 1;
-        UpdateVisuals();
+        List<ItemData> validPotions = GetValidPotions();
+
+        // Si hay al menos una poción, permitimos que el sistema se refresque
+        if (validPotions.Count > 0)
+        {
+            // Solo cambiamos el índice si hay más de una opción
+            if (validPotions.Count > 1)
+            {
+                currentIndex--;
+                if (currentIndex < 0)
+                    currentIndex = validPotions.Count - 1;
+            }
+            else
+            {
+                // Si solo hay una, nos aseguramos de estar en el índice 0
+                currentIndex = 0;
+            }
+
+            // ¡CLAVE!: Siempre llamamos a UpdateVisuals si hay pociones,
+            // esto "limpiará" el mensaje de SIN POCIONES.
+            UpdateVisuals();
+        }
     }
 
+    // ARREGLO: La flecha derecha ahora usa la lista filtrada igual que la izquierda
     public void OnRightArrowClicked()
     {
-        var inv = InventoryManager.Instance.inventory;
-        if (currentState != TubeState.Selecting || inv.Count == 0)
+        if (currentState != TubeState.Selecting)
             return;
 
-        currentIndex++;
-        if (currentIndex >= inv.Count)
-            currentIndex = 0;
-        UpdateVisuals();
-    }
-    
+        List<ItemData> validPotions = GetValidPotions();
 
-    private void UpdateSelectionUI()
-    {
-        // Accedemos a la lista real del inventario
-        var inv = InventoryManager.Instance.inventory;
-
-        if (inv != null && inv.Count > 0)
+        if (validPotions.Count > 0)
         {
-            // En tu script el índice se llama currentIndex
-            // Y cada slot tiene un .item que es el ItemData
-            ItemData selectedItem = inv[currentIndex].item;
-
-            if (selectedItem != null)
+            if (validPotions.Count > 1)
             {
-                nameDisplayText.text = selectedItem.itemName.ToUpper();
+                currentIndex++;
+                if (currentIndex >= validPotions.Count)
+                    currentIndex = 0;
             }
-        }
-        else
-        {
-            nameDisplayText.text = "SISTEMA VACÍO";
+            else
+            {
+                currentIndex = 0;
+            }
+
+            UpdateVisuals();
         }
     }
 
+    // ARREGLO: UpdateVisuals limpio. Sin redundancias ni variables duplicadas.
     private void UpdateVisuals()
     {
         if (currentVisualPotion != null)
             Destroy(currentVisualPotion);
 
-        var inv = InventoryManager.Instance.inventory;
+        List<ItemData> validPotions = GetValidPotions();
 
-        if (inv.Count == 0)
+        if (validPotions.Count == 0)
         {
-            currentVisualPotion = Instantiate(forbiddenSignPrefab, spawnPoint);
+            nameDisplayText.text = "SIN POCIONES";
+            nameDisplayText.color = Color.red;
+            currentVisualPotion = null;
+            return;
         }
-        else
-        {
-            currentIndex = Mathf.Clamp(currentIndex, 0, inv.Count - 1);
-            ItemData selectedItem = inv[currentIndex].item;
-            // --- AÑADE ESTO ---
-            if (selectedItem.potionPrefab == null)
-            {
-                Debug.LogError(
-                    $"¡ALERTA ROJA! El ítem '{selectedItem.itemName}' está en el inventario, pero su PotionPrefab es NULL. Revisa cómo se añadió este ítem al inventario."
-                );
-                return; // Detenemos el código para que no explote
-            }
-            // ------------------
-            currentVisualPotion = Instantiate(selectedItem.potionPrefab, spawnPoint);
-        }
+
+        //nameDisplayText.color = Color.white;
+
+        if (currentIndex >= validPotions.Count)
+            currentIndex = 0;
+        if (currentIndex < 0)
+            currentIndex = validPotions.Count - 1;
+
+        ItemData selectedItem = validPotions[currentIndex];
+        nameDisplayText.text = selectedItem.itemName.ToUpper();
+
+        currentVisualPotion = Instantiate(selectedItem.potionPrefab, spawnPoint);
 
         ApplyHologramEffect();
-        UpdateSelectionUI(); // <-- Llamada vital para la pantalla de abajo
     }
 
     private void ApplyHologramEffect()
@@ -161,22 +170,16 @@ public class DeliveryTube3D : MonoBehaviour
         if (currentVisualPotion == null)
             return;
 
-        // Buscamos el renderizador en el modelo (puede estar en un hijo)
         MeshRenderer renderer = currentVisualPotion.GetComponentInChildren<MeshRenderer>();
 
         if (renderer != null)
         {
-            // Guardamos los materiales originales para poder restaurarlos después
             originalMaterials = renderer.materials;
-
-            // Creamos un array del mismo tamaño pero lleno con el material de holograma
             Material[] holoMats = new Material[originalMaterials.Length];
             for (int i = 0; i < holoMats.Length; i++)
             {
                 holoMats[i] = hologramMaterial;
             }
-
-            // Aplicamos los materiales de holograma
             renderer.materials = holoMats;
         }
         else
@@ -192,28 +195,44 @@ public class DeliveryTube3D : MonoBehaviour
         MeshRenderer renderer = currentVisualPotion.GetComponentInChildren<MeshRenderer>();
         if (renderer != null && originalMaterials != null)
         {
-            // Devolvemos los materiales reales (vidrio, líquido, corcho)
             renderer.materials = originalMaterials;
-            Debug.Log("Poción solidificada: Lista para envío.");
         }
 
-        // Esperamos un momento para que el jugador aprecie su creación sólida
         Invoke("ExecuteDelivery", 0.6f);
     }
 
+    // ARREGLO CRÍTICO: La entrega ahora saca el ítem correcto de la lista filtrada,
+    // evitando que le entregues a B.E.L. una raíz creyendo que es una poción.
     private void ExecuteDelivery()
     {
-        var inv = InventoryManager.Instance.inventory;
-        ItemData itemToSend = inv[currentIndex].item;
+        List<ItemData> validPotions = GetValidPotions();
 
-        // 1. Enviamos al sistema de comercio
+        // Seguro de vida por si ocurre algún error extraño
+        if (validPotions.Count == 0 || currentIndex >= validPotions.Count)
+            return;
+
+        ItemData itemToSend = validPotions[currentIndex];
+
         tradeManager.ProcessDelivery(itemToSend);
-
-        // 2. Restamos del inventario usando tu método RemoveItem
         InventoryManager.Instance.RemoveItem(itemToSend, 1);
 
         tubeAnimator.SetTrigger("SendUp");
         Destroy(currentVisualPotion);
         currentState = TubeState.Idle;
+    }
+
+    private List<ItemData> GetValidPotions()
+    {
+        List<ItemData> validPotions = new List<ItemData>();
+        var inv = InventoryManager.Instance.inventory;
+
+        foreach (var slot in inv)
+        {
+            if (slot.item != null && slot.item.potionPrefab != null)
+            {
+                validPotions.Add(slot.item);
+            }
+        }
+        return validPotions;
     }
 }
