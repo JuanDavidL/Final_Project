@@ -9,15 +9,28 @@ public class FrostNova : BaseAbility
     [Header("Indicator")]
     public GameObject circleIndicator;
 
+    void Start()
+    {
+        circleIndicator.SetActive(false);
+    }
+
+    void Update()
+    {
+        base.Update();
+        circleIndicator.transform.position = new Vector3(
+            transform.position.x,
+            circleIndicator.transform.position.y,
+            transform.position.z
+        );
+    }
+
     public override void ShowIndicator()
     {
         base.ShowIndicator();
-        
         if (circleIndicator != null)
         {
             circleIndicator.SetActive(true);
-            circleIndicator.transform.localScale = new Vector3 (novaRadius * 2f, circleIndicator.transform.localScale.y, novaRadius * 2f);
-
+            circleIndicator.transform.localScale = new Vector3(novaRadius * 2f, circleIndicator.transform.localScale.y, novaRadius * 2f);
         }
     }
 
@@ -25,25 +38,20 @@ public class FrostNova : BaseAbility
     {
         base.HideIndicator();
         if (circleIndicator != null)
-        {
             circleIndicator.SetActive(false);
-        }
     }
 
     public override void Use()
     {
-        if (IsOnCooldown())
-            return;
-        
-        Collider[] hits = Physics.OverlapSphere(transform.position, novaRadius);
+        // TryConsumeCharge maneja las 2 cargas independientes
+        if (!TryConsumeCharge()) return;
 
+        Collider[] hits = Physics.OverlapSphere(transform.position, novaRadius);
         foreach (Collider hit in hits)
         {
-           Destructible destructible = hit.GetComponent<Destructible>();
-              if (destructible != null)
-              {
+            Destructible destructible = hit.GetComponent<Destructible>();
+            if (destructible != null)
                 destructible.TakeDamage(damage);
-              }
         }
 
         if (frostNovaVFX != null)
@@ -53,22 +61,11 @@ public class FrostNova : BaseAbility
         }
 
         HideIndicator();
-        lastUsedTime = Time.time;
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, novaRadius);
-    }
-
-    void Start()
-    {
-        circleIndicator.SetActive(false);
-    }
-
-    void Update()
-    {
-        circleIndicator.transform.position = new Vector3(transform.position.x, circleIndicator.transform.position.y, transform.position.z);
     }
 }
