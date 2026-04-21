@@ -67,6 +67,7 @@ public class InteractiveMenuManager : MonoBehaviour
     private MenuState _currentState = MenuState.Inicio;
     private int _currentPlanetIndex = 0;
     private AbilityUpgradeTree _currentTree = null;
+    private int _currentUpgradeIndex = 0;
 
     // ─── Unity ───────────────────────────────────────────────────
 
@@ -89,8 +90,6 @@ public class InteractiveMenuManager : MonoBehaviour
 
         // Viaja mundos — todo oculto
         imagePlanet.SetActive(false);
-        arrowRightPlanet.SetActive(false);
-        arrowLeftPlanet.SetActive(false);
         buttonTravel.SetActive(false);
         buttonCancel.SetActive(false);
 
@@ -140,8 +139,6 @@ public class InteractiveMenuManager : MonoBehaviour
 
         // Oculta viaja mundos
         imagePlanet.SetActive(false);
-        arrowRightPlanet.SetActive(false);
-        arrowLeftPlanet.SetActive(false);
         buttonTravel.SetActive(false);
         OcultarDetalle();
 
@@ -169,9 +166,10 @@ public class InteractiveMenuManager : MonoBehaviour
         }
         else if (_currentState == MenuState.ArbolDetalle)
         {
-            // Navega entre mejoras — muestra la mejora anterior comprada
-            // Por ahora las mejoras son secuenciales, las flechas no aplican aquí
-            // pero las dejamos para expansión futura
+            _currentUpgradeIndex--;
+            if (_currentUpgradeIndex < 0)
+                _currentUpgradeIndex = _currentTree.GetTotalUpgrades() - 1;
+            ActualizarDetalleUpgrade();
         }
     }
 
@@ -186,7 +184,10 @@ public class InteractiveMenuManager : MonoBehaviour
         }
         else if (_currentState == MenuState.ArbolDetalle)
         {
-            // Expansión futura
+            _currentUpgradeIndex++;
+            if (_currentUpgradeIndex >= _currentTree.GetTotalUpgrades())
+                _currentUpgradeIndex = 0;
+            ActualizarDetalleUpgrade();
         }
     }
 
@@ -239,6 +240,7 @@ public class InteractiveMenuManager : MonoBehaviour
     private void MostrarDetalleArbol()
     {
         _currentState = MenuState.ArbolDetalle;
+        _currentUpgradeIndex = 0;
 
         // Oculta selección
         buttonSelectTreeFireball.SetActive(false);
@@ -252,8 +254,6 @@ public class InteractiveMenuManager : MonoBehaviour
         textTitle.gameObject.SetActive(true);
         textDescription.gameObject.SetActive(true);
         buttonBuy.SetActive(true);
-        arrowRightAbility.SetActive(true);
-        arrowLeftAbility.SetActive(true);
 
         ActualizarDetalleUpgrade();
     }
@@ -262,45 +262,69 @@ public class InteractiveMenuManager : MonoBehaviour
     {
         if (_currentTree == null) return;
 
-        AbilityUpgrade next = _currentTree.GetNextUpgrade();
+        // Obtiene la mejora en el índice actual (no solo la siguiente)
+        AbilityUpgrade upgrade = _currentTree.GetUpgradeAt(_currentUpgradeIndex);
+        if (upgrade == null) return;
 
-        if (next == null)
-        {
-            // Ya compró todas las mejoras
-            textTitle.text = _currentTree.targetAbility.abilityName;
-            textDescription.text = "✓ Todas las mejoras compradas!";
-            buttonBuy.SetActive(false);
-            return;
+        bool isAlreadyPurchased = _currentUpgradeIndex < _currentTree.GetPurchasedCount();
+        bool isNext = _currentUpgradeIndex == _currentTree.GetPurchasedCount();
+        bool canAfford = GameManager.Instance.totalCredits >= upgrade.cost;
+
+        //Nombre y descripción siempre visibles
+    textTitle.text = upgrade.upgradeName;
+    textDescription.text = $"{upgrade.description}\nCosto: {upgrade.cost} créditos";
+
+        //StatusText según estado
+        if (isAlreadyPurchased)
+        statusText.text = "You got it ✓";
+        else if (canAfford)
+        statusText.text = "You don't have it yet";
+        else
+        statusText.text = "You don't have it yet";
+
+        //Sprite
+        Image img = imageAbility.GetComponent<Image>();
+        if (img != null && upgrade.upgradeIcon != null)
+        img.sprite = upgrade.upgradeIcon;
+
+        //ButtonBuy siempre visible
+        buttonBuy.SetActive(true);
         }
 
-        textTitle.text = next.upgradeName;
-        textDescription.text = $"{next.description}\nCosto: {next.cost} créditos";
-
-        // Cambia el sprite de la habilidad
-        Image img = imageAbility.GetComponent<Image>();
-        if (img != null && next.upgradeIcon != null)
-            img.sprite = next.upgradeIcon;
-
-        buttonBuy.SetActive(_currentTree.CanPurchaseNext());
-    }
-
-    // Llama esto desde ButtonBuy
+        // Llama esto desde ButtonBuy
     public void OnBuyPressed()
     {
         if (_currentTree == null) return;
 
-        bool purchased = _currentTree.TryPurchaseNext();
+        bool isAlreadyPurchased = _currentUpgradeIndex < _currentTree.GetPurchasedCount();
+        bool isNext = _currentUpgradeIndex == _currentTree.GetPurchasedCount();
 
-        if (purchased)
+        // Ya está comprada
+        if (isAlreadyPurchased)
         {
-            Debug.Log("Mejora comprada!");
-            ActualizarDetalleUpgrade();
-            UpdateCreditsDisplay();
+            statusText.text = "You already have this!";
+            return;
         }
-        else
+
+        // No es la siguiente en el árbol secuencial
+        if (!isNext)
         {
-            statusText.text = "No tienes suficientes créditos!";
+            statusText.text = "Buy previous upgrades first!";
+            return;
         }
+
+        // No hay créditos
+        if (!_currentTree.CanPurchaseNext())
+        {
+            statusText.text = "Not enough credits!";
+            return;
+        }
+
+        //Compra exitosa
+        _currentTree.TryPurchaseNext();
+        statusText.text = "Upgrade purchased!";
+        ActualizarDetalleUpgrade();
+        UpdateCreditsDisplay();
     }
 
     // ─── Botón volver ─────────────────────────────────────────────
@@ -328,8 +352,6 @@ public class InteractiveMenuManager : MonoBehaviour
         textTitle.gameObject.SetActive(false);
         textDescription.gameObject.SetActive(false);
         buttonBuy.SetActive(false);
-        arrowRightAbility.SetActive(false);
-        arrowLeftAbility.SetActive(false);
     }
 
     private void UpdateCreditsDisplay()

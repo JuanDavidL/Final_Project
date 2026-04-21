@@ -105,17 +105,20 @@ Assets/
   InventoryTester.cs
   TesterInventario.cs
  _Project/Scripts/UI/
+  ArrowButton3D.cs
   BookAnimatorController.cs
   BookUI.cs
   CollectibleItem.cs
   FloatingShelf.cs
   IngredientSlotUI.cs
+  InteractiveMenuManager.cs
   InventoryUI.cs
   ItemDetailUI.cs
   MachineUI.cs
   PotionSlot.cs
   PotionSlotUI.cs
   RotateCameraInShip.cs
+  WorldAndTreeButton3D.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 
 [metadataReferences]

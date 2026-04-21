@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c267d89e600b6b247b77dbbccac8eb27, type: 3}
   m_Name: Upgrade_Fireball_Radius
   m_EditorClassIdentifier: Assembly-CSharp::AbilityUpgrade
-  upgradeName: 
-  description: 
-  upgradeIcon: {fileID: 0}
-  cost: 0
-  upgradeType: 0
-  value: 0
+  upgradeName: En la mira
+  description: Aumenta el radio de tu bola de fuego en un 20%
+  upgradeIcon: {fileID: -628014042, guid: 948e28589177d4d49be28278a3ef7c8d, type: 3}
+  cost: 400
+  upgradeType: 3
+  value: 20
