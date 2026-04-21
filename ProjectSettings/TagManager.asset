@@ -9,6 +9,7 @@ TagManager:
   - Deposito
   - Estantes
   - Enemy
+  - Destructible
   layers:
   - Default
   - TransparentFX
@@ -45,6 +46,15 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Floor
+    uniqueID: 483829337
+    locked: 0
+  - name: Props
+    uniqueID: 1288345463
+    locked: 0
+  - name: Player
+    uniqueID: 3448537035
     locked: 0
   m_RenderingLayers:
   - Default
