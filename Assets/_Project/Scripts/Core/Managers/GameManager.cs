@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour
     public bool isTutorialCompleted;
     public int totalCredits;
 
+    [Header("Mejoras Compradas")]
+    public int fireballUpgradesPurchased = 0;
+    public int frostNovaUpgradesPurchased = 0;
+
     void Awake()
     {
         // Regla de oro del Singleton
@@ -21,6 +25,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
 
     public void AddCredits(int amount)
@@ -34,12 +39,33 @@ public class GameManager : MonoBehaviour
     {
         isTutorialCompleted = PlayerPrefs.GetInt("TutorialCompleted", 0) == 1;
         totalCredits = PlayerPrefs.GetInt("TotalCredits", 0);
+
+        fireballUpgradesPurchased = PlayerPrefs.GetInt("FireballUpgradesPurchased", 0);
+        frostNovaUpgradesPurchased = PlayerPrefs.GetInt("FrostNovaUpgradesPurchased", 0);
     }
 
     public void SaveGlobalProgress()
     {
         PlayerPrefs.SetInt("TutorialCompleted", isTutorialCompleted ? 1 : 0);
         PlayerPrefs.SetInt("TotalCredits", totalCredits);
+        PlayerPrefs.SetInt("FireballUpgradesPurchased", fireballUpgradesPurchased);
+        PlayerPrefs.SetInt("FrostNovaUpgradesPurchased", frostNovaUpgradesPurchased);
         PlayerPrefs.Save();
+    }
+
+    void Start()
+    {
+        // Ejemplo de cómo usar AddCredits (puedes eliminar esto después de probar)
+        ResetUpgrades();
+    }
+
+    [ContextMenu("Reset Progress")]
+    public void ResetUpgrades()
+    {
+        fireballUpgradesPurchased = 0;
+        frostNovaUpgradesPurchased = 0;
+        totalCredits = 10000; // créditos de prueba
+        SaveGlobalProgress();
+        Debug.Log("Mejoras reseteadas!");
     }
 }

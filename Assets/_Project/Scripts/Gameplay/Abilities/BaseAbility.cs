@@ -95,6 +95,9 @@ public abstract class BaseAbility : MonoBehaviour
 
     public float GetCooldownRemaining()
     {
+        
+        if (_chargeTimers == null) return 0f;
+        
         // Devuelve el tiempo restante de la carga que termina primero
         float shortest = float.MaxValue;
 

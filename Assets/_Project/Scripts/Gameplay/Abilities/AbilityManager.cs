@@ -37,11 +37,49 @@ public class AbilityManager : MonoBehaviour
     void Start()
     {
         // Al iniciar (o al bajar al planeta), asignamos las visuales
-        if (uiSlot1 != null) uiSlot1.SetupSlot(abilitySlot1);
-        if (uiSlot2 != null) uiSlot2.SetupSlot(abilitySlot2);
+        SetupAbilitySlot();
         if (blinkSlot != null && playerBlink != null)
         {
             blinkSlot.SetupSlot(playerBlink);
+        }
+    }
+
+    private void SetupAbilitySlot()
+    {
+        bool fireballUnlocked = GameManager.Instance != null 
+        && GameManager.Instance.fireballUpgradesPurchased > 0;
+
+        bool frostNovaUnlocked = GameManager.Instance != null 
+        && GameManager.Instance.frostNovaUpgradesPurchased > 0;
+
+        //Slot 1 = Fireball solo si está desbloqueada
+        if (uiSlot1 != null)
+        {
+        if (fireballUnlocked)
+            {
+                uiSlot1.SetupSlot(abilitySlot1);
+                abilitySlot1?.gameObject.SetActive(true);
+            }
+            else
+            {
+                uiSlot1.SetupSlot(null); // slot vacío
+                abilitySlot1?.gameObject.SetActive(false);
+            }
+        }
+
+        //Slot 2 = FrostNova solo si está desbloqueada
+        if (uiSlot2 != null)
+        {
+            if (frostNovaUnlocked)
+            {
+                uiSlot2.SetupSlot(abilitySlot2);
+                abilitySlot2?.gameObject.SetActive(true);
+            }
+            else
+            {
+                uiSlot2.SetupSlot(null); // slot vacío
+                abilitySlot2?.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -61,12 +99,14 @@ public class AbilityManager : MonoBehaviour
 
     private void OnAbility1(InputAction.CallbackContext context)
     {
+        if (abilitySlot1 == null || !abilitySlot1.gameObject.activeSelf) return;
         currentAttackID = 1;
         SelectAbility(abilitySlot1, MagicBook.BookState.Ability1);
     }
 
     private void OnAbility2(InputAction.CallbackContext context)
     {
+        if (abilitySlot2 == null || !abilitySlot2.gameObject.activeSelf) return;
         currentAttackID = 2;
         SelectAbility(abilitySlot2, MagicBook.BookState.Ability2);
     }
