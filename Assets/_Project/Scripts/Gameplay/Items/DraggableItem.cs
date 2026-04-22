@@ -15,6 +15,7 @@ public class DraggableItem : MonoBehaviour
 
     [Header("VFX")]
     public GameObject pourVFX;
+    public Transform pivotVFX;
 
     private Vector3 _startPosition;
     private Quaternion _startRotation;
@@ -110,7 +111,7 @@ public class DraggableItem : MonoBehaviour
         // VFX
         if (pourVFX != null)
         {
-            GameObject vfx = Instantiate(pourVFX, dropPoint.position, Quaternion.identity);
+            GameObject vfx = Instantiate(pourVFX, pivotVFX.position, Quaternion.identity);
             Destroy(vfx, 2f);
         }
 

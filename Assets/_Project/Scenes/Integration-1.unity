@@ -675,6 +675,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 428299138}
     m_Modifications:
     - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pourVFX
+      value: 
+      objectReference: {fileID: 8371776753521665946, guid: ec1445ee49311a6428966f86b96e6144, type: 3}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pivotVFX
+      value: 
+      objectReference: {fileID: 1729051558}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
       propertyPath: dropPoint
       value: 
       objectReference: {fileID: 6943117923099741977}
@@ -1389,6 +1397,14 @@ PrefabInstance:
       propertyPath: quantityText
       value: 
       objectReference: {fileID: 334188269}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pourVFX
+      value: 
+      objectReference: {fileID: 8371776753521665946, guid: ec1445ee49311a6428966f86b96e6144, type: 3}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pivotVFX
+      value: 
+      objectReference: {fileID: 1729051558}
     - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
       propertyPath: dropPoint
       value: 
@@ -4581,6 +4597,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 428299138}
     m_Modifications:
     - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pourVFX
+      value: 
+      objectReference: {fileID: 8371776753521665946, guid: ec1445ee49311a6428966f86b96e6144, type: 3}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pivotVFX
+      value: 
+      objectReference: {fileID: 1729051558}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
       propertyPath: dropPoint
       value: 
       objectReference: {fileID: 6943117923099741977}
@@ -4840,6 +4864,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 428299138}
     m_Modifications:
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pourVFX
+      value: 
+      objectReference: {fileID: 8371776753521665946, guid: ec1445ee49311a6428966f86b96e6144, type: 3}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pivotVFX
+      value: 
+      objectReference: {fileID: 1729051558}
     - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
       propertyPath: dropPoint
       value: 
@@ -5485,6 +5517,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 428299138}
     m_Modifications:
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pourVFX
+      value: 
+      objectReference: {fileID: 8371776753521665946, guid: ec1445ee49311a6428966f86b96e6144, type: 3}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pivotVFX
+      value: 
+      objectReference: {fileID: 1729051558}
     - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
       propertyPath: dropPoint
       value: 
@@ -6533,6 +6573,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 428299138}
     m_Modifications:
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pourVFX
+      value: 
+      objectReference: {fileID: 8371776753521665946, guid: ec1445ee49311a6428966f86b96e6144, type: 3}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pivotVFX
+      value: 
+      objectReference: {fileID: 1729051558}
     - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
       propertyPath: dropPoint
       value: 
@@ -8187,6 +8235,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 428299138}
     m_Modifications:
     - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pourVFX
+      value: 
+      objectReference: {fileID: 8371776753521665946, guid: ec1445ee49311a6428966f86b96e6144, type: 3}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pivotVFX
+      value: 
+      objectReference: {fileID: 1729051558}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
       propertyPath: dropPoint
       value: 
       objectReference: {fileID: 6943117923099741977}
@@ -9112,7 +9168,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 30.6
+  m_Intensity: 80
   m_Range: 15
   m_SpotAngle: 133.84517
   m_InnerSpotAngle: 73.25273
@@ -9441,6 +9497,14 @@ PrefabInstance:
       propertyPath: quantityText
       value: 
       objectReference: {fileID: 1037464909}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pourVFX
+      value: 
+      objectReference: {fileID: 8371776753521665946, guid: ec1445ee49311a6428966f86b96e6144, type: 3}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pivotVFX
+      value: 
+      objectReference: {fileID: 1729051558}
     - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
       propertyPath: dropPoint
       value: 
@@ -9987,6 +10051,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 428299138}
     m_Modifications:
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pourVFX
+      value: 
+      objectReference: {fileID: 8371776753521665946, guid: ec1445ee49311a6428966f86b96e6144, type: 3}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pivotVFX
+      value: 
+      objectReference: {fileID: 1729051558}
     - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
       propertyPath: dropPoint
       value: 
@@ -10567,6 +10639,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1712120009}
   m_CullTransparentMesh: 1
+--- !u!1 &1729051557
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1729051558}
+  m_Layer: 0
+  m_Name: PivotVFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1729051558
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729051557}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.16, y: 4.58, z: -1.53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5964604601877574245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1773994063 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3276376619794898626, guid: 334fdaca33bcf9d43a6b5b5cb7cd9e14, type: 3}
@@ -12716,6 +12819,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 428299138}
     m_Modifications:
     - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pourVFX
+      value: 
+      objectReference: {fileID: 8371776753521665946, guid: ec1445ee49311a6428966f86b96e6144, type: 3}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
+      propertyPath: pivotVFX
+      value: 
+      objectReference: {fileID: 1729051558}
+    - target: {fileID: 2470750800287964831, guid: 6cbd17a9ff5d8ee41a8dfade33cb661d, type: 3}
       propertyPath: dropPoint
       value: 
       objectReference: {fileID: 6943117923099741977}
@@ -12986,6 +13097,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: New_VendingMachine
       objectReference: {fileID: 0}
+    - target: {fileID: 1832445723449235243, guid: d4357573a52ee514abf7fef470f90417, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1832445723449235243, guid: d4357573a52ee514abf7fef470f90417, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 1832445723449235243, guid: d4357573a52ee514abf7fef470f90417, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.53
+      objectReference: {fileID: 0}
     - target: {fileID: 8429056385922219588, guid: d4357573a52ee514abf7fef470f90417, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.006
@@ -13028,7 +13151,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8429056385922219588, guid: d4357573a52ee514abf7fef470f90417, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1729051558}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4357573a52ee514abf7fef470f90417, type: 3}
 --- !u!4 &1155060572518880536
