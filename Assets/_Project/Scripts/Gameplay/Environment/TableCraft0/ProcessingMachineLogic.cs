@@ -27,6 +27,8 @@ public class ProcessingMachineLogic : MonoBehaviour
     [SerializeField] private GameObject contenedorFisico;
     [SerializeField] private Transform deliveryPoint;
 
+  
+
     private float zAbierto = -0.9f;
     private float zCerrado = 0.11f;
     public int _selectedQuantity = 1;
@@ -40,6 +42,7 @@ public class ProcessingMachineLogic : MonoBehaviour
     {
         _machineUI = FindFirstObjectByType<MachineUI>();
     }
+
 
     public void HandleButtonPress(MachineButton.ButtonType tipo)
     {
@@ -91,8 +94,7 @@ public class ProcessingMachineLogic : MonoBehaviour
         Debug.Log("Máquina Cancelada.");
         }
 
-        
-}
+    }
 
     private void TryCloseAndLock()
     {
@@ -117,6 +119,7 @@ public class ProcessingMachineLogic : MonoBehaviour
         {
             Debug.LogWarning("¡No puedes procesar un contenedor vacío!");
         }
+
     }
 
     private void TryDeliverPotion()
@@ -142,6 +145,7 @@ public class ProcessingMachineLogic : MonoBehaviour
             selectedRecipe = null;
 
         }
+
     }
 
     private IEnumerator ProcesoEnvioInventario(PoolableItem itemVisual, GameObject prefabUsado)
@@ -161,6 +165,7 @@ public class ProcessingMachineLogic : MonoBehaviour
            InventoryManager.Instance.AddItem(potionBasura, _failCount);
 
         PotionPool.Instance.Release(prefabUsado, itemVisual);
+
     }
 
     public void SeleccionarRecetaManual(RecipeData receta, int quantity = 1)

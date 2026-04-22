@@ -40,6 +40,12 @@ public class MachineUI : MonoBehaviour
     [Header("Recetas")]
     public RecipeData[] recipes;
 
+    [Header("VFX buttons")]
+    [SerializeField] private GameObject vfxRedButton;
+    [SerializeField] private GameObject vfxYellowButton;
+    [SerializeField] private GameObject vfxGreenButton;
+    [SerializeField] private GameObject vfxLever;
+
     private int _required1 = 0;
     private int _required2 = 0;
     private int _current1 = 0;
@@ -58,6 +64,10 @@ public class MachineUI : MonoBehaviour
     void Start()
     {
         ResetToStart();
+        if(vfxRedButton != null) vfxRedButton.SetActive(false);
+        if(vfxYellowButton != null) vfxYellowButton.SetActive(false);
+        if(vfxGreenButton != null) vfxGreenButton.SetActive(false);
+        if(vfxLever != null) vfxLever.SetActive(false);
     }
 
     private void ResetToStart()
@@ -137,6 +147,8 @@ public class MachineUI : MonoBehaviour
         btnMinus.SetActive(false);
         textQuantity.gameObject.SetActive(false);
         statusText.text = "Press RED button";
+        if(vfxRedButton != null) vfxRedButton.SetActive(true);
+
     }
 
     public void OnPlusClick()
@@ -177,6 +189,7 @@ public class MachineUI : MonoBehaviour
     {
         UpdateIngredientsDisplay(_machine.selectedRecipe);
         statusText.text = "Add ingredients";
+        if(vfxRedButton != null) vfxRedButton.SetActive(false);
     }
 
     // Llamado cuando se deposita un ingrediente
@@ -204,6 +217,7 @@ public class MachineUI : MonoBehaviour
         quantityText1.gameObject.SetActive(false);
         quantityText2.gameObject.SetActive(false);
         statusText.text = "Press yellow button";
+        if(vfxRedButton != null) vfxYellowButton.SetActive(true);
     }
 
     // Llamado cuando se presiona boton amarillo
@@ -219,6 +233,8 @@ public class MachineUI : MonoBehaviour
         textCountOfLever.gameObject.SetActive(true);
         textCountOfLever.text = $"0/{_requiredPresses}";
         statusText.text = "Pull the lever!";
+        if(vfxYellowButton != null) vfxYellowButton.SetActive(false);
+        if(vfxLever != null) vfxLever.SetActive(true);
     }
 
     // Actualiza contador de palanca
@@ -233,6 +249,8 @@ public class MachineUI : MonoBehaviour
         textPullTheLever.SetActive(false);
         textCountOfLever.gameObject.SetActive(false);
         statusText.text = "Press green button";
+        if(vfxLever != null) vfxLever.SetActive(false);
+        if(vfxGreenButton != null) vfxGreenButton.SetActive(true);
     }
 
     // Llamado cuando se presiona boton verde
@@ -246,6 +264,7 @@ public class MachineUI : MonoBehaviour
             statusText.text = $"{successCount} éxito / {failCount} fallo";
 
         StartCoroutine(ResetAfterDelay());
+        if(vfxGreenButton != null) vfxGreenButton.SetActive(false);
     }
 
     private IEnumerator ResetAfterDelay()
