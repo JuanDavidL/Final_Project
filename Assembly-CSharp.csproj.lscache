@@ -71,6 +71,8 @@ Assets/
    RecipeData.cs
  _Project/Scripts/Gameplay/Abilities/
   AbilityManager.cs
+  AbilityUpgrade.cs
+  AbilityUpgradeTree.cs
   BaseAbility.cs
   Fireball.cs
   FireballProjectile.cs
@@ -80,11 +82,13 @@ Assets/
  _Project/Scripts/Gameplay/Enemies/
   Destructible.cs
   EnemyAI.cs
+  EnemyHealth.cs
   EnemySpawner.cs
   LootTable.cs
  _Project/Scripts/Gameplay/Environment/
   Client_Interaction/PhysicalButton.cs
   CollectOrb.cs
+  GateTeleport.cs
   TableCraft0/
    MachineButton.cs
    MachineDeposit.cs

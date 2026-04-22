@@ -49,9 +49,10 @@ public class FrostNova : BaseAbility
         Collider[] hits = Physics.OverlapSphere(transform.position, novaRadius);
         foreach (Collider hit in hits)
         {
-            Destructible destructible = hit.GetComponent<Destructible>();
-            if (destructible != null)
-                destructible.TakeDamage(damage);
+            Destructible dest = hit.GetComponent<Destructible>();
+            if (dest != null) dest.TakeDamage(damage);
+            EnemyHealth enemy = hit.GetComponent<EnemyHealth>();
+            if (enemy != null) enemy.TakeDamage(damage);
         }
 
         if (frostNovaVFX != null)

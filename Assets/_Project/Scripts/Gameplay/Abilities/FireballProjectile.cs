@@ -4,7 +4,7 @@ public class FireballProjectile : MonoBehaviour
 {
     private Vector3 direction;
     private float speed;
-    private float Damage;
+    private float damage;
     private float explosionRadius;
 
     public GameObject explosionVFX;
@@ -17,7 +17,7 @@ public class FireballProjectile : MonoBehaviour
 
         this.speed = spd;
         this.explosionRadius = radius;
-        this.Damage = dmg;
+        this.damage = dmg;
 
         Destroy(gameObject, 3f);
     }
@@ -29,22 +29,18 @@ public class FireballProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       if (other.CompareTag("Player")) return;
-
-       Explote();
+        if (other.CompareTag("Player")) return;
+        Debug.Log("golpeo a " + other.tag);
+        Explode();
     }
 
-    private void Explote()
+    private void Explode()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, explosionRadius);
-
-        foreach (Collider hit in hits)
+        Collider[] targets = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider t in targets)
         {
-           Destructible destructible = hit.GetComponent<Destructible>();
-              if (destructible != null)
-              {
-                destructible.TakeDamage(Damage);
-              }
+            EnemyHealth e = t.GetComponent<EnemyHealth>();
+            if (e != null) e.TakeDamage(damage);
         }
 
         if (explosionVFX != null)

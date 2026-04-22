@@ -20,7 +20,7 @@ public class LootTable : MonoBehaviour
           float roll = Random.Range(0f, 1f);
           if (roll <= drop.dropChance)
           {
-            Vector3 radomOffset = new Vector3(Random.Range(-2f, 2f), 0, Random.Range(-2f, 2f));
+            Vector3 radomOffset = new Vector3(Random.Range(-2f, 2f), 1.5f, Random.Range(-2f, 2f));
               GameObject dropObj = Instantiate(CollectablePrefab, transform.position + radomOffset, Quaternion.identity);
               CollectibleItem collectible = dropObj.GetComponent<CollectibleItem>();
               collectible.item = drop.item;
