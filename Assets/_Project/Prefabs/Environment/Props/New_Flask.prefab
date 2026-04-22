@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 1f66f5f881a81c748872bfbadd030b81, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.09700012
+      value: -0.09
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f66f5f881a81c748872bfbadd030b81, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.817
+      value: 4.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f66f5f881a81c748872bfbadd030b81, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.931
+      value: 2.95
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f66f5f881a81c748872bfbadd030b81, type: 3}
       propertyPath: m_LocalRotation.w
@@ -81,6 +81,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1f66f5f881a81c748872bfbadd030b81, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2470750800287964831}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1f66f5f881a81c748872bfbadd030b81, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6812190508160999517}
   m_SourcePrefab: {fileID: 100100000, guid: 1f66f5f881a81c748872bfbadd030b81, type: 3}
 --- !u!1 &4028094494459981735 stripped
 GameObject:
@@ -147,4 +150,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219da0735e3037f4ebeb78c19c14f934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
-  itemContenido: {fileID: 0}
+  itemContenido: {fileID: 11400000, guid: ec3c10fda64830b49b7d0083c3932e56, type: 2}
+  dropPoint: {fileID: 0}
+  shakeDuration: 0.3
+  shakeIntensity: 15
+  returnDuration: 0.3
+  pourVFX: {fileID: 5531895628249144561, guid: 0bb644701eecc5140aa4dbc9acf5424c, type: 3}
+--- !u!114 &6812190508160999517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4028094494459981735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d65332799e94d5439aab07ce5af6d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientSlotUI
+  item: {fileID: 11400000, guid: ec3c10fda64830b49b7d0083c3932e56, type: 2}
+  quantityText: {fileID: 0}

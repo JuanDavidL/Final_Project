@@ -14316,6 +14316,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6592693361160163371, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
+      propertyPath: maxCharge
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592693361160163371, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: circleIndicator
       value: 
       objectReference: {fileID: 1749382560}
