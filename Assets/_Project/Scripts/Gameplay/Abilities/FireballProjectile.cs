@@ -30,7 +30,7 @@ public class FireballProjectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) return;
-
+        Debug.Log("golpeo a " + other.tag);
         Explode();
     }
 
