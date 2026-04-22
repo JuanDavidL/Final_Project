@@ -4524,7 +4524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FloatingShelf
   floatSpeed: 0.5
   floatAmount: 0.1
-  rotationSpeed: 3
+  rotationSpeed: 10
   potionSlots:
   - {fileID: 1401893826}
   - {fileID: 1209836076}
