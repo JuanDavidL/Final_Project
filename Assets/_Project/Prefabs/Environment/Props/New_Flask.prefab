@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f66f5f881a81c748872bfbadd030b81, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.7
+      value: 1.784
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f66f5f881a81c748872bfbadd030b81, type: 3}
       propertyPath: m_LocalPosition.z
@@ -83,7 +83,7 @@ PrefabInstance:
       addedObject: {fileID: 2470750800287964831}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1f66f5f881a81c748872bfbadd030b81, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6812190508160999517}
+      addedObject: {fileID: 5383924686371825290}
   m_SourcePrefab: {fileID: 100100000, guid: 1f66f5f881a81c748872bfbadd030b81, type: 3}
 --- !u!1 &4028094494459981735 stripped
 GameObject:
@@ -150,13 +150,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219da0735e3037f4ebeb78c19c14f934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
-  itemContenido: {fileID: 11400000, guid: ec3c10fda64830b49b7d0083c3932e56, type: 2}
+  itemContenido: {fileID: 11400000, guid: a215784442437a448b19aba1abe61ffd, type: 2}
   dropPoint: {fileID: 0}
   shakeDuration: 0.3
   shakeIntensity: 15
   returnDuration: 0.3
   pourVFX: {fileID: 5531895628249144561, guid: 0bb644701eecc5140aa4dbc9acf5424c, type: 3}
---- !u!114 &6812190508160999517
+--- !u!114 &5383924686371825290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,5 +168,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d65332799e94d5439aab07ce5af6d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IngredientSlotUI
-  item: {fileID: 11400000, guid: ec3c10fda64830b49b7d0083c3932e56, type: 2}
+  item: {fileID: 11400000, guid: a215784442437a448b19aba1abe61ffd, type: 2}
   quantityText: {fileID: 0}
