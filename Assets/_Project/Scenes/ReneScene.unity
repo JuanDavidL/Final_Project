@@ -14085,17 +14085,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 333725442508423362, guid: 9e074f1f582c3774297fd0accff2a26f, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 5046242719250851364, guid: 9e074f1f582c3774297fd0accff2a26f, type: 3}
       propertyPath: m_Name
       value: JawHop
-      objectReference: {fileID: 0}
-    - target: {fileID: 5940920557566561559, guid: 9e074f1f582c3774297fd0accff2a26f, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8338603299575537520, guid: 9e074f1f582c3774297fd0accff2a26f, type: 3}
       propertyPath: m_LocalPosition.x
