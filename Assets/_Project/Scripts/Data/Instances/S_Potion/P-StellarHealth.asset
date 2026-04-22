@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 11
   itemName: 'Stellar Health '
-  itemIcon: {fileID: -41163533657757057, guid: 4677e1b6a9c97c840b7076995e4059a1, type: 3}
+  itemIcon: {fileID: -4217581981127943786, guid: 4677e1b6a9c97c840b7076995e4059a1, type: 3}
   potionPrefab: {fileID: 919132149155446097, guid: 3d6f5c8827f10474b937d47cd065d2d1, type: 3}
   itemDescription: Placeholder

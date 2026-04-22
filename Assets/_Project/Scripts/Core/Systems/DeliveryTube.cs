@@ -151,24 +151,18 @@ public class DeliveryTube3D : MonoBehaviour
         }
     }
 
-    // ARREGLO: UpdateVisuals limpio. Sin redundancias ni variables duplicadas.
-    // Modifica este método en DeliveryTube3D.cs
     private void UpdateVisuals()
     {
-        // Limpieza de hologramas anteriores
         if (currentVisualPotion != null)
             Destroy(currentVisualPotion);
 
-        // --- 1. PRIORIDAD MÁXIMA: ¿DÍA TERMINADO? ---
-        if (tradeManager.IsShiftComplete())
+        // Si el tubo no está en modo selección, pantalla limpia.
+        if (currentState != TubeState.Selecting)
         {
-            nameDisplayText.text = "SHIFT COMPLETE. POWER OFF CONSOLE.";
-            nameDisplayText.color = normalTextColor;
-            currentVisualPotion = null;
-            return; // Salimos para no mostrar nada más
+            nameDisplayText.text = "";
+            return;
         }
-
-        // --- 2. PRIORIDAD MEDIA: ¿SIN POCIONES? ---
+        // --- PRIORIDAD: ¿SIN POCIONES? ---
         List<ItemData> validPotions = GetValidPotions();
 
         if (validPotions.Count == 0)
@@ -179,7 +173,7 @@ public class DeliveryTube3D : MonoBehaviour
             return;
         }
 
-        // --- 3. ESTADO NORMAL: MOSTRAR POCIÓN ---
+        // --- ESTADO NORMAL: MOSTRAR POCIÓN DEL INVENTARIO ---
         nameDisplayText.color = normalTextColor;
 
         if (currentIndex >= validPotions.Count)
@@ -262,6 +256,8 @@ public class DeliveryTube3D : MonoBehaviour
 
         tubeAnimator.SetTrigger("SendUp");
         Destroy(currentVisualPotion);
+
+        nameDisplayText.text = "";
         currentState = TubeState.Idle;
     }
 
