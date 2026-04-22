@@ -5,9 +5,12 @@ public class EnemyHealth : MonoBehaviour
     [Header("Settings")]
     public float maxHealth = 50f;
     private float currentHealth;
-    
+
     private Animator anim;
     private bool isDead = false;
+
+    private LootTable lootTable;
+
 
     void Start()
     {
@@ -54,5 +57,7 @@ public class EnemyHealth : MonoBehaviour
 
         // 4. Destruir el objeto después de que termine la animación (ej. 2 segundos)
         Destroy(gameObject, 2f);
+
+        if (lootTable != null) lootTable.SpawnDrops();
     }
 }

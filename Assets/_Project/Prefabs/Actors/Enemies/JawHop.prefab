@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 3897493531447678490}
   - component: {fileID: 8628221832367576918}
   - component: {fileID: 3231364482993745549}
+  - component: {fileID: 5951941296267858723}
   m_Layer: 0
   m_Name: JawHop
   m_TagString: Enemy
@@ -60,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 5046242719250851364}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.21, y: 0, z: 4.41}
+  m_LocalPosition: {x: -25.21, y: 1, z: 4.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -113,10 +114,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.28597593
-  m_Height: 1.9004622
+  m_Radius: 0.5
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9367142, z: 0.0028271675}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &8628221832367576918
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -136,7 +137,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &3231364482993745549
@@ -152,6 +153,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 50
+--- !u!114 &5951941296267858723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5046242719250851364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b47a2f9e7d6cc143ac873fa3be0e60a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LootTable
+  CollectablePrefab: {fileID: 7863539330069029907, guid: c99172be5b612754daf9605ed31361ce, type: 3}
+  drops:
+  - item: {fileID: 11400000, guid: 0edb7b25430ce5c46824661103cf7e34, type: 2}
+    amount: 2
+    dropChance: 0.7
+  - item: {fileID: 11400000, guid: 8c412733f2eb90749b64eb9c93f92916, type: 2}
+    amount: 1
+    dropChance: 0.85
 --- !u!1 &5940920557566561559
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 5940920557566561559}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 1
   m_Children:
