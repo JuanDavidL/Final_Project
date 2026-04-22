@@ -4,7 +4,6 @@ public class RotateCameraInShip : MonoBehaviour
 {
     [SerializeField] GameObject btoLeft;
     [SerializeField] GameObject btoRigth;
-    [SerializeField] GameObject GoToPlanetButton;
     [SerializeField] GameObject menuPanel;
 
     public float stepDegrees = -90f;
@@ -19,7 +18,6 @@ public class RotateCameraInShip : MonoBehaviour
         _targetRotation = transform.localRotation;
         btoLeft.SetActive(false);
         btoRigth.SetActive(false);
-        GoToPlanetButton.SetActive(false);
     }
 
     void Update()
@@ -28,7 +26,6 @@ public class RotateCameraInShip : MonoBehaviour
         {
             btoLeft.SetActive(true);
             btoRigth.SetActive(true);
-            UpdateGoToPlanetButton();
         }
 
         // Mueve suavemente hacia la rotacion objetivo
@@ -49,16 +46,6 @@ public class RotateCameraInShip : MonoBehaviour
         }
     }
 
-    private void UpdateGoToPlanetButton()
-    {
-        float normalizedAngle = stepDegrees % 360f;
-        if (normalizedAngle < 0) normalizedAngle += 360f;
-
-        if (Mathf.Approximately(normalizedAngle, 270f))
-            GoToPlanetButton.SetActive(true);
-        else
-            GoToPlanetButton.SetActive(false);
-    }
 
     public void RotateLeft()
     {
@@ -66,7 +53,6 @@ public class RotateCameraInShip : MonoBehaviour
         stepDegrees -= 90;
         _targetRotation = Quaternion.Euler(0, stepDegrees, 0f);
         _isRotating = true;
-        UpdateGoToPlanetButton();
     }
 
     public void RotateRigth()
@@ -75,6 +61,5 @@ public class RotateCameraInShip : MonoBehaviour
         stepDegrees += 90;
         _targetRotation = Quaternion.Euler(0, stepDegrees, 0f);
         _isRotating = true;
-        UpdateGoToPlanetButton();
     }
 }

@@ -65,7 +65,7 @@ public class MachineUI : MonoBehaviour
         statusText.text = "Press this button to make a potion ↓↓↓";
 
         buttonMakeAPotion.SetActive(true);
-        buttonCancel.SetActive(true);
+        buttonCancel.SetActive(false);
         buttonLeft.SetActive(false);
         buttonRight.SetActive(false);
         spritePotion.gameObject.SetActive(false);
@@ -89,6 +89,7 @@ public class MachineUI : MonoBehaviour
     public void OnMakePotionClick()
     {
         buttonMakeAPotion.SetActive(false);
+        buttonCancel.SetActive(true);
         buttonLeft.SetActive(true);
         buttonRight.SetActive(true);
         spritePotion.gameObject.SetActive(true);

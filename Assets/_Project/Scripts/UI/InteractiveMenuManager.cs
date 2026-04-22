@@ -86,7 +86,7 @@ public class InteractiveMenuManager : MonoBehaviour
     private void MostrarInicio()
     {
         _currentState = MenuState.Inicio;
-        statusText.text = "Select the mood";
+        statusText.text = "Select the mood: \n Left Button = Travel, \n Right Button = Skill Tree";
 
         // Viaja mundos — todo oculto
         imagePlanet.SetActive(false);
@@ -247,7 +247,7 @@ public class InteractiveMenuManager : MonoBehaviour
         buttonSelectTreeFrostNova.SetActive(false);
         imageFireball.SetActive(false);
         imageFrostNova.SetActive(false);
-        buttonComeBack.SetActive(true);
+        buttonComeBack.SetActive(false);
 
         // Muestra detalle
         imageAbility.SetActive(true);
@@ -272,7 +272,7 @@ public class InteractiveMenuManager : MonoBehaviour
 
         //Nombre y descripción siempre visibles
     textTitle.text = upgrade.upgradeName;
-    textDescription.text = $"{upgrade.description}\nCosto: {upgrade.cost} créditos";
+    textDescription.text = $"{upgrade.description}\n\nCosto: {upgrade.cost} créditos";
 
         //StatusText según estado
         if (isAlreadyPurchased)
