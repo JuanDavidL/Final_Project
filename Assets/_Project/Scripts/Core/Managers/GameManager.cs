@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             LoadGlobalProgress(); // Opcional: Cargar de PlayerPrefs al iniciar
+            ResetUpgrades();
         }
         else
         {
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
 
         fireballUpgradesPurchased = PlayerPrefs.GetInt("FireballUpgradesPurchased", 0);
         frostNovaUpgradesPurchased = PlayerPrefs.GetInt("FrostNovaUpgradesPurchased", 0);
+        //Debug.Log($"LoadGlobalProgress → Creditos: {totalCredits} | Fireball: {fireballUpgradesPurchased} | FrostNova: {frostNovaUpgradesPurchased}");
     }
 
     public void SaveGlobalProgress()
@@ -56,7 +58,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // Ejemplo de cómo usar AddCredits (puedes eliminar esto después de probar)
-        ResetUpgrades();
+        
     }
 
     [ContextMenu("Reset Progress")]
@@ -65,7 +67,7 @@ public class GameManager : MonoBehaviour
         fireballUpgradesPurchased = 0;
         frostNovaUpgradesPurchased = 0;
         totalCredits = 10000; // créditos de prueba
-        SaveGlobalProgress();
-        Debug.Log("Mejoras reseteadas!");
+        SaveGlobalProgress(); // ✅ guarda el reset en PlayerPrefs inmediatamente
+        //Debug.Log($"Reseteado! Verificando PlayerPrefs → Fireball: {PlayerPrefs.GetInt("FireballUpgrades")} | FrostNova: {PlayerPrefs.GetInt("FrostNovaUpgrades")}");
     }
 }
