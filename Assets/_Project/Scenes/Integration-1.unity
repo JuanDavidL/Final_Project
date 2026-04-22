@@ -400,11 +400,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7611764903690424994, guid: 334fdaca33bcf9d43a6b5b5cb7cd9e14, type: 3}
   m_PrefabInstance: {fileID: 612206295}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &48655340 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5043030878320992097, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
-  m_PrefabInstance: {fileID: 221908055}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &68886090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,7 +1020,7 @@ GameObject:
   - component: {fileID: 108481337}
   - component: {fileID: 108481336}
   m_Layer: 5
-  m_Name: PanelNav
+  m_Name: NavigationArrows_Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1102,7 +1097,7 @@ GameObject:
   - component: {fileID: 121707044}
   - component: {fileID: 121707043}
   m_Layer: 5
-  m_Name: PanelMain
+  m_Name: MenuPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1144,7 +1139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 0.392}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2017,18 +2012,18 @@ PrefabInstance:
     - target: {fileID: 983948561220121506, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 221908057}
+      objectReference: {fileID: 989949688}
     - target: {fileID: 983948561220121506, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 983948561220121506, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ToggleMenu
+      value: OnPlayButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 983948561220121506, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ChangeScene, Assembly-CSharp
+      value: MenuController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 983948561220121506, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -2121,46 +2116,45 @@ PrefabInstance:
     - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 9f75c7df5fddfd341885b0f9e519ca55, type: 2}
+      objectReference: {fileID: 11400000, guid: 3f3c9e84c797edc4eb412d7767d2cb6b, type: 2}
+    - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.7830189
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.7830189
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.7830189
+      objectReference: {fileID: 0}
     - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -5742582450722482002, guid: 9f75c7df5fddfd341885b0f9e519ca55, type: 2}
+      objectReference: {fileID: 789526087415187728, guid: 3f3c9e84c797edc4eb412d7767d2cb6b, type: 2}
+    - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4291348680
+      objectReference: {fileID: 0}
     - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5043030878320992097, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_Name
-      value: UIButton_Play
+      value: Play_Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5043030878320992097, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 221908057}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
 --- !u!224 &221908056 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3156539859793643565, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
   m_PrefabInstance: {fileID: 221908055}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &221908057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48655340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64f2bc2d993eb6e47ad5fb1a9af4b88f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChangeScene
-  menuPanel: {fileID: 121707041}
-  mainCamera: {fileID: 683207806}
 --- !u!1 &230073070
 GameObject:
   m_ObjectHideFlags: 0
@@ -2780,37 +2774,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334188267}
   m_CullTransparentMesh: 1
---- !u!1 &340989388
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 340989389}
-  m_Layer: 0
-  m_Name: UIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &340989389
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340989388}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 181.87766, y: 107.31718, z: -6.10304}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 989949687}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &361857648
 GameObject:
   m_ObjectHideFlags: 0
@@ -7324,6 +7287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 989949687}
+  - component: {fileID: 989949688}
   m_Layer: 0
   m_Name: ------ UI ------
   m_TagString: Untagged
@@ -7344,10 +7308,23 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 340989389}
   - {fileID: 576161598}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &989949688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989949686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 753ed9aebdbc9f442bbe93cb0878b227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuController
+  menuPanel: {fileID: 121707041}
+  shipArrowsContainer: {fileID: 108481334}
 --- !u!1 &1003148926
 GameObject:
   m_ObjectHideFlags: 0
@@ -9671,11 +9648,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4566597854633748056, guid: 8586b664d6865e941b8fb00461be9d3d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 564.3274
+      value: 826.126
       objectReference: {fileID: 0}
     - target: {fileID: 4566597854633748056, guid: 8586b664d6865e941b8fb00461be9d3d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 98.6263
+      value: 187.81
       objectReference: {fileID: 0}
     - target: {fileID: 4566597854633748056, guid: 8586b664d6865e941b8fb00461be9d3d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9707,11 +9684,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4566597854633748056, guid: 8586b664d6865e941b8fb00461be9d3d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.000045776
       objectReference: {fileID: 0}
     - target: {fileID: 4566597854633748056, guid: 8586b664d6865e941b8fb00461be9d3d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 85
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 4566597854633748056, guid: 8586b664d6865e941b8fb00461be9d3d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9731,7 +9708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7945732970707139760, guid: 8586b664d6865e941b8fb00461be9d3d, type: 3}
       propertyPath: m_fontSize
-      value: 100
+      value: 131.4
       objectReference: {fileID: 0}
     - target: {fileID: 7945732970707139760, guid: 8586b664d6865e941b8fb00461be9d3d, type: 3}
       propertyPath: m_fontAsset
@@ -9739,12 +9716,16 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 90e07da849ddec94a9fda59af50891e9, type: 2}
     - target: {fileID: 7945732970707139760, guid: 8586b664d6865e941b8fb00461be9d3d, type: 3}
       propertyPath: m_fontSizeBase
-      value: 100
+      value: 131.4
       objectReference: {fileID: 0}
     - target: {fileID: 7945732970707139760, guid: 8586b664d6865e941b8fb00461be9d3d, type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -7029659589382778841, guid: 90e07da849ddec94a9fda59af50891e9, type: 2}
+    - target: {fileID: 7945732970707139760, guid: 8586b664d6865e941b8fb00461be9d3d, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 7945732970707139760, guid: 8586b664d6865e941b8fb00461be9d3d, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2
@@ -11256,23 +11237,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_text
-      value: Exist
+      value: Exit
       objectReference: {fileID: 0}
     - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 9f75c7df5fddfd341885b0f9e519ca55, type: 2}
+      objectReference: {fileID: 11400000, guid: 3f3c9e84c797edc4eb412d7767d2cb6b, type: 2}
+    - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.7830189
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.7830189
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.7830189
+      objectReference: {fileID: 0}
     - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -5742582450722482002, guid: 9f75c7df5fddfd341885b0f9e519ca55, type: 2}
+      objectReference: {fileID: 789526087415187728, guid: 3f3c9e84c797edc4eb412d7767d2cb6b, type: 2}
+    - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4291348680
+      objectReference: {fileID: 0}
     - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5043030878320992097, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_Name
-      value: UIButton (2)
+      value: Exit_Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11777,23 +11774,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_text
-      value: Music
+      value: Music volume
       objectReference: {fileID: 0}
     - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 9f75c7df5fddfd341885b0f9e519ca55, type: 2}
+      objectReference: {fileID: 11400000, guid: 3f3c9e84c797edc4eb412d7767d2cb6b, type: 2}
+    - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.7830189
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.7830189
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.7830189
+      objectReference: {fileID: 0}
     - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -5742582450722482002, guid: 9f75c7df5fddfd341885b0f9e519ca55, type: 2}
+      objectReference: {fileID: 789526087415187728, guid: 3f3c9e84c797edc4eb412d7767d2cb6b, type: 2}
+    - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4291348680
+      objectReference: {fileID: 0}
     - target: {fileID: 4137366182517424943, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5043030878320992097, guid: 7b9b6673874399240b8098b67badb8e4, type: 3}
       propertyPath: m_Name
-      value: UIButton (1)
+      value: Music_Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
