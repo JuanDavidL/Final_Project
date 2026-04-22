@@ -10,91 +10,138 @@ public class EnemyAI : MonoBehaviour
     public float detectionRange = 10f;
     public float attackRange = 2f;
     public float patrolRadius = 15f;
-    public float chaseStopDistance = 20f; 
+    public float chaseStopDistance = 20f;
+
+    [Header("Combat Settings")]
+    public float damageDealt = 15f;
+    public Transform attackPoint;
+    public float attackRadius = 1f;
+    public LayerMask playerLayer;
 
     private NavMeshAgent agent;
     private Transform player;
     private Vector3 startPosition;
     private float stateTimer;
 
-    // Referencia opcional para animaciones
     private Animator anim;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        anim = GetComponentInChildren<Animator>(); //
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        startPosition = transform.position;
+        // Buscamos componentes en el padre
+        agent = GetComponentInParent<NavMeshAgent>();
+
+        // Componentes en este objeto (Visuals)
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null) player = playerObj.transform;
+        if (transform.parent != null)
+            startPosition = transform.parent.position;
+        else
+            startPosition = transform.position;
     }
 
     void Update()
     {
+        if (player == null || agent == null) return;
+
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        HandleSpriteFlip();
 
         switch (currentState)
         {
             case State.Idle:
-                if (distanceToPlayer <= detectionRange) 
-                    ChangeState(State.Chasing);
-                else if (CheckTimer(2f)) 
-                    ChangeState(State.Patrolling);
+                if (distanceToPlayer <= detectionRange) ChangeState(State.Chasing);
+                else if (CheckTimer(2f)) ChangeState(State.Patrolling);
                 break;
 
             case State.Patrolling:
-                if (distanceToPlayer <= detectionRange) 
-                    ChangeState(State.Chasing);
-                // Si llegó al punto de patrulla, volver a Idle para descansar
-                else if (!agent.pathPending && agent.remainingDistance < 0.5f) 
-                    ChangeState(State.Idle);
+                if (distanceToPlayer <= detectionRange) ChangeState(State.Chasing);
+                else if (!agent.pathPending && agent.remainingDistance < 0.5f) ChangeState(State.Idle);
                 break;
 
             case State.Chasing:
+                agent.isStopped = false;
                 agent.SetDestination(player.position);
-                if (distanceToPlayer <= attackRange) 
-                    ChangeState(State.Attacking);
-                else if (distanceToPlayer > chaseStopDistance) 
-                    ReturnToOrigin();
+                if (distanceToPlayer <= attackRange) ChangeState(State.Attacking);
+                else if (distanceToPlayer > chaseStopDistance) ReturnToOrigin();
                 break;
 
             case State.Attacking:
-                agent.ResetPath();
-                // Mirar al jugador mientras ataca
-                Vector3 lookPos = new Vector3(player.position.x, transform.position.y, player.position.z);
-                transform.LookAt(lookPos);
-
-                if (distanceToPlayer > attackRange) 
+                agent.isStopped = true; // Se detiene para no empujar al jugador
+                if (distanceToPlayer > attackRange + 0.5f) // Pequeño margen para no alternar estados brusco
+                {
                     ChangeState(State.Chasing);
+                }
                 break;
         }
 
         UpdateAnimation();
     }
 
-    // Nueva función para manejar el cambio de lógica al entrar a un estado
+    void HandleSpriteFlip()
+    {
+        if (spriteRenderer == null) return;
+        float directionX = (player.position.x - transform.position.x);
+
+        // true o false dependiendo de hacia donde mira tu dibujo original
+        spriteRenderer.flipX = (directionX > 0);
+    }
+
     void ChangeState(State newState)
     {
         currentState = newState;
         stateTimer = 0;
+        if (currentState == State.Patrolling) SetRandomPatrolPoint();
 
-        if (currentState == State.Patrolling)
+        if (currentState == State.Attacking && anim != null)
         {
-            SetRandomPatrolPoint();
+            anim.SetTrigger("Attack");
         }
+    }
+
+    // Se llama desde el Animation Event
+    public void PerformDamage()
+    {
+        Debug.Log("Evento de daño disparado"); // Mira la consola para ver si esto sale
+        if (attackPoint == null) return;
+
+        // Cambiamos a OverlapSphere para detectar mejor en 3D
+        Collider[] hitColliders = Physics.OverlapSphere(attackPoint.position, attackRadius, playerLayer);
+        foreach (var hit in hitColliders)
+        {
+            if (hit.CompareTag("Player"))
+            {
+                PlayerHealth health = hit.GetComponent<PlayerHealth>();
+                if (health != null) health.TakeDamage(damageDealt);
+            }
+        }
+    }
+
+    void UpdateAnimation()
+    {
+        if (anim != null && agent != null)
+        {
+            anim.SetBool("isWalking", agent.velocity.magnitude > 0.1f);
+        }
+    }
+
+    // --- REVISIÓN DE GIZMOS ---
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        if (attackPoint != null) Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
     }
 
     void SetRandomPatrolPoint()
     {
-        // Buscamos un punto aleatorio dentro de un círculo
         Vector3 randomDirection = Random.insideUnitSphere * patrolRadius;
-        randomDirection += startPosition; // Patrullar alrededor de su zona de spawn
-
+        randomDirection += startPosition;
         NavMeshHit hit;
-        // Buscamos el punto más cercano válido en el NavMesh
         if (NavMesh.SamplePosition(randomDirection, out hit, patrolRadius, 1))
-        {
             agent.SetDestination(hit.position);
-        }
     }
 
     void ReturnToOrigin()
@@ -106,25 +153,6 @@ public class EnemyAI : MonoBehaviour
     private bool CheckTimer(float duration)
     {
         stateTimer += Time.deltaTime;
-        if (stateTimer >= duration) { stateTimer = 0; return true; }
-        return false;
-    }
-
-    private void UpdateAnimation()
-    {
-        if (anim != null)
-        {
-            // Enviamos la velocidad actual al Animator para caminar/correr
-            //anim.SetFloat("Speed", agent.velocity.magnitude); //
-        }
-    }
-
-    // Para visualizar el radio de patrulla en el editor
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(startPosition, patrolRadius);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRange);
+        return stateTimer >= duration;
     }
 }
