@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Upgrade_FrostNova_Unlock
   m_EditorClassIdentifier: Assembly-CSharp::AbilityUpgrade
   upgradeName: Nova de Escarcha
-  description: Aprendes esta pedora y costosa habilidad  en area
+  description: Aprendes esta poderosa y costosa habilidad  en area
   upgradeIcon: {fileID: 1978321623, guid: 948e28589177d4d49be28278a3ef7c8d, type: 3}
   cost: 100
   upgradeType: 0
