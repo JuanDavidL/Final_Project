@@ -33,14 +33,18 @@ public class ClientSystem : MonoBehaviour
     private List<ItemData> unlockedPotions;
 
     [Header("Ajustes de Tiempo y Energía")]
-    public MonitorSwitch powerSwitch; // Arrastra tu switch aquí
+    public MonitorSwitch powerSwitch;
+
+    [Header("UI - Nueva Pantalla Izquierda")]
+    [SerializeField]
+    private TextMeshProUGUI leftScreenText;
+
+    [SerializeField]
+    private Color monitorGreen = new Color(0.576f, 0.972f, 0.443f);
 
     [SerializeField]
     //private float timeToNextClient = 2f;
     private float maxPatienceTime = 45f;
-
-    [Header("Economía")]
-    public int playerCredits = 0;
 
     // Estados internos
     private bool isTutorialCompleted;
@@ -48,19 +52,17 @@ public class ClientSystem : MonoBehaviour
     private bool isClientActive = false;
     private float currentPatience;
     private ItemData currentOrder;
-    private float nextClientTimer; // ¡NUEVO! El contador interno
-    private bool isCallingNext = false; // El semáforo
+    private float nextClientTimer;
+    private bool isCallingNext = false; // semáforo
 
     void Start()
     {
-        // Usamos una pequeña comprobación de seguridad
         if (GameManager.Instance != null)
         {
             isTutorialCompleted = GameManager.Instance.isTutorialCompleted;
         }
         else
         {
-            // Si por alguna razón el Singleton no está listo, lo leemos del disco directamente
             isTutorialCompleted = PlayerPrefs.GetInt("TutorialCompleted", 0) == 1;
         }
 
@@ -81,7 +83,6 @@ public class ClientSystem : MonoBehaviour
             : (timeRatio > 0.3f) ? baseValue
             : Mathf.RoundToInt(baseValue * 0.5f);
 
-        // 2. Sumamos al contador global
         GameManager.Instance.AddCredits(finalPayout);
     }
 
@@ -157,7 +158,7 @@ public class ClientSystem : MonoBehaviour
     }
 
     // ==========================================
-    // RESTO DE TUS MÉTODOS (TUTORIAL Y BUCLE)
+    // RESTO DE MÉTODOS (TUTORIAL Y BUCLE)
     // ==========================================
 
     private void StartTutorialMode()
@@ -174,6 +175,12 @@ public class ClientSystem : MonoBehaviour
         patienceBar.fillAmount = 1f;
         patienceBar.color = Color.cyan;
         queueText.text = "TUTORIAL";
+
+        if (leftScreenText != null && currentOrder != null)
+        {
+            leftScreenText.text = currentOrder.itemName.ToUpper();
+            leftScreenText.color = monitorGreen;
+        }
     }
 
     public void AddClientsToQueue(int amount)
@@ -184,10 +191,13 @@ public class ClientSystem : MonoBehaviour
 
     private void UpdateQueueUI()
     {
-        if (clientsInQueue > 0)
-            queueText.text = "x " + clientsInQueue.ToString("D2");
-        else
-            queueText.text = "";
+        if (queueText != null)
+        {
+            if (clientsInQueue > 0)
+            {
+                queueText.text = "CLIENTS IN QUEUE: " + clientsInQueue;
+            }
+        }
     }
 
     private IEnumerator CallNextClient()
@@ -225,6 +235,12 @@ public class ClientSystem : MonoBehaviour
         currentOrder = unlockedPotions[Random.Range(0, unlockedPotions.Count)];
         orderScreenImage.sprite = currentOrder.itemIcon;
         orderScreenImage.color = Color.white;
+
+        if (leftScreenText != null && currentOrder != null)
+        {
+            leftScreenText.text = currentOrder.itemName.ToUpper();
+            leftScreenText.color = monitorGreen;
+        }
     }
 
     private void HandlePatienceTimer()
@@ -245,7 +261,10 @@ public class ClientSystem : MonoBehaviour
             patienceBar.color = Color.red;
 
         if (currentPatience <= 0)
-            ProcessDelivery(null);
+        {
+            currentPatience = 0; // Aseguramos que no sea negativa
+            StartCoroutine(HandleClientExpired()); // Llamamos al castigo
+        }
     }
 
     public void ProcessDelivery(ItemData potionDelivered)
@@ -268,33 +287,55 @@ public class ClientSystem : MonoBehaviour
         StartCoroutine(ResolveClientAndCheckQueue());
     }
 
-    // --- MODIFICACIÓN EN LA RESOLUCIÓN ---
-    private IEnumerator ResolveClientAndCheckQueue()
+    private IEnumerator ResolveClientAndCheckQueue(bool successfulTrade = true)
     {
         isCallingNext = true;
-        yield return new WaitForSeconds(2f); // Tiempo del feedback de "Vendido"
+
+        // Solo esperamos 2 segundos si le entregaste una poción
+        if (successfulTrade)
+        {
+            yield return new WaitForSeconds(2f);
+        }
 
         ClearScreens();
-        isClientActive = false; // <--- IMPORTANTE: Aquí marcamos que ya no hay nadie
+        isClientActive = false;
 
         if (clientsInQueue > 0)
         {
             yield return new WaitForSeconds(1f);
             clientsInQueue--;
-            UpdateQueueUI();
+            UpdateQueueUI(); // Actualiza la pantalla pequeña con el nuevo número
             GenerateDynamicClient();
             isCallingNext = false;
         }
         else
         {
-            UpdateQueueUI();
+            UpdateQueueUI(); // Pantalla pequeña dirá "CLIENTS IN QUEUE: 0"
             isCallingNext = false;
 
-            // Ahora sí, el IsShiftComplete será True y el tubo mostrará el mensaje
-            DeliveryTube3D tube = FindObjectOfType<DeliveryTube3D>();
-            if (tube != null)
-                tube.SendMessage("UpdateVisuals");
+            // La pantalla izquierda da la orden de apagar
+            if (leftScreenText != null)
+            {
+                leftScreenText.text = "SHIFT COMPLETE. POWER OFF CONSOLE.";
+                leftScreenText.color = monitorGreen;
+            }
         }
+    }
+
+    private IEnumerator HandleClientExpired()
+    {
+        isClientActive = false;
+
+        // La pantalla izquierda se encarga del castigo
+        if (leftScreenText != null)
+        {
+            leftScreenText.text = "CLIENT LOST: TIME OUT";
+            leftScreenText.color = Color.red;
+        }
+
+        yield return new WaitForSeconds(4f);
+
+        StartCoroutine(ResolveClientAndCheckQueue(false));
     }
 
     private void ClearScreens()
@@ -303,9 +344,11 @@ public class ClientSystem : MonoBehaviour
         orderScreenImage.color = Color.clear;
         patienceBar.fillAmount = 0;
         currentOrder = null;
-    }
 
-    // --- EN TU SCRIPT ClientSystem.cs ---
+        // Limpiamos la pantalla izquierda
+        if (leftScreenText != null)
+            leftScreenText.text = "";
+    }
 
     public bool IsShiftComplete()
     {
