@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public int fireballUpgradesPurchased = 0;
     public int frostNovaUpgradesPurchased = 0;
 
+    public bool hasGameStarted = false;
+
     void Awake()
     {
         // Regla de oro del Singleton
