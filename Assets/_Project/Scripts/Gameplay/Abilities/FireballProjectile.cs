@@ -36,19 +36,35 @@ public class FireballProjectile : MonoBehaviour
 
     private void Explode()
     {
+        // 1. Detectamos todo en el radio
         Collider[] targets = Physics.OverlapSphere(transform.position, explosionRadius);
+
         foreach (Collider t in targets)
         {
-            EnemyHealth e = t.GetComponent<EnemyHealth>();
-            if (e != null) e.TakeDamage(damage);
+            // 2. Intentamos obtener el script de vida
+            EnemyHealth e = t.GetComponentInParent<EnemyHealth>();
+
+            // 3. ¡CRÍTICO! Solo actuamos si realmente hay un enemigo
+            if (e != null)
+            {
+                e.TakeDamage(damage);
+                Debug.Log($"Fireball explotó y golpeó a {e.name} con {damage} de daño.");
+            }
+            else
+            {
+                // Opcional: Log para saber que golpeó algo inerte
+                Debug.Log($"Impacto en objeto sin vida: {t.name}");
+            }
         }
 
+        // 4. Efectos visuales
         if (explosionVFX != null)
         {
             GameObject vfx = Instantiate(explosionVFX, transform.position, Quaternion.identity);
             Destroy(vfx, 2f);
         }
 
+        // 5. Destruir el proyectil
         Destroy(gameObject);
     }
 

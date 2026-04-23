@@ -16,24 +16,26 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         anim = GetComponentInChildren<Animator>();
+        lootTable = GetComponent<LootTable>();
     }
 
     public void TakeDamage(float damage)
     {
-        if (isDead) return;
+        // Si ya está muerto o el daño es inválido, salimos
+        if (isDead || damage <= 0) return;
 
         currentHealth -= damage;
-        Debug.Log($"{gameObject.name} recibió {damage} de daño. Vida restante: {currentHealth}");
 
         if (currentHealth <= 0)
         {
+            currentHealth = 0; // Evitamos valores negativos por estética
             Die();
         }
-        else
-        {
-            // Tarea para luego, realizar animación de recibir daño o hurt en el enemigo
-            //if (anim != null) anim.SetTrigger("Hurt");
-        }
+        // else
+        // {
+        // Tarea para luego, realizar animación de recibir daño o hurt en el enemigo
+        //     if (anim != null) anim.SetTrigger("Hurt");
+        // }
     }
 
     private void Die()
