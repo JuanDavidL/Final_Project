@@ -53,6 +53,7 @@ TemporaryDependencyNodeTargetIdentifier=netstandard2.1
 Assets/
  TutorialInfo/Scripts/Readme.cs
  _Project/Scripts/Core/
+  Interfaces/MenuController.cs
   InventorySlotUI.cs
   Managers/
    ChangeScene.cs
@@ -62,13 +63,9 @@ Assets/
    ClientSystem.cs
    DeliveryTube.cs
    MonitorSwitch.cs
-   SaveSystem.cs
- _Project/Scripts/Data/
+ _Project/Scripts/Data/ScriptableObject/
   ItemData.cs
-  ScriptableObject/
-   InventorySO.cs
-   ItemDataOld.cs
-   RecipeData.cs
+  RecipeData.cs
  _Project/Scripts/Gameplay/Abilities/
   AbilityManager.cs
   AbilityUpgrade.cs
@@ -105,24 +102,23 @@ Assets/
    PlayerHealth.cs
    PlayerMovement.cs
    PotionQuickBar.cs
- _Project/Scripts/TEST/
-  InventoryTester.cs
-  TesterInventario.cs
- _Project/Scripts/UI/
-  ArrowButton3D.cs
-  BookAnimatorController.cs
-  BookUI.cs
-  CollectibleItem.cs
-  FloatingShelf.cs
-  IngredientSlotUI.cs
-  InteractiveMenuManager.cs
-  InventoryUI.cs
-  ItemDetailUI.cs
-  MachineUI.cs
-  PotionSlot.cs
-  PotionSlotUI.cs
-  RotateCameraInShip.cs
-  WorldAndTreeButton3D.cs
+ _Project/Scripts/
+  TEST/TesterInventario.cs
+  UI/
+   ArrowButton3D.cs
+   BookAnimatorController.cs
+   BookUI.cs
+   CollectibleItem.cs
+   FloatingShelf.cs
+   IngredientSlotUI.cs
+   InteractiveMenuManager.cs
+   InventoryUI.cs
+   ItemDetailUI.cs
+   MachineUI.cs
+   PotionSlot.cs
+   PotionSlotUI.cs
+   RotateCameraInShip.cs
+   WorldAndTreeButton3D.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 
 [metadataReferences]
