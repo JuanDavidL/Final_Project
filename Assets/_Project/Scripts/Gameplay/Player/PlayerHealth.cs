@@ -187,8 +187,8 @@ public class PlayerHealth : MonoBehaviour
         SceneManager.LoadScene("JDavidScene");
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Enemy")) TakeDamage(10f);
-    }
+    // private void OnTriggerStay(Collider other)
+    // {
+    //     if (other.CompareTag("Enemy")) TakeDamage(10f);
+    // }
 }
