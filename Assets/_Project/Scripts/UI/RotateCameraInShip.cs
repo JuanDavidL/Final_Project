@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class RotateCameraInShip : MonoBehaviour
 {
-    [SerializeField] GameObject btoLeft;
-    [SerializeField] GameObject btoRigth;
-    [SerializeField] GameObject menuPanel;
+    [SerializeField]
+    GameObject btoLeft;
+
+    [SerializeField]
+    GameObject btoRigth;
+
+    [SerializeField]
+    GameObject menuPanel;
 
     public float stepDegrees = -90f;
     public float rotationSpeed = 5f;
@@ -14,7 +19,7 @@ public class RotateCameraInShip : MonoBehaviour
 
     void Start()
     {
-        transform.localRotation = Quaternion.Euler(0, stepDegrees, 0f);
+        //transform.localRotation = Quaternion.Euler(0, stepDegrees, 0f);
         _targetRotation = transform.localRotation;
         btoLeft.SetActive(false);
         btoRigth.SetActive(false);
@@ -46,10 +51,10 @@ public class RotateCameraInShip : MonoBehaviour
         }
     }
 
-
     public void RotateLeft()
     {
-        if (_isRotating) return; // evita rotar mientras esta rotando
+        if (_isRotating)
+            return; // evita rotar mientras esta rotando
         stepDegrees -= 90;
         _targetRotation = Quaternion.Euler(0, stepDegrees, 0f);
         _isRotating = true;
@@ -57,7 +62,8 @@ public class RotateCameraInShip : MonoBehaviour
 
     public void RotateRigth()
     {
-        if (_isRotating) return; // evita rotar mientras esta rotando
+        if (_isRotating)
+            return; // evita rotar mientras esta rotando
         stepDegrees += 90;
         _targetRotation = Quaternion.Euler(0, stepDegrees, 0f);
         _isRotating = true;

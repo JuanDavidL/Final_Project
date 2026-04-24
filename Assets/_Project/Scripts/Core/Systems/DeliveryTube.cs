@@ -167,7 +167,7 @@ public class DeliveryTube3D : MonoBehaviour
 
         if (validPotions.Count == 0)
         {
-            nameDisplayText.text = "SIN POCIONES";
+            nameDisplayText.text = "No Potions";
             nameDisplayText.color = Color.red;
             currentVisualPotion = null;
             return;

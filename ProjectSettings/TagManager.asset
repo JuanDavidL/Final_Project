@@ -10,6 +10,9 @@ TagManager:
   - Estantes
   - Enemy
   - Destructible
+  - Transmuter
+  - NodeSystem
+  - ClientSystem
   layers:
   - Default
   - TransparentFX
