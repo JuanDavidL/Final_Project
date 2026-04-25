@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c267d89e600b6b247b77dbbccac8eb27, type: 3}
   m_Name: Upgrade_Fireball_Mana
   m_EditorClassIdentifier: Assembly-CSharp::AbilityUpgrade
-  upgradeName: Manos Lijeras
-  description: Bola de fuego ahora cuesta 20% menos de mana
+  upgradeName: Light Hands
+  description: Fireball now costs 20% less mana
   upgradeIcon: {fileID: 1881944424, guid: 948e28589177d4d49be28278a3ef7c8d, type: 3}
   cost: 200
   upgradeType: 1

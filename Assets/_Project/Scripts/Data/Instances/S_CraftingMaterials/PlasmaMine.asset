@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: PlasmaMine
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 4
-  itemName: Mina de Plasma
+  itemName: Plasma Mine
   itemIcon: {fileID: -180327539, guid: 33357870b3a367a4185060d3bd3c59dc, type: 3}
   potionPrefab: {fileID: 0}
-  itemDescription: 
+  itemDescription: A highly volatile, floating sphere of condensed solar energy.
+    It requires extreme care and precise thermal control during transmutation to
+    prevent a localized breach.

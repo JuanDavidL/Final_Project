@@ -17,6 +17,9 @@ public class RotateCameraInShip : MonoBehaviour
     private Quaternion _targetRotation;
     private bool _isRotating = false;
 
+    [Header("Configuración de Audio")]
+    public AudioClip cameraSFX; // Sonido al girar la cámara dentro de la nave
+
     void Start()
     {
         //transform.localRotation = Quaternion.Euler(0, stepDegrees, 0f);
@@ -53,6 +56,10 @@ public class RotateCameraInShip : MonoBehaviour
 
     public void RotateLeft()
     {
+        if (AudioManager.Instance != null && cameraSFX != null)
+        {
+            AudioManager.Instance.PlaySFXRandomPitch(cameraSFX, 0.95f, 1.05f);
+        }
         if (_isRotating)
             return; // evita rotar mientras esta rotando
         stepDegrees -= 90;
@@ -62,6 +69,10 @@ public class RotateCameraInShip : MonoBehaviour
 
     public void RotateRigth()
     {
+        if (AudioManager.Instance != null && cameraSFX != null)
+        {
+            AudioManager.Instance.PlaySFXRandomPitch(cameraSFX, 0.95f, 1.05f);
+        }
         if (_isRotating)
             return; // evita rotar mientras esta rotando
         stepDegrees += 90;

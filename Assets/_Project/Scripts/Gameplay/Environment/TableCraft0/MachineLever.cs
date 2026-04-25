@@ -33,7 +33,6 @@ public class MachineLever : MonoBehaviour
                     if (machine.currentState != ProcessingMachineLogic.MachineState.Procesando) return;
 
                     _currentPresses++;
-                    Debug.Log($"Palancazo número: {_currentPresses}");
                     StartCoroutine(PlayAnimationCoroutine());
                     machine.UpdateLeverProgress(_currentPresses);
                 }

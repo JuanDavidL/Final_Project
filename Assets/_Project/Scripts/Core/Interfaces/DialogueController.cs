@@ -38,6 +38,9 @@ public class DialogueController : MonoBehaviour
     [Header("Diálogos Contextuales")]
     public ContextDialogue[] stationDialogues;
 
+    [Header("Audio de B.E.L.")]
+    public AudioClip belBeepSound;
+
     private int currentLineIndex = 0;
     private bool isTyping = false;
     private Coroutine typingCoroutine;
@@ -86,6 +89,13 @@ public class DialogueController : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {
             dialogueText.text += letter;
+
+            // TRUCO: Solo hacemos el "beep" si la letra NO es un espacio vacío
+            if (letter != ' ' && belBeepSound != null)
+            {
+                AudioManager.Instance.PlaySFXRandomPitch(belBeepSound, 0.95f, 1.05f);
+            }
+
             yield return new WaitForSeconds(typingSpeed);
         }
 

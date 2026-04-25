@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 
     public void AddCredits(int amount)
@@ -57,11 +56,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    void Start()
-    {
-        // Ejemplo de cómo usar AddCredits (puedes eliminar esto después de probar)
-        
-    }
+    void Start() { }
 
     [ContextMenu("Reset Progress")]
     public void ResetUpgrades()

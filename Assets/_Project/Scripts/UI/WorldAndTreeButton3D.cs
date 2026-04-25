@@ -3,15 +3,22 @@ using UnityEngine.InputSystem;
 
 public class WorldAndTreeButton3D : MonoBehaviour
 {
-    public enum ButtonType { TravelToOtherWorld, SkillTree }
+    public enum ButtonType
+    {
+        TravelToOtherWorld,
+        SkillTree,
+    }
 
     [Header("Button Type")]
     public ButtonType buttonType;
 
-    [Header ("Visual Feedback")]
+    [Header("Visual Feedback")]
     public MeshRenderer meshRenderer;
     public Material materialNormal;
     public Material materialHover;
+
+    [Header("Configuración de Audio")]
+    public AudioClip buttonNodesSFX; // Sonido al oprimir el botón redondo principal
 
     private InteractiveMenuManager _menuManager;
     private Camera _cam;
@@ -24,7 +31,7 @@ public class WorldAndTreeButton3D : MonoBehaviour
             meshRenderer = GetComponentInChildren<MeshRenderer>();
     }
 
-    void Update ()
+    void Update()
     {
         HandleHover();
 
@@ -37,8 +44,8 @@ public class WorldAndTreeButton3D : MonoBehaviour
         Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == gameObject)
         {
-          if (materialHover != null)
-              meshRenderer.material = materialHover;
+            if (materialHover != null)
+                meshRenderer.material = materialHover;
         }
         else
         {
@@ -48,14 +55,18 @@ public class WorldAndTreeButton3D : MonoBehaviour
     }
 
     private void TryClick()
-{
-    Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-    if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == gameObject)
     {
-        if (buttonType == ButtonType.TravelToOtherWorld)
-            _menuManager.OnViajaMundosPressed();
-        else
-            _menuManager.OnArbolHabilidadesPressed();
+        if (AudioManager.Instance != null && buttonNodesSFX != null)
+        {
+            AudioManager.Instance.PlaySFXRandomPitch(buttonNodesSFX, 0.95f, 1.05f);
+        }
+        Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == gameObject)
+        {
+            if (buttonType == ButtonType.TravelToOtherWorld)
+                _menuManager.OnViajaMundosPressed();
+            else
+                _menuManager.OnArbolHabilidadesPressed();
+        }
     }
-}
 }

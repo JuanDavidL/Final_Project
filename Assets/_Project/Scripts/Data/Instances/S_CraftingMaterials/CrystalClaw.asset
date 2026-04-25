@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: CrystalClaw
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 9
-  itemName: Garra de Cristal
+  itemName: Crystal Claw
   itemIcon: {fileID: 1101383809, guid: e4bd23bdc9fb22248b2d25eb8c98bf28, type: 3}
   potionPrefab: {fileID: 0}
-  itemDescription: 
+  itemDescription: A razor-sharp appendage composed entirely of ultra-dense silicate.
+    It never loses its edge and is perfect for grinding down into a highly conductive
+    alchemical dust.

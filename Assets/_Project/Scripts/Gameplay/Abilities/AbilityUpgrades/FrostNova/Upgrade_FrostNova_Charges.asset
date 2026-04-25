@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c267d89e600b6b247b77dbbccac8eb27, type: 3}
   m_Name: Upgrade_FrostNova_Charges
   m_EditorClassIdentifier: Assembly-CSharp::AbilityUpgrade
-  upgradeName: Invierno sin Fin
-  description: 'Ahora tu Nova tiene 2 cargas. Cada una tiene un enfriamiento independiente '
+  upgradeName: Endless Winter
+  description: 'Your Nova now has 2 charges. Each charge has its own cooldown. '
   upgradeIcon: {fileID: -2006327042, guid: 948e28589177d4d49be28278a3ef7c8d, type: 3}
   cost: 600
   upgradeType: 4

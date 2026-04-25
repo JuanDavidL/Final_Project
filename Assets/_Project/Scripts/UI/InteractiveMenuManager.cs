@@ -1,6 +1,6 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 using UnityEngine.UI;
 
 public class InteractiveMenuManager : MonoBehaviour
@@ -22,6 +22,8 @@ public class InteractiveMenuManager : MonoBehaviour
     public GameObject buttonCancel;
     public TextMeshProUGUI planetNameText; // puede ser el statusText si quieres
 
+    [Header("Configuración de Audio")]
+    public AudioClip buyButtonSFX; // Sonido al comprar una mejora en el árbol de habilidades
     [System.Serializable]
     public class PlanetData
     {
@@ -30,16 +32,17 @@ public class InteractiveMenuManager : MonoBehaviour
         public Sprite planetSprite;
         public string sceneName;
     }
+
     public PlanetData[] planets;
 
     // ─── Árbol Habilidades - Selección ───────────────────────────
     [Header("Árbol Habilidades - Selección")]
     public GameObject buttonSelectTreeFireball;
     public GameObject buttonSelectTreeFrostNova;
-    public GameObject imageFireball;        // sprite de fireball
-    public GameObject imageFrostNova;       // sprite de frostnova
+    public GameObject imageFireball; // sprite de fireball
+    public GameObject imageFrostNova; // sprite de frostnova
     public GameObject buttonComeBack;
-    public GameObject buttonCancelSkillTree;       // vuelve al inicio
+    public GameObject buttonCancelSkillTree; // vuelve al inicio
 
     // ─── Árbol Habilidades - Detalle ──────────────────────────────
     [Header("Árbol Habilidades - Detalle")]
@@ -61,7 +64,7 @@ public class InteractiveMenuManager : MonoBehaviour
         Inicio,
         ViajaMundos,
         ArbolSeleccion,
-        ArbolDetalle
+        ArbolDetalle,
     }
 
     private MenuState _currentState = MenuState.Inicio;
@@ -200,7 +203,8 @@ public class InteractiveMenuManager : MonoBehaviour
 
     private void ActualizarPlaneta()
     {
-        if (planets.Length == 0) return;
+        if (planets.Length == 0)
+            return;
 
         PlanetData planet = planets[_currentPlanetIndex];
         statusText.text = $"{planet.planetName}: {planet.difficulty}";
@@ -214,8 +218,10 @@ public class InteractiveMenuManager : MonoBehaviour
     // Llama esto desde el ButtonTravel
     public void OnTravelPressed()
     {
-        if (_currentState != MenuState.ViajaMundos) return;
-        if (planets.Length == 0) return;
+        if (_currentState != MenuState.ViajaMundos)
+            return;
+        if (planets.Length == 0)
+            return;
 
         GameManager.Instance?.SaveGlobalProgress();
         SceneManager.LoadScene(planets[_currentPlanetIndex].sceneName);
@@ -260,41 +266,44 @@ public class InteractiveMenuManager : MonoBehaviour
 
     private void ActualizarDetalleUpgrade()
     {
-        if (_currentTree == null) return;
+        if (_currentTree == null)
+            return;
 
         // Obtiene la mejora en el índice actual (no solo la siguiente)
         AbilityUpgrade upgrade = _currentTree.GetUpgradeAt(_currentUpgradeIndex);
-        if (upgrade == null) return;
+        if (upgrade == null)
+            return;
 
         bool isAlreadyPurchased = _currentUpgradeIndex < _currentTree.GetPurchasedCount();
         bool isNext = _currentUpgradeIndex == _currentTree.GetPurchasedCount();
         bool canAfford = GameManager.Instance.totalCredits >= upgrade.cost;
 
         //Nombre y descripción siempre visibles
-    textTitle.text = upgrade.upgradeName;
-    textDescription.text = $"{upgrade.description}\n\nCosto: {upgrade.cost} créditos";
+        textTitle.text = upgrade.upgradeName;
+        textDescription.text = $"{upgrade.description}\n\nCosto: {upgrade.cost} créditos";
 
         //StatusText según estado
         if (isAlreadyPurchased)
-        statusText.text = "You got it ✓";
+            statusText.text = "You got it already!";
         else if (canAfford)
-        statusText.text = "You don't have it yet";
+            statusText.text = "You don't have it yet";
         else
-        statusText.text = "You don't have it yet";
+            statusText.text = "You don't have it yet";
 
         //Sprite
         Image img = imageAbility.GetComponent<Image>();
         if (img != null && upgrade.upgradeIcon != null)
-        img.sprite = upgrade.upgradeIcon;
+            img.sprite = upgrade.upgradeIcon;
 
         //ButtonBuy siempre visible
         buttonBuy.SetActive(true);
-        }
+    }
 
-        // Llama esto desde ButtonBuy
+    // Llama esto desde ButtonBuy
     public void OnBuyPressed()
     {
-        if (_currentTree == null) return;
+        if (_currentTree == null)
+            return;
 
         bool isAlreadyPurchased = _currentUpgradeIndex < _currentTree.GetPurchasedCount();
         bool isNext = _currentUpgradeIndex == _currentTree.GetPurchasedCount();
@@ -316,11 +325,16 @@ public class InteractiveMenuManager : MonoBehaviour
         // No hay créditos
         if (!_currentTree.CanPurchaseNext())
         {
-            statusText.text = "Not enough credits!";
+            statusText.text = "Not enough Star Credits!";
             return;
         }
 
         //Compra exitosa
+
+        if (AudioManager.Instance != null && buyButtonSFX != null)
+        {
+            AudioManager.Instance.PlaySFXRandomPitch(buyButtonSFX, 0.95f, 1.05f);
+        }
         _currentTree.TryPurchaseNext();
         statusText.text = "Upgrade purchased!";
         ActualizarDetalleUpgrade();
@@ -357,6 +371,6 @@ public class InteractiveMenuManager : MonoBehaviour
     private void UpdateCreditsDisplay()
     {
         if (creditsText != null && GameManager.Instance != null)
-            creditsText.text = $"{GameManager.Instance.totalCredits} Credits";
+            creditsText.text = $"Star Credits: {GameManager.Instance.totalCredits}";
     }
 }

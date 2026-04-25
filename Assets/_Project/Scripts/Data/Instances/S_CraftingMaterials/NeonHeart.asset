@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: NeonHeart
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 10
-  itemName: Corazon de Neon
+  itemName: Neon Heart
   itemIcon: {fileID: -627457535, guid: 7b4cefe68dae40242986aff118c49368, type: 3}
   potionPrefab: {fileID: 0}
-  itemDescription: Flor sacfgra jfdjjdsfjsdfjsjdfjsdjfjdfjs
+  itemDescription: A pulsing, energy-rich organ extracted from an anomaly. Curiously,
+    it continues to beat in perfect, uninterrupted synchronization with our ship's
+    main fusion engine.
