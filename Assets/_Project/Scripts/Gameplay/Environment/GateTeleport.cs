@@ -176,25 +176,21 @@ public class GateTeleport : MonoBehaviour
             camTransform.position = playerGO.transform.position + camOffset;
         }
 
-        // ── PASO 8: Apagar VFX y mostrar sprite ───────
-        if (vfxMago != null)
-        {
-            ParticleSystem ps = vfxMago.GetComponent<ParticleSystem>();
-            if (ps != null) ps.Stop();
-            yield return new WaitForSeconds(1.5f); // Esperamos a que el VFX se disipe un poco
-            vfxMago.SetActive(false);
-        }
+        // ── PASO 8: Mostrar sprite y reactivar jugador ─────
+        if (spriteRenderer != null) spriteRenderer.enabled = true;
+        if (playerMovement != null) playerMovement.enabled = true;
+        if (playerInput != null) playerInput.enabled = true;
 
-        if (spriteRenderer != null)
-            spriteRenderer.enabled = true;
+    // ── PASO 9: Apagar VFX con delay ──────────────────
+    if (vfxMago != null)
+        {   
+        ParticleSystem ps = vfxMago.GetComponent<ParticleSystem>();
+        if (ps != null) ps.Stop();
 
-        // ── PASO 9: Reactivar movimiento ──────────────
-        if (playerMovement != null)
-            playerMovement.enabled = true;
-        if (playerInput != null)
-            playerInput.enabled = true;
+        // ✅ El jugador ya puede moverse mientras espera
+        yield return new WaitForSeconds(1f);
 
-        Debug.Log("[GateTeleport] Jugador reactivado.");
+        vfxMago.SetActive(false);
 
         // ── PASO 10: Cooldown de seguridad ────────────
         yield return new WaitForSeconds(cooldownFinal);
@@ -203,6 +199,7 @@ public class GateTeleport : MonoBehaviour
         _globalCooldown = false;
 
         Debug.Log("[GateTeleport] Portal listo.");
+        }
     }
 
     // ─────────────────────────────────────────────
