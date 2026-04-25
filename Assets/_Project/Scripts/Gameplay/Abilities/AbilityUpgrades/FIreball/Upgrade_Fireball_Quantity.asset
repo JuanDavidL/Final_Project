@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c267d89e600b6b247b77dbbccac8eb27, type: 3}
   m_Name: Upgrade_Fireball_Quantity
   m_EditorClassIdentifier: Assembly-CSharp::AbilityUpgrade
-  upgradeName: TIro Doble
-  description: Ahora lanzara una segunda bola de fuego gratis
+  upgradeName: Double Shot
+  description: Now fires a second fireball for free
   upgradeIcon: {fileID: 2114168772, guid: 948e28589177d4d49be28278a3ef7c8d, type: 3}
   cost: 500
   upgradeType: 4

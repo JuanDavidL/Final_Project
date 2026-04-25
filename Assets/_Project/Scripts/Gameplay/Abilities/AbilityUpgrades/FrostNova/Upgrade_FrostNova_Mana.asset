@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c267d89e600b6b247b77dbbccac8eb27, type: 3}
   m_Name: Upgrade_FrostNova_Mana
   m_EditorClassIdentifier: Assembly-CSharp::AbilityUpgrade
-  upgradeName: Nieve Plana
-  description: Tu frost nova ahora cuesta  menos 20%
+  upgradeName: Flat Snow
+  description: Your Frost Nova now costs 20% less mana.
   upgradeIcon: {fileID: -1141711544, guid: 948e28589177d4d49be28278a3ef7c8d, type: 3}
   cost: 250
   upgradeType: 1

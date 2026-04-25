@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c267d89e600b6b247b77dbbccac8eb27, type: 3}
   m_Name: Upgrade_FrostNova_Radius
   m_EditorClassIdentifier: Assembly-CSharp::AbilityUpgrade
-  upgradeName: Era de Hielo
-  description: Ahora tu Nova de escarcha tiene un 20% mas de area
+  upgradeName: Ice Age
+  description: Your Frost Nova now has a 20% larger area of effect.
   upgradeIcon: {fileID: 1603176959, guid: 948e28589177d4d49be28278a3ef7c8d, type: 3}
   cost: 450
   upgradeType: 3

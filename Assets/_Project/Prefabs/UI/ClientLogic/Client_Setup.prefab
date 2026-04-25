@@ -236,9 +236,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4902316231119965166}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 817cee14aee81b347877c6754a375caa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4638841677658155664}
     - targetCorrespondingSourceObject: {fileID: -7464248044913407735, guid: 817cee14aee81b347877c6754a375caa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6422615107285011206}
@@ -542,22 +539,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0064318385, y: 0.00236979, z: 0.0037289825}
   m_Center: {x: 0.00027730782, y: 0.0011848911, z: 0.0011325342}
---- !u!1 &9073440490636166782 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 817cee14aee81b347877c6754a375caa, type: 3}
-  m_PrefabInstance: {fileID: 8154400291363420975}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4638841677658155664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9073440490636166782}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ebc559a970a72043b747804f66d96a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TesterInventario
-  pocionVida: {fileID: 11400000, guid: 2a4588e7acd87844fa314f762288ca12, type: 2}
-  pocionMana: {fileID: 11400000, guid: 2a05be332c4c049499e6a730c4bd11a9, type: 2}

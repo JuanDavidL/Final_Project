@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: TemporalRoot
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 3
-  itemName: Raiz Temporal
+  itemName: Temporal Root
   itemIcon: {fileID: 849140387, guid: 0b1cfb2189c30bb4987cb4d1d65fa44d, type: 3}
   potionPrefab: {fileID: 0}
-  itemDescription: 
+  itemDescription: A truly bizarre plant that constantly shifts slightly out of phase
+    with reality. It is heavily utilized as a grounding anchor to stabilize time-altering
+    potion recipes.

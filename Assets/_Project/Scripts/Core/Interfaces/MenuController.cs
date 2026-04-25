@@ -6,11 +6,13 @@ public class MenuController : MonoBehaviour
     [Header("UI del Menú")]
     public GameObject menuPanel;
 
-    [Header("Elementos de la Escena (Opcionales)")]
+    [Header("Interfaz de Juego (HUD)")]
     [SerializeField]
-    private GameObject shipArrowsContainer; 
+    private GameObject hudGameContainer; // Arrastra aquí el HUD_Game_Container
+
     void Start()
     {
+        // Al empezar, nos aseguramos de que el menú esté ON y el HUD esté OFF
         if (GameManager.Instance != null && GameManager.Instance.hasGameStarted)
         {
             ResumeGame();
@@ -33,7 +35,7 @@ public class MenuController : MonoBehaviour
                 }
                 else
                 {
-                    PauseGame();
+                    ShowMainMenu();
                 }
             }
         }
@@ -46,6 +48,14 @@ public class MenuController : MonoBehaviour
             GameManager.Instance.hasGameStarted = true;
         }
         ResumeGame();
+
+        // Solo lanzamos el tutorial si es la primera vez
+        if (PlayerPrefs.GetInt("TutorialVisto", 0) == 0)
+        {
+            DialogueController diag = FindObjectOfType<DialogueController>();
+            if (diag != null)
+                diag.StartTutorialDialogue();
+        }
     }
 
     private void ShowMainMenu()
@@ -53,19 +63,9 @@ public class MenuController : MonoBehaviour
         menuPanel.SetActive(true);
         Time.timeScale = 0f;
 
-        // --- APAGAMOS LAS FLECHAS ---
-        if (shipArrowsContainer != null)
-            shipArrowsContainer.SetActive(false);
-    }
-
-    private void PauseGame()
-    {
-        menuPanel.SetActive(true);
-        Time.timeScale = 0f;
-
-        // --- APAGAMOS LAS FLECHAS ---
-        if (shipArrowsContainer != null)
-            shipArrowsContainer.SetActive(false);
+        // Apagamos todo el HUD de juego mientras estemos en el menú
+        if (hudGameContainer != null)
+            hudGameContainer.SetActive(false);
     }
 
     public void ResumeGame()
@@ -73,8 +73,9 @@ public class MenuController : MonoBehaviour
         menuPanel.SetActive(false);
         Time.timeScale = 1f;
 
-        // --- ENCENDEMOS LAS FLECHAS ---
-        if (shipArrowsContainer != null)
-            shipArrowsContainer.SetActive(true);
+        // ¡Encendemos el HUD de juego!
+        if (hudGameContainer != null)
+            hudGameContainer.SetActive(true);
     }
+
 }

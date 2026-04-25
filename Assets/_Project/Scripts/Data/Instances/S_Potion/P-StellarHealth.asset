@@ -16,4 +16,6 @@ MonoBehaviour:
   itemName: 'Stellar Health '
   itemIcon: {fileID: -4217581981127943786, guid: 4677e1b6a9c97c840b7076995e4059a1, type: 3}
   potionPrefab: {fileID: 919132149155446097, guid: 3d6f5c8827f10474b937d47cd065d2d1, type: 3}
-  itemDescription: Placeholder
+  itemDescription: A standard biomedical draught infused with raw starlight. It rapidly
+    accelerates cellular regeneration, instantly mending flesh and healing minor
+    plasma burns.

@@ -3,7 +3,11 @@ using UnityEngine.InputSystem;
 
 public class ArrowButton3D : MonoBehaviour
 {
-    public enum ArrowDirection { Left, Right }
+    public enum ArrowDirection
+    {
+        Left,
+        Right,
+    }
 
     [Header("Direction")]
     public ArrowDirection Direction;

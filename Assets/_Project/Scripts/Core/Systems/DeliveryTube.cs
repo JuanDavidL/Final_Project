@@ -30,6 +30,11 @@ public class DeliveryTube3D : MonoBehaviour
     [SerializeField]
     private Color normalTextColor = new Color(0.576f, 0.972f, 0.443f);
 
+    [Header("Configuración de Audio")]
+    public AudioClip mainButtonSFX; // Sonido al oprimir el botón redondo principal
+    public AudioClip arrowButtonSFX; // Sonido al oprimir las flechas de la mesa
+    public AudioClip tubeMovingSFX; // Sonido mecánico del tubo bajando o subiendo
+
     private int currentIndex = 0;
     private GameObject currentVisualPotion;
     private Material[] originalMaterials;
@@ -39,6 +44,11 @@ public class DeliveryTube3D : MonoBehaviour
         // 1. El único "seguro" que dejamos es el del switch de energía
         if (powerSwitch == null || !powerSwitch.IsOn)
             return;
+
+        if (AudioManager.Instance != null && mainButtonSFX != null)
+        {
+            AudioManager.Instance.PlaySFXRandomPitch(mainButtonSFX, 0.95f, 1.05f);
+        }
 
         // 2. Si el tubo está arriba (Idle), lo bajamos y TERMINAMOS el proceso de este clic
         if (currentState == TubeState.Idle)
@@ -65,6 +75,10 @@ public class DeliveryTube3D : MonoBehaviour
 
     private void OpenTube()
     {
+        if (AudioManager.Instance != null && tubeMovingSFX != null)
+        {
+            AudioManager.Instance.PlaySFX(tubeMovingSFX); // Sin random pitch para el motor
+        }
         currentState = TubeState.Selecting;
         tubeAnimator.SetTrigger("LowerTube");
 
@@ -100,6 +114,11 @@ public class DeliveryTube3D : MonoBehaviour
         if (currentState != TubeState.Selecting)
             return;
 
+        if (AudioManager.Instance != null && arrowButtonSFX != null)
+        {
+            AudioManager.Instance.PlaySFXRandomPitch(arrowButtonSFX, 0.9f, 1.1f);
+        }
+
         List<ItemData> validPotions = GetValidPotions();
 
         // Si hay al menos una poción, permitimos que el sistema se refresque
@@ -131,7 +150,10 @@ public class DeliveryTube3D : MonoBehaviour
             return;
         if (currentState != TubeState.Selecting)
             return;
-
+        if (AudioManager.Instance != null && arrowButtonSFX != null)
+        {
+            AudioManager.Instance.PlaySFXRandomPitch(arrowButtonSFX, 0.9f, 1.1f);
+        }
         List<ItemData> validPotions = GetValidPotions();
 
         if (validPotions.Count > 0)
@@ -167,7 +189,7 @@ public class DeliveryTube3D : MonoBehaviour
 
         if (validPotions.Count == 0)
         {
-            nameDisplayText.text = "SIN POCIONES";
+            nameDisplayText.text = "No Potions";
             nameDisplayText.color = Color.red;
             currentVisualPotion = null;
             return;
@@ -253,6 +275,11 @@ public class DeliveryTube3D : MonoBehaviour
 
         tradeManager.ProcessDelivery(itemToSend);
         InventoryManager.Instance.RemoveItem(itemToSend, 1);
+
+        if (AudioManager.Instance != null && tubeMovingSFX != null)
+        {
+            AudioManager.Instance.PlaySFX(tubeMovingSFX);
+        }
 
         tubeAnimator.SetTrigger("SendUp");
         Destroy(currentVisualPotion);

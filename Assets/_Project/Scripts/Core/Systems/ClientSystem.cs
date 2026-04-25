@@ -144,7 +144,7 @@ public class ClientSystem : MonoBehaviour
         // Esto solo ocurre UNA VEZ al cargar la escena de la nave
         clientsInQueue = Random.Range(3, 6);
         UpdateQueueUI();
-        Debug.Log($"Bienvenido de vuelta. Hay {clientsInQueue} clientes en espera.");
+        //Debug.Log($"Bienvenido de vuelta. Hay {clientsInQueue} clientes en espera.");
     }
 
     // ==========================================
