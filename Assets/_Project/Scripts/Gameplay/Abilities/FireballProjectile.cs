@@ -27,10 +27,10 @@ public class FireballProjectile : MonoBehaviour
         transform.position += direction * speed * Time.deltaTime;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Player")) return;
-        Debug.Log("golpeo a " + other.tag);
+        if (collision.collider.CompareTag("Player")) return;
+        Debug.Log("golpeo a " + collision.collider.tag);
         Explode();
     }
 

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5911865906501396514}
   - component: {fileID: 2740127460376838845}
   - component: {fileID: 4637510859625401503}
+  - component: {fileID: 3560777479718195839}
+  - component: {fileID: 5286672958736076780}
   m_Layer: 0
   m_Name: Arch_Bioma2
   m_TagString: Untagged
@@ -26,13 +28,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5784965845790828693}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0.000000057601152, z: -0.000000057601163, w: 0.7071067}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 0, y: -0, z: -5.19}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7223354260089017242}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &2740127460376838845
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -90,3 +93,106 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3560777479718195839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5784965845790828693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84c20c7a7c7171d4f80dfbdae233d549, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GateTeleport
+  spawnPoint: {fileID: 0}
+  spawnOffset: {x: 2, y: 0, z: 0}
+  waypoints: []
+  travelSpeed: 30
+  vfxMago: {fileID: 0}
+  delayAntesDeViajar: 1
+  cooldownFinal: 1
+  amplitud: 10
+--- !u!65 &5286672958736076780
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5784965845790828693}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.04218442, y: 0.0076987683, z: 0.044139482}
+  m_Center: {x: 1.9862884e-16, y: -0.0000000012805683, z: 0.022069741}
+--- !u!1001 &6662374795524106479
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5911865906501396514}
+    m_Modifications:
+    - target: {fileID: 4056336981655026549, guid: 617120e9222722b4d8d4eb353d6fe46b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056336981655026549, guid: 617120e9222722b4d8d4eb353d6fe46b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056336981655026549, guid: 617120e9222722b4d8d4eb353d6fe46b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0176
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056336981655026549, guid: 617120e9222722b4d8d4eb353d6fe46b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056336981655026549, guid: 617120e9222722b4d8d4eb353d6fe46b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056336981655026549, guid: 617120e9222722b4d8d4eb353d6fe46b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056336981655026549, guid: 617120e9222722b4d8d4eb353d6fe46b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056336981655026549, guid: 617120e9222722b4d8d4eb353d6fe46b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056336981655026549, guid: 617120e9222722b4d8d4eb353d6fe46b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056336981655026549, guid: 617120e9222722b4d8d4eb353d6fe46b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801464815128282753, guid: 617120e9222722b4d8d4eb353d6fe46b, type: 3}
+      propertyPath: m_Name
+      value: VFX_Portal_Bioma2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 617120e9222722b4d8d4eb353d6fe46b, type: 3}
+--- !u!4 &7223354260089017242 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4056336981655026549, guid: 617120e9222722b4d8d4eb353d6fe46b, type: 3}
+  m_PrefabInstance: {fileID: 6662374795524106479}
+  m_PrefabAsset: {fileID: 0}

@@ -74,7 +74,7 @@ public class Fireball : BaseAbility
 
         for (int i = 0; i < quantity; i++)
         {
-            Vector3 finalSpawn = spawnPosition + direction * 0.5f;
+            Vector3 finalSpawn = spawnPosition + direction * 1f; // Spawn a 1 metro frente al libro
             finalSpawn = new Vector3(finalSpawn.x, transform.position.y, finalSpawn.z);
 
             GameObject projectile = Instantiate(projectilePrefab, finalSpawn, Quaternion.identity);
