@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 717094715574241917}
   - component: {fileID: 2659524453104949763}
   - component: {fileID: 3359828135993014632}
-  - component: {fileID: 9164720728701578804}
+  - component: {fileID: 1625832473260578485}
   m_Layer: 0
   m_Name: Rock_2_Bioma1
   m_TagString: Untagged
@@ -91,8 +91,8 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9164720728701578804
-BoxCollider:
+--- !u!64 &1625832473260578485
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -109,6 +109,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.04143423, y: 0.028689327, z: 0.02861924}
-  m_Center: {x: 0.0021932228, y: -0.00073955476, z: 0.014308817}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6430996585727400838, guid: d794607b94710dc45b8a2d4c59f8f8f5, type: 3}
