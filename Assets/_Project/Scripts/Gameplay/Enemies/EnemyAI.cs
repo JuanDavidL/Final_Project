@@ -19,6 +19,8 @@ public class EnemyAI : MonoBehaviour
     public float attackRadius = 1f;
     public LayerMask playerLayer;
     public LayerMask obstructionMask;
+    public float attackCooldown = 1.5f; // Tiempo entre ataques
+    private float lastAttackTime;
 
     private NavMeshAgent agent;
     private Transform player;
@@ -89,8 +91,25 @@ public class EnemyAI : MonoBehaviour
 
             case State.Attacking:
                 agent.isStopped = true;
+
+                // Mirar siempre al jugador mientras ataca
+                HandleSpriteFlip();
+
+                // Lógica de repetición de ataque
+                if (Time.time >= lastAttackTime + attackCooldown)
+                {
+                    // Disparamos la animación (esto activará PerformDamage vía Animation Event si lo tienes así)
+                    if (anim != null) anim.SetTrigger("Attack");
+
+                    lastAttackTime = Time.time;
+                    // Si no usas Animation Events, puedes llamar a PerformDamage() aquí directamente
+                }
+
+                // Si el jugador se aleja, volver a perseguir
                 if (pathDistance > attackRange + 0.5f || pathDistance == -1f)
+                {
                     ChangeState(State.Chasing);
+                }
                 break;
 
             case State.Returning:
