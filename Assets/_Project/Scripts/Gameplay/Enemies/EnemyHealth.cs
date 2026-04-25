@@ -4,7 +4,7 @@ public class EnemyHealth : MonoBehaviour
 {
     [Header("Settings")]
     public float maxHealth = 50f;
-    private float currentHealth;
+    public float currentHealth;
 
     private Animator anim;
     private bool isDead = false;
