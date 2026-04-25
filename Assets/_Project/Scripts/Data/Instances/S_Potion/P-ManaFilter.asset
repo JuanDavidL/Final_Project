@@ -16,4 +16,6 @@ MonoBehaviour:
   itemName: 'Mana Filter '
   itemIcon: {fileID: -6923940485407251254, guid: 4677e1b6a9c97c840b7076995e4059a1, type: 3}
   potionPrefab: {fileID: 919132149155446097, guid: e0d07a80d99587340b9d1b5f4c6caaaf, type: 3}
-  itemDescription: Placeholder
+  itemDescription: A basic but essential concoction that purges cosmic radiation
+    from the bloodstream while simultaneously restoring depleted magical reserves
+    to the tired user.

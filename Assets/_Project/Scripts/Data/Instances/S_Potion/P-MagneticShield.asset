@@ -16,4 +16,6 @@ MonoBehaviour:
   itemName: 'Magnetic Shield '
   itemIcon: {fileID: -626287197617166103, guid: 4677e1b6a9c97c840b7076995e4059a1, type: 3}
   potionPrefab: {fileID: 919132149155446097, guid: c51fd5320fc3ee242bcbc9139e206e2c, type: 3}
-  itemDescription: Placeholder
+  itemDescription: This heavy, metallic brew temporarily coats the drinker's aura
+    in a polarized repelling field, effectively deflecting micrometeorites and minor
+    plasma fire.

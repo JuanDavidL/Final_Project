@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c267d89e600b6b247b77dbbccac8eb27, type: 3}
   m_Name: Upgrade_Fireball_Damage
   m_EditorClassIdentifier: Assembly-CSharp::AbilityUpgrade
-  upgradeName: Fuego Volatil
-  description: La bola de fuego se vuelve mas volatil y quema mas rapido
+  upgradeName: Volatile Fire
+  description: The fireball becomes more volatile and burns faster
   upgradeIcon: {fileID: -401064118, guid: 948e28589177d4d49be28278a3ef7c8d, type: 3}
   cost: 350
   upgradeType: 2

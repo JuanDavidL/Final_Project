@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c267d89e600b6b247b77dbbccac8eb27, type: 3}
   m_Name: Upgrade_FrostNova_Damage
   m_EditorClassIdentifier: Assembly-CSharp::AbilityUpgrade
-  upgradeName: Bajo Cero
-  description: "Aumenta un 20% el da\xF1o que inflijes con frost Nova"
+  upgradeName: Below Zero
+  description: Increases the damage you deal with Frost Nova by 20%.
   upgradeIcon: {fileID: -841608604, guid: 948e28589177d4d49be28278a3ef7c8d, type: 3}
   cost: 350
   upgradeType: 2

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c267d89e600b6b247b77dbbccac8eb27, type: 3}
   m_Name: Upgrade_FrostNova_Unlock
   m_EditorClassIdentifier: Assembly-CSharp::AbilityUpgrade
-  upgradeName: Nova de Escarcha
-  description: Aprendes esta poderosa y costosa habilidad  en area
+  upgradeName: Frost Nova
+  description: You learn this powerful but costly area-of-effect ability
   upgradeIcon: {fileID: 1978321623, guid: 948e28589177d4d49be28278a3ef7c8d, type: 3}
   cost: 100
   upgradeType: 0

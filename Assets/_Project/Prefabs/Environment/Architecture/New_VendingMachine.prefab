@@ -5140,6 +5140,7 @@ Transform:
   - {fileID: 5591802009224541743}
   - {fileID: 7340156555959274591}
   - {fileID: 1832445723449235243}
+  - {fileID: 1216486696365066975}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &2264246514018902003
@@ -15109,6 +15110,37 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
+--- !u!1 &3625477119956173824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1216486696365066975}
+  m_Layer: 0
+  m_Name: PivotVFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1216486696365066975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3625477119956173824}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.16, y: 4.58, z: -1.53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8429056385922219588}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3729811447447945494
 GameObject:
   m_ObjectHideFlags: 0
@@ -25015,7 +25047,7 @@ Transform:
   m_GameObject: {fileID: 6940743762208793277}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.31, y: 4.329, z: -1.45}
+  m_LocalPosition: {x: -5.16, y: 4.98, z: -1.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30267,7 +30299,7 @@ GameObject:
   - component: {fileID: 7681139836821234958}
   m_Layer: 0
   m_Name: VendingMachine.001
-  m_TagString: Untagged
+  m_TagString: Transmuter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
