@@ -176,25 +176,21 @@ public class GateTeleport : MonoBehaviour
             camTransform.position = playerGO.transform.position + camOffset;
         }
 
-        // ── PASO 8: Apagar VFX y mostrar sprite ───────
-        if (vfxMago != null)
-        {
-            ParticleSystem ps = vfxMago.GetComponent<ParticleSystem>();
-            if (ps != null)
-                ps.Stop();
-            vfxMago.SetActive(false);
-        }
+        // ── PASO 8: Mostrar sprite y reactivar jugador ─────
+        if (spriteRenderer != null) spriteRenderer.enabled = true;
+        if (playerMovement != null) playerMovement.enabled = true;
+        if (playerInput != null) playerInput.enabled = true;
 
-        if (spriteRenderer != null)
-            spriteRenderer.enabled = true;
+    // ── PASO 9: Apagar VFX con delay ──────────────────
+    if (vfxMago != null)
+        {   
+        ParticleSystem ps = vfxMago.GetComponent<ParticleSystem>();
+        if (ps != null) ps.Stop();
 
-        // ── PASO 9: Reactivar movimiento ──────────────
-        if (playerMovement != null)
-            playerMovement.enabled = true;
-        if (playerInput != null)
-            playerInput.enabled = true;
+        // ✅ El jugador ya puede moverse mientras espera
+        yield return new WaitForSeconds(1f);
 
-        Debug.Log("[GateTeleport] Jugador reactivado.");
+        vfxMago.SetActive(false);
 
         // ── PASO 10: Cooldown de seguridad ────────────
         yield return new WaitForSeconds(cooldownFinal);
@@ -203,6 +199,7 @@ public class GateTeleport : MonoBehaviour
         _globalCooldown = false;
 
         Debug.Log("[GateTeleport] Portal listo.");
+        }
     }
 
     // ─────────────────────────────────────────────
@@ -219,57 +216,42 @@ public class GateTeleport : MonoBehaviour
     {
         Vector3 origen = objeto.position;
 
-        // ── Generamos el punto de control de la Bézier ──
-        // Es el punto medio entre origen y destino...
+        // ── Punto de control de la parábola ──
+        // Es el punto medio entre origen y destino
         Vector3 puntoMedio = (origen + destino) * 0.5f;
 
-        // ...desplazado aleatoriamente en X y Z para crear la curva
-        // Usamos Random.insideUnitSphere para que pueda ir en cualquier dirección lateral
-        Vector3 desplazamiento =
-            new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)).normalized * amplitud;
+        // ✅ Solo sube en Y para crear la parábola, sin desplazamiento lateral
+        Vector3 puntoControl = puntoMedio + new Vector3(0f, amplitud, 0f);
 
-        // P1 = punto de control que "jala" la curva
-        Vector3 puntoControl = puntoMedio + desplazamiento;
+        float progreso = 0f;
 
-        float progreso = 0f; // Va de 0 a 1
-
-        // Calculamos la distancia aproximada de la curva para la velocidad
-        // Usamos la distancia directa * 1.5 como aproximación del largo real de la curva
         float distanciaAprox = Vector3.Distance(origen, destino) * 1.5f;
 
         while (progreso < 1f)
-        {
-            // Avanzamos el progreso según velocidad y distancia
+            {
             progreso += (travelSpeed * Time.deltaTime) / distanciaAprox;
             progreso = Mathf.Clamp01(progreso);
 
-            // ── Fórmula Bézier cuadrática ──────────────
-            // Interpolamos entre origen → puntoControl → destino
             float t = progreso;
             float u = 1f - t;
 
-            // B(t) = u²*P0 + 2ut*P1 + t²*P2
-            Vector3 posicionCurva =
-                (u * u * origen) + (2f * u * t * puntoControl) + (t * t * destino);
+            // ✅ Misma fórmula Bézier cuadrática pero el puntoControl está arriba
+            // Esto produce una parábola perfecta entre origen y destino
+            Vector3 posicionCurva = (u * u * origen)
+                              + (2f * u * t * puntoControl)
+                              + (t * t * destino);
 
-            // Aplicamos la posición calculada — SIN ROTACIÓN
             objeto.position = posicionCurva;
 
-            // Movemos la cámara siguiendo al Player suavemente
             if (camTransform != null)
             {
                 Vector3 targetCamPos = objeto.position + camOffset;
-                camTransform.position = Vector3.Lerp(
-                    camTransform.position,
-                    targetCamPos,
-                    camSmooth * Time.deltaTime
-                );
+                camTransform.position = Vector3.Lerp(camTransform.position, targetCamPos, camSmooth * Time.deltaTime);
             }
 
             yield return null;
-        }
-
-        // Snap exacto al destino
+            }
+        
         objeto.position = destino;
     }
 
