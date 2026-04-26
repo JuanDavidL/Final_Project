@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eeb647fa22165a41b7deb959b712e54, type: 3}
+  m_Name: Mob-2-JawHop
+  m_EditorClassIdentifier: Assembly-CSharp::CreatureData
+  creatureName: Jaw-Hop
+  creatureSprite: {fileID: -6263264168041623252, guid: 32aabd17a73cc5848b2ac3db5ab46aa9, type: 3}
+  creatureDescription: This humanoid rabbit uses its ears to collect morning moisture
+    for water and its powerful legs to dig out underground creatures for food.
+  whereYouFindIt: A nimble, jumping creature found in (Biome 2), adapted to dry environments
+    with strong survival skills.

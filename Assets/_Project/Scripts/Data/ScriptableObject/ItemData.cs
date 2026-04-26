@@ -8,5 +8,8 @@ public class ItemData : ScriptableObject
     public string itemName;
     public Sprite itemIcon;
     public GameObject potionPrefab;     
-    [TextArea] public string itemDescription; 
+    [TextArea] public string itemDescription;
+
+    [Header("Info Libro")]
+    [TextArea] public string whereAndWho;
 }
