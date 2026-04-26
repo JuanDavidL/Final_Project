@@ -129,6 +129,11 @@ public class BookUI : MonoBehaviour
         InfoPageUI infoUI = infoPage.GetComponent<InfoPageUI>();
         if (infoUI != null) infoUI.RefreshUI();
         }
+        else if (page == abilitiesPanel)
+        {
+        AbilitiesPageUI abilitiesUI = abilitiesPanel.GetComponent<AbilitiesPageUI>();
+        if (abilitiesUI != null) abilitiesUI.RefreshUI();
+        }
 
         // ── Tabs ──────────────────────────────────────
         ResetTabPosition(tabInventory);
