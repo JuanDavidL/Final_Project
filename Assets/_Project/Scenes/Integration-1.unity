@@ -3019,7 +3019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.45056242, g: 0.9056604, b: 0.4229263, a: 1}
+  m_Color: {r: 0.42352942, g: 0.72516525, b: 0.90588236, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5556,7 +5556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.45056242, g: 0.9056604, b: 0.4229263, a: 1}
+  m_Color: {r: 0.42352942, g: 0.72516525, b: 0.90588236, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5632,7 +5632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.45056242, g: 0.9056604, b: 0.4229263, a: 1}
+  m_Color: {r: 0.42352942, g: 0.72516525, b: 0.90588236, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8495,7 +8495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.45056242, g: 0.9056604, b: 0.4229263, a: 1}
+  m_Color: {r: 0.42352942, g: 0.72516525, b: 0.90588236, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11305,8 +11305,8 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 166.87
-  m_Range: 15
+  m_Intensity: 70.52
+  m_Range: 14.860678
   m_SpotAngle: 133.84517
   m_InnerSpotAngle: 73.25273
   m_CookieSize2D: {x: 0.5, y: 0.5}
@@ -12920,7 +12920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.45056242, g: 0.9056604, b: 0.4229263, a: 1}
+  m_Color: {r: 0.42352942, g: 0.72516525, b: 0.90588236, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
