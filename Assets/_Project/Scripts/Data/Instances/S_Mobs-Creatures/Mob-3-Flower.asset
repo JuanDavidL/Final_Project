@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eeb647fa22165a41b7deb959b712e54, type: 3}
+  m_Name: Mob-3-Flower
+  m_EditorClassIdentifier: Assembly-CSharp::CreatureData
+  creatureName: MataqueMata
+  creatureSprite: {fileID: 406247594, guid: db35ec421132ec24cbaf12293f5a3abb, type: 3}
+  creatureDescription: "It is highly aggressive and relentlessly carnivorous, actively
+    hunting and trapping any creature that comes too close. Despite its dangerous
+    nature and adaptability, it has a critical weakness\u2014it is extremely vulnerable
+    to fire, which can quickly destroy it."
+  whereYouFindIt: A living plant found in (Biome 3), adapted to tropical environments
+    with changing temperatures.

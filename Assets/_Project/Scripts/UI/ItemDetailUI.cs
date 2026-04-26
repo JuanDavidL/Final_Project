@@ -7,6 +7,7 @@ public class ItemDetailUI : MonoBehaviour
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
     public Image itemSprite;
+    public GameObject spriteBackground;
 
     public void ShowItem(ItemData item)
     {
@@ -15,6 +16,12 @@ public class ItemDetailUI : MonoBehaviour
         descriptionText.text = item.itemDescription;
 
         if (item.itemIcon != null)
-           itemSprite.sprite = item.itemIcon;  
+        {
+            itemSprite.sprite = item.itemIcon;
+            if(spriteBackground != null)
+            {
+                spriteBackground.SetActive(true);
+            }
+        }
     }
 }

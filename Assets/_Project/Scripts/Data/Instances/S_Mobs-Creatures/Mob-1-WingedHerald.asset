@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eeb647fa22165a41b7deb959b712e54, type: 3}
+  m_Name: Mob-1-WingedHerald
+  m_EditorClassIdentifier: Assembly-CSharp::CreatureData
+  creatureName: WingeHerald
+  creatureSprite: {fileID: 2806414869788639878, guid: 48b6059066c80e347a9ba546e12e5d46, type: 3}
+  creatureDescription: A gravity-defying creature found in dark, humid environments,
+    known for hunting in the shadows and possessing a deadly venom.
+  whereYouFindIt: This impressive creature defies gravity and can be found in (Biome
+    1), a dark and humid environment perfect for those that hunt in the shadows.
