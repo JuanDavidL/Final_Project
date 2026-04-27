@@ -32,6 +32,7 @@ public class InteractiveMenuManager : MonoBehaviour
         public string difficulty;
         public Sprite planetSprite;
         public string sceneName;
+        public Material skyboxMaterial;
     }
 
     public PlanetData[] planets;
@@ -221,6 +222,9 @@ public class InteractiveMenuManager : MonoBehaviour
     {
         if (_currentState != MenuState.ViajaMundos) return;
         if (planets.Length == 0) return;
+
+        GameManager.Instance.selectedPlanetIndex = _currentPlanetIndex;
+        GameManager.Instance.SaveGlobalProgress();
 
         StartCoroutine(FadeAndTravel(planets[_currentPlanetIndex].sceneName));
     }
