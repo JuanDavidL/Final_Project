@@ -16,5 +16,5 @@ MonoBehaviour:
   creatureSprite: {fileID: -6263264168041623252, guid: 32aabd17a73cc5848b2ac3db5ab46aa9, type: 3}
   creatureDescription: This humanoid rabbit uses its ears to collect morning moisture
     for water and its powerful legs to dig out underground creatures for food.
-  whereYouFindIt: A nimble, jumping creature found in (Biome 2), adapted to dry environments
-    with strong survival skills.
+  whereYouFindIt: A nimble, jumping creature found in Roomush-46D, adapted to dry
+    environments with strong survival skills.

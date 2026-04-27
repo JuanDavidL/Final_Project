@@ -122446,7 +122446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CreatureSlotUI
   icon: {fileID: 1075922747}
-  _creature: {fileID: 11400000, guid: d9770cb4a374bdc4db68f933d1f492ba, type: 2}
+  _creature: {fileID: 11400000, guid: 9fa3d521b3353b14c999be1114fd9466, type: 2}
 --- !u!114 &1338803885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124064,7 +124064,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1696772107, guid: 6d4ebc5a5d4b9db46b3bb25e45b1c2d2, type: 3}
+  m_Sprite: {fileID: -747184077, guid: 6d4ebc5a5d4b9db46b3bb25e45b1c2d2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -126874,7 +126874,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1451939076
 RectTransform:
   m_ObjectHideFlags: 0
@@ -126921,7 +126921,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c8c45421a0d632a4498aeea1cea2f049, type: 2}
   - {fileID: 11400000, guid: 6fae919b888466348a9221d6f679ee71, type: 2}
   - {fileID: 11400000, guid: 0af0d86baf8cd7f4aa88ddae2990116e, type: 2}
-  - {fileID: 11400000, guid: d9770cb4a374bdc4db68f933d1f492ba, type: 2}
+  - {fileID: 11400000, guid: 9fa3d521b3353b14c999be1114fd9466, type: 2}
   textTitle: {fileID: 559685032}
   textDescription: {fileID: 253632536}
   textWhereYouFind: {fileID: 1336033025}
