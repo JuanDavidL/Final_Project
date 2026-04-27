@@ -127,7 +127,7 @@ public class PlayerHealth : MonoBehaviour
 
         // 1. Disparar animaciones de muerte
         if (anim != null) anim.SetTrigger("Die");
-        if (faceUIAnimator != null) faceUIAnimator.SetTrigger("Die");
+        //if (faceUIAnimator != null) faceUIAnimator.SetTrigger("Die");
 
         // 2. DESACTIVAR CONTROLES Y SISTEMAS
 
@@ -174,17 +174,11 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    // IMPORTANTE: Debemos devolver el tiempo a la normalidad al cambiar de escena
-    public void RegresarALaNave()
-    {
-        Time.timeScale = 1f; // REANUDAR EL TIEMPO
-        SceneManager.LoadScene("JuanScene");
-    }
-
     // Función para el botón "Volver a la nave"
     public void BackToShip()
     {
-        SceneManager.LoadScene("JDavidScene");
+        Time.timeScale = 1f; // REANUDAR EL TIEMPO
+        SceneManager.LoadScene("Integration-1");
     }
 
     // private void OnTriggerStay(Collider other)
