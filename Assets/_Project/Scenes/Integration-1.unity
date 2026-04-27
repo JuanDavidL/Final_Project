@@ -8104,7 +8104,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -8858,7 +8858,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -22971,14 +22971,17 @@ MonoBehaviour:
     difficulty: Easy
     planetSprite: {fileID: 757834019, guid: 21e8c67990ccef94eb8f5663334fe609, type: 3}
     sceneName: Bioma1
+    skyboxMaterial: {fileID: 2100000, guid: 4b38af5e1f1e0d14b8b1941bc219a7e2, type: 2}
   - planetName: Roomush-46D
     difficulty: Medium
     planetSprite: {fileID: -455249793, guid: 20c3960e6c514534797f28b710623660, type: 3}
-    sceneName: 
+    sceneName: Bioma1
+    skyboxMaterial: {fileID: 2100000, guid: 282972d82f8c3c24296a0621e9de45b3, type: 2}
   - planetName: Alfha_48B
     difficulty: Available soon
     planetSprite: {fileID: 407574973, guid: 6c030e1cfd27f214b8946da89e8d2f3b, type: 3}
     sceneName: 
+    skyboxMaterial: {fileID: 0}
   buttonSelectTreeFireball: {fileID: 1774690346}
   buttonSelectTreeFrostNova: {fileID: 1916931457}
   imageFireball: {fileID: 2096788350}

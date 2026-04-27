@@ -14,9 +14,9 @@ public class IslandFloating : MonoBehaviour
     void Update()
     {
         transform.position = new Vector3(
-            transform.position.x + Mathf.Sin(Time.time * speed) * amplitude.x,
-            transform.position.y + Mathf.Sin(Time.time * speed) * amplitude.y,
-            transform.position.z + Mathf.Sin(Time.time * speed) * amplitude.z
+            transform.position.x + Mathf.Sin(Time.deltaTime * speed) * amplitude.x,
+            transform.position.y + Mathf.Sin(Time.deltaTime * speed) * amplitude.y,
+            transform.position.z + Mathf.Sin(Time.deltaTime * speed) * amplitude.z
         );
     }
 }
