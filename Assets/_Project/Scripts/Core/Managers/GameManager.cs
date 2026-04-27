@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public int fireballUpgradesPurchased = 0;
     public int frostNovaUpgradesPurchased = 0;
 
+    [Header("Planeta Seleccionado")]
+    public int selectedPlanetIndex = 0;
+
     public bool hasGameStarted = false;
 
     void Awake()
@@ -44,6 +47,7 @@ public class GameManager : MonoBehaviour
 
         fireballUpgradesPurchased = PlayerPrefs.GetInt("FireballUpgradesPurchased", 0);
         frostNovaUpgradesPurchased = PlayerPrefs.GetInt("FrostNovaUpgradesPurchased", 0);
+        selectedPlanetIndex = PlayerPrefs.GetInt("SelectedPlanet", 0);
         //Debug.Log($"LoadGlobalProgress → Creditos: {totalCredits} | Fireball: {fireballUpgradesPurchased} | FrostNova: {frostNovaUpgradesPurchased}");
     }
 
@@ -53,10 +57,14 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("TotalCredits", totalCredits);
         PlayerPrefs.SetInt("FireballUpgradesPurchased", fireballUpgradesPurchased);
         PlayerPrefs.SetInt("FrostNovaUpgradesPurchased", frostNovaUpgradesPurchased);
+        PlayerPrefs.SetInt("SelectedPlanet", selectedPlanetIndex);
         PlayerPrefs.Save();
     }
 
-    void Start() { }
+    void Start() 
+    {
+        
+    }
 
     [ContextMenu("Reset Progress")]
     public void ResetUpgrades()
@@ -66,6 +74,7 @@ public class GameManager : MonoBehaviour
         totalCredits = 10000; // créditos de prueba
         PlayerPrefs.DeleteKey("TutorialVisto");
         isTutorialCompleted = false;
+
 
         SaveGlobalProgress(); // ✅ guarda el reset en PlayerPrefs inmediatamente
         //Debug.Log($"Reseteado! Verificando PlayerPrefs → Fireball: {PlayerPrefs.GetInt("FireballUpgrades")} | FrostNova: {PlayerPrefs.GetInt("FrostNovaUpgrades")}");

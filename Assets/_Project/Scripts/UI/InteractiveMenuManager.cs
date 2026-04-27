@@ -32,6 +32,7 @@ public class InteractiveMenuManager : MonoBehaviour
         public string difficulty;
         public Sprite planetSprite;
         public string sceneName;
+        public Material skyboxMaterial;
     }
 
     public PlanetData[] planets;
@@ -222,6 +223,9 @@ public class InteractiveMenuManager : MonoBehaviour
         if (_currentState != MenuState.ViajaMundos) return;
         if (planets.Length == 0) return;
 
+        GameManager.Instance.selectedPlanetIndex = _currentPlanetIndex;
+        GameManager.Instance.SaveGlobalProgress();
+
         StartCoroutine(FadeAndTravel(planets[_currentPlanetIndex].sceneName));
     }
 
@@ -316,7 +320,7 @@ public class InteractiveMenuManager : MonoBehaviour
         // No es la siguiente en el árbol secuencial
         if (!isNext)
         {
-            statusText.text = "Buy previous upgrades first!";
+            statusText.text = "Buy previous \n upgrades first!";
             return;
         }
 
