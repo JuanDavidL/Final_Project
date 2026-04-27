@@ -10,6 +10,7 @@ public class CollectAura : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction CollectAction;
 
+
     void Awake()
     {
         playerInput = FindFirstObjectByType<PlayerInput>();
@@ -44,6 +45,7 @@ public class CollectAura : MonoBehaviour
             {
                 orb.StartAttract(magicBook.transform);
             }
+
         }
 
     }
