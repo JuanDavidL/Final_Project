@@ -22980,7 +22980,7 @@ Transform:
   m_GameObject: {fileID: 237136106}
   serializedVersion: 2
   m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 14.62, y: 3, z: 99.93}
+  m_LocalPosition: {x: 14, y: 4.23, z: 99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26417,6 +26417,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JawHop
       objectReference: {fileID: 0}
+    - target: {fileID: 5046242719250851364, guid: 9e074f1f582c3774297fd0accff2a26f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8338603299575537520, guid: 9e074f1f582c3774297fd0accff2a26f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 28.015974
@@ -27271,6 +27275,10 @@ PrefabInstance:
     - target: {fileID: 2587813954002609955, guid: 548e70e872bac334387fe237f1de7451, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437258741437202750, guid: 548e70e872bac334387fe237f1de7451, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4437258741437202750, guid: 548e70e872bac334387fe237f1de7451, type: 3}
       propertyPath: fireballUpgradesPurchased
@@ -79797,6 +79805,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WingedHerald
       objectReference: {fileID: 0}
+    - target: {fileID: 6126442105135073124, guid: 112415362e7e08d40a16a2bc92de2375, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8725018900755435745, guid: 112415362e7e08d40a16a2bc92de2375, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.606674
@@ -116384,7 +116396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1315137052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147456,7 +147468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5879427928219578267, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.48
+      value: 14.59
       objectReference: {fileID: 0}
     - target: {fileID: 5879427928219578267, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: m_LocalPosition.y
@@ -147464,7 +147476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5879427928219578267, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 106.93
+      value: 106.85
       objectReference: {fileID: 0}
     - target: {fileID: 5879427928219578267, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: m_LocalRotation.w
@@ -175474,6 +175486,10 @@ PrefabInstance:
     - target: {fileID: 9046951032173600128, guid: 15d4f74f946d2734f91e242a7d55e67c, type: 3}
       propertyPath: m_Name
       value: WorldEnder
+      objectReference: {fileID: 0}
+    - target: {fileID: 9046951032173600128, guid: 15d4f74f946d2734f91e242a7d55e67c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -316,7 +316,7 @@ public class InteractiveMenuManager : MonoBehaviour
         // No es la siguiente en el árbol secuencial
         if (!isNext)
         {
-            statusText.text = "Buy previous upgrades first!";
+            statusText.text = "Buy previous \n upgrades first!";
             return;
         }
 

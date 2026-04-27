@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6835cdb5b5d3d404eb41d0eb92e365fa
+guid: 6c030e1cfd27f214b8946da89e8d2f3b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Salud
+      name: MissingPlanet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 736
-        height: 736
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46a59b8f3e86c6244ab2892129af4967
-      internalID: 1408746737
+      spriteID: 59ec5f0ff9a6a114ca5cfcfcf617ae27
+      internalID: 407574973
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3ca04ce5caf4fe949932c77a4e7c4171
+    spriteID: 6321e4d741b3e8a49988bdcf4c9bf23e
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,7 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Salud: 1408746737
+      MissingPlanet_0: 407574973
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

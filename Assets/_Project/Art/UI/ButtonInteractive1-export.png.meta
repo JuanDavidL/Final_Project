@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 26ba2685f58fb2449a52cc977ddcaac1
+guid: 37be1e8997935a54982cf3e9f57309e1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: QuintaEsencia_0
+      name: ButtonInteractive1-export_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 736
-        height: 736
+        x: 20
+        y: 1690
+        width: 280
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,118 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6c604b3b43704c4189627c3936e1d98
-      internalID: -1984058655
+      spriteID: 51a74611a2c1b614c8439125b996c4a9
+      internalID: -43282228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ButtonInteractive1-export_1
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 1370
+        width: 280
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b79918725e2e75b47ae369bb67da72a4
+      internalID: -1425519289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ButtonInteractive1-export_2
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 1050
+        width: 280
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6a74c11da80dce4ba6483090d44fd32
+      internalID: 1191905556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ButtonInteractive1-export_3
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 730
+        width: 280
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37b7e3955e741774cb3dddf00bceab86
+      internalID: 1064913806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ButtonInteractive1-export_4
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 410
+        width: 280
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3855a46909d028409ba599f238501ee
+      internalID: 2140124488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ButtonInteractive1-export_5
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 90
+        width: 280
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b1bb45a2e833aa4c9afe62e1f3fa068
+      internalID: -207348476
       vertices: []
       indices: 
       edges: []
@@ -135,7 +245,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0f87b5c4738a0024a9201f8bc24a906e
+    spriteID: 3821f03fe0c54544e8f8428caae18e64
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +257,12 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      QuintaEsencia_0: -1984058655
+      ButtonInteractive1-export_0: -43282228
+      ButtonInteractive1-export_1: -1425519289
+      ButtonInteractive1-export_2: 1191905556
+      ButtonInteractive1-export_3: 1064913806
+      ButtonInteractive1-export_4: 2140124488
+      ButtonInteractive1-export_5: -207348476
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
