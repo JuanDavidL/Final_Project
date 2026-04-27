@@ -6,14 +6,18 @@ public class PotionPool : MonoBehaviour
 {
     public static PotionPool Instance;
 
-    [SerializeField] private int defaultCapacity = 10;
-    [SerializeField] private int maxSize = 20;
+    [SerializeField]
+    private int defaultCapacity = 10;
+
+    [SerializeField]
+    private int maxSize = 20;
 
     // Diccionario que guarda un Pool independiente para cada Prefab
-    private Dictionary<GameObject, ObjectPool<PoolableItem>> _poolsDict = new Dictionary<GameObject, ObjectPool<PoolableItem>>();
+    private Dictionary<GameObject, ObjectPool<PoolableItem>> _poolsDict =
+        new Dictionary<GameObject, ObjectPool<PoolableItem>>();
 
     // Variable temporal para saber qué prefab instanciar en CreateItem
-    private GameObject _currentPrefabRequest;
+    public GameObject _currentPrefabRequest;
 
     void Awake()
     {
@@ -38,7 +42,8 @@ public class PotionPool : MonoBehaviour
         GameObject prefabToInstantiate = prefab;
 
         var newPool = new ObjectPool<PoolableItem>(
-            createFunc: () => {
+            createFunc: () =>
+            {
                 GameObject obj = Instantiate(prefabToInstantiate, transform);
                 return obj.GetComponent<PoolableItem>();
             },

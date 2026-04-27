@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 3d6f5c8827f10474b937d47cd065d2d1
+guid: 39bc54b0d6b9df749821f375fafed0a9
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: CT_Pallete
-    second: {fileID: 2800000, guid: 7f32653e9ed48114ebaba0f88c82e88d, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
