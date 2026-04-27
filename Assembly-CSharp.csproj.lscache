@@ -52,13 +52,18 @@ TemporaryDependencyNodeTargetIdentifier=netstandard2.1
 [sourceFiles]
 Assets/
  TutorialInfo/Scripts/Readme.cs
+ _Project/Scripts/Core/Interfaces/
+  CameraRaycaster.cs
+  DialogueController.cs
+  MenuController.cs
  _Project/Scripts/Core/
-  Interfaces/MenuController.cs
   InventorySlotUI.cs
   Managers/
+   AudioManager.cs
    ChangeScene.cs
    GameManager.cs
    InventoryManager.cs
+   SceneMusicTrigger.cs
   Systems/
    ClientSystem.cs
    DeliveryTube.cs
@@ -83,9 +88,14 @@ Assets/
   EnemySpawner.cs
   LootTable.cs
  _Project/Scripts/Gameplay/Environment/
+  CameraOcclusion.cs
   Client_Interaction/PhysicalButton.cs
   CollectOrb.cs
   GateTeleport.cs
+  IslandFloating.cs
+  ReturnToShip.cs
+  RotateTail.cs
+  SceneFadeIn.cs
   TableCraft0/
    MachineButton.cs
    MachineDeposit.cs
@@ -473,7 +483,7 @@ C:/Program Files/Unity/Hub/Editor/6000.3.5f2/Editor/Data/Tools/BuildPipeline/Uni
  Unity.Properties.SourceGenerator.dll
  Unity.SourceGenerators.dll
  Unity.UIToolkit.SourceGenerator.dll
-C:/Users/Alex Valero/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.2.1/Analyzers/Microsoft.Unity.Analyzers.dll
+C:/Users/Alex Valero/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.2.2/Analyzers/Microsoft.Unity.Analyzers.dll
 
 [analyzerConfigFiles]
 Temp/obj/Assembly-CSharp/Assembly-CSharp.GeneratedMSBuildEditorConfig.editorconfig
