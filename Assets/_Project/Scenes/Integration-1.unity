@@ -9316,6 +9316,18 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 1
             m_CallState: 2
+          - m_Target: {fileID: 2074722796}
+            m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_MethodName: SetActive
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
   belBeepSound: {fileID: 8300000, guid: 8318681d174f9af43a07a1b5d1ae2f6c, type: 3}
 --- !u!1 &1003148926
 GameObject:
@@ -16428,7 +16440,7 @@ MonoBehaviour:
   tutorialPotionRequired: {fileID: 11400000, guid: 2a4588e7acd87844fa314f762288ca12, type: 2}
   normalClientSprites:
   - {fileID: 21300000, guid: 2b5691dc535557242bad11e2a6885a3d, type: 3}
-  - {fileID: 21300000, guid: e3f6facff0092de43952a6fe86ef31d5, type: 3}
+  - {fileID: 6613813762891492427, guid: 0e961b53ebe0e674f82beb9998225ca3, type: 3}
   unlockedPotions:
   - {fileID: 11400000, guid: 2a4588e7acd87844fa314f762288ca12, type: 2}
   - {fileID: 11400000, guid: 2a05be332c4c049499e6a730c4bd11a9, type: 2}
