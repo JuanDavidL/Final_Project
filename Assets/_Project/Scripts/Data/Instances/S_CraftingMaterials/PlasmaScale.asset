@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 7
   itemName: Plasma Scale
-  itemIcon: {fileID: 1783027246, guid: b2efc4e9243ec8644b19ade7fe7654d0, type: 3}
+  itemIcon: {fileID: -8389307421777844654, guid: 4023e85c62ebcd74f884becd59a6cbfb, type: 3}
   potionPrefab: {fileID: 0}
   itemDescription: A massive shed scale recovered from a roaming stellar leviathan.
     It remains perpetually warm to the touch and easily resists the most extreme

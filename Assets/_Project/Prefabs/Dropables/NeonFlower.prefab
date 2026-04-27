@@ -27,8 +27,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.865, y: 2.865, z: 2.865}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6937341185641788370}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 96851795, guid: 33357870b3a367a4185060d3bd3c59dc, type: 3}
+  m_Sprite: {fileID: -132303041176995811, guid: 7b783912cf71f8d49bb2a646bf37f5dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 7654627948509957732}
   - component: {fileID: 3216450440888701252}
   m_Layer: 0
-  m_Name: PruebaLoot
+  m_Name: NeonFlower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,8 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4b0555e2db22f4a94d81e4493c48f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleItem
-  item: {fileID: 0}
-  amount: 0
+  item: {fileID: 11400000, guid: 8a74c0e6d30305e408e697469bdcde17, type: 2}
+  amount: 1
   hasLuch: 1
 --- !u!54 &4506287079175399021
 Rigidbody:

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 6
   itemName: Beast Eye
-  itemIcon: {fileID: 1743071186, guid: 98aaf35270991b84dba6e4f49ece07f4, type: 3}
+  itemIcon: {fileID: 3827268136883607361, guid: aa1efc3f74a222f41864f8e37f791799, type: 3}
   potionPrefab: {fileID: 0}
   itemDescription: An organic ocular organ harvested from a void predator. It still
     twitches frantically when exposed to raw starlight, making it a highly volatile

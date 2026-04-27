@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 3
   itemName: Temporal Root
-  itemIcon: {fileID: 849140387, guid: 0b1cfb2189c30bb4987cb4d1d65fa44d, type: 3}
+  itemIcon: {fileID: 7508373482542565827, guid: 8d1f9e7e9b9923d4db1843f42b1ab6ff, type: 3}
   potionPrefab: {fileID: 0}
   itemDescription: A truly bizarre plant that constantly shifts slightly out of phase
     with reality. It is heavily utilized as a grounding anchor to stabilize time-altering

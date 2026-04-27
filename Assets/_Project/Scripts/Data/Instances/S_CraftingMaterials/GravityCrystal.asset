@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 5
   itemName: Gravity Crystal
-  itemIcon: {fileID: -1172514035, guid: 33357870b3a367a4185060d3bd3c59dc, type: 3}
+  itemIcon: {fileID: -2783115168368280780, guid: 5f2e68db08b6b3c47b2a5fe9a05d31b2, type: 3}
   potionPrefab: {fileID: 0}
   itemDescription: A remarkably dense mineral that subtly distorts local physics
     around it. It is absolutely essential for brewing weightless concoctions and
