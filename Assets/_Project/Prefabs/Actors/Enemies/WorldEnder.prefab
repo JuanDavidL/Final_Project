@@ -25,8 +25,8 @@ Transform:
   m_GameObject: {fileID: 5972200368118655566}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: 0.247, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4985137922571949200}
@@ -278,7 +278,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 1
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &5600561315556334188
@@ -310,9 +310,37 @@ MonoBehaviour:
   drops:
   - item: {fileID: 11400000, guid: a215784442437a448b19aba1abe61ffd, type: 2}
     collectablePrefab: {fileID: 7863539330069029907, guid: 90bf013ac1a59a941a23381af6b0aa92, type: 3}
-    amount: 3
+    amount: 2
     dropChance: 1
+  - item: {fileID: 11400000, guid: a215784442437a448b19aba1abe61ffd, type: 2}
+    collectablePrefab: {fileID: 7863539330069029907, guid: 90bf013ac1a59a941a23381af6b0aa92, type: 3}
+    amount: 2
+    dropChance: 0.5
+  - item: {fileID: 11400000, guid: a215784442437a448b19aba1abe61ffd, type: 2}
+    collectablePrefab: {fileID: 7863539330069029907, guid: 90bf013ac1a59a941a23381af6b0aa92, type: 3}
+    amount: 4
+    dropChance: 0.1
+  - item: {fileID: 11400000, guid: 8c412733f2eb90749b64eb9c93f92916, type: 2}
+    collectablePrefab: {fileID: 7863539330069029907, guid: 7a756d5b819006343a361a26410370c1, type: 3}
+    amount: 2
+    dropChance: 1
+  - item: {fileID: 11400000, guid: 8c412733f2eb90749b64eb9c93f92916, type: 2}
+    collectablePrefab: {fileID: 7863539330069029907, guid: 7a756d5b819006343a361a26410370c1, type: 3}
+    amount: 2
+    dropChance: 0.5
+  - item: {fileID: 11400000, guid: 8c412733f2eb90749b64eb9c93f92916, type: 2}
+    collectablePrefab: {fileID: 7863539330069029907, guid: 7a756d5b819006343a361a26410370c1, type: 3}
+    amount: 4
+    dropChance: 0.1
   - item: {fileID: 11400000, guid: 383ef6a0db0397546a31fab7c7036345, type: 2}
     collectablePrefab: {fileID: 7863539330069029907, guid: 9549bbc90754b0d43aa94eacb1c2d65d, type: 3}
-    amount: 3
+    amount: 1
+    dropChance: 0.01
+  - item: {fileID: 11400000, guid: b97313eaeabd29e42807aad539fd7aa4, type: 2}
+    collectablePrefab: {fileID: 7863539330069029907, guid: a6a343c1ae33e084e9ec76475012f6a1, type: 3}
+    amount: 1
+    dropChance: 0.01
+  - item: {fileID: 11400000, guid: 0edb7b25430ce5c46824661103cf7e34, type: 2}
+    collectablePrefab: {fileID: 7863539330069029907, guid: c99172be5b612754daf9605ed31361ce, type: 3}
+    amount: 2
     dropChance: 1
