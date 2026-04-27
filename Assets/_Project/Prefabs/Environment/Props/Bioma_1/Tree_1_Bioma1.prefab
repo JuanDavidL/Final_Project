@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7130418278992177992}
   - component: {fileID: 2892826133798593024}
   - component: {fileID: 8507598873363527736}
-  - component: {fileID: 6060745820222820366}
+  - component: {fileID: 7240875503787003896}
   m_Layer: 0
   m_Name: Tree_1_Bioma1
   m_TagString: Untagged
@@ -91,8 +91,8 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &6060745820222820366
-CapsuleCollider:
+--- !u!64 &7240875503787003896
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -109,8 +109,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.0040787584
-  m_Height: 0.069203876
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.030669462}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 359309017751182429, guid: d794607b94710dc45b8a2d4c59f8f8f5, type: 3}
