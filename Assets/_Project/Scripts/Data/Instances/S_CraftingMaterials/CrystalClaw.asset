@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 9
   itemName: Crystal Claw
-  itemIcon: {fileID: 1101383809, guid: e4bd23bdc9fb22248b2d25eb8c98bf28, type: 3}
+  itemIcon: {fileID: -7561346218899695041, guid: f4ed6c2a91fa9f343830be9e3fe707db, type: 3}
   potionPrefab: {fileID: 0}
   itemDescription: A razor-sharp appendage composed entirely of ultra-dense silicate.
     It never loses its edge and is perfect for grinding down into a highly conductive

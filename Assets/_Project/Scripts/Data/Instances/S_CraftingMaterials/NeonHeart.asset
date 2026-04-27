@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 10
   itemName: Neon Heart
-  itemIcon: {fileID: -627457535, guid: 7b4cefe68dae40242986aff118c49368, type: 3}
+  itemIcon: {fileID: -3668777054730008683, guid: b8c729d82192e6348b8acf1fdd4978bb, type: 3}
   potionPrefab: {fileID: 0}
   itemDescription: A pulsing, energy-rich organ extracted from an anomaly. Curiously,
     it continues to beat in perfect, uninterrupted synchronization with our ship's

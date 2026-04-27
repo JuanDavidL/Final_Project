@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 1
   itemName: Neon Flower
-  itemIcon: {fileID: -501208460, guid: 36488b3fe35e2df45bb54d8535adb45c, type: 3}
+  itemIcon: {fileID: -132303041176995811, guid: 7b783912cf71f8d49bb2a646bf37f5dc, type: 3}
   potionPrefab: {fileID: 0}
   itemDescription: A striking bio-luminescent plant that actively thrives in heavy
     cosmic radiation. Its brightly glowing nectar is highly conductive and powers

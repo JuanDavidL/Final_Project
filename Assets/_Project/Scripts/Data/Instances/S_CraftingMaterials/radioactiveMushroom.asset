@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 2
   itemName: Radioactive Mushroom
-  itemIcon: {fileID: 167809667, guid: 06994b066211aba419fda48282d6e458, type: 3}
+  itemIcon: {fileID: -8446826805000674629, guid: fc80ebec5c03fd14a86dccfa12db65b2, type: 3}
   potionPrefab: {fileID: 0}
   itemDescription: A glowing, mutated fungus nourished entirely by old reactor leaks.
     It is highly toxic when handled raw, but incredibly potent when properly distilled

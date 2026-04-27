@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 8
   itemName: 'Gaseous viscera '
-  itemIcon: {fileID: -38373400, guid: 7891f12fa16e8a346b2b8d8c8172356b, type: 3}
+  itemIcon: {fileID: 4259067268667656505, guid: 7f5a890618b85654db6e8ab824cdb11a, type: 3}
   potionPrefab: {fileID: 0}
   itemDescription: The shimmering, ethereal remains of a deep-nebula dweller. It
     must be kept strictly pressurized in containment flasks to prevent its magical

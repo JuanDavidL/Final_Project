@@ -110,11 +110,11 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.9712397
   m_Height: 2.0366607
   m_Direction: 1
   m_Center: {x: 0, y: 0.8862231, z: 0}
@@ -128,7 +128,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 0
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 0
@@ -152,7 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66302a6f375a8468e7266500c38f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 20
+  maxHealth: 50
+  currentHealth: 0
 --- !u!114 &5951941296267858723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,12 +166,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b47a2f9e7d6cc143ac873fa3be0e60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LootTable
-  CollectablePrefab: {fileID: 7863539330069029907, guid: c99172be5b612754daf9605ed31361ce, type: 3}
   drops:
   - item: {fileID: 11400000, guid: 0edb7b25430ce5c46824661103cf7e34, type: 2}
+    collectablePrefab: {fileID: 7863539330069029907, guid: c99172be5b612754daf9605ed31361ce, type: 3}
     amount: 2
     dropChance: 0.7
   - item: {fileID: 11400000, guid: 8c412733f2eb90749b64eb9c93f92916, type: 2}
+    collectablePrefab: {fileID: 7863539330069029907, guid: 7a756d5b819006343a361a26410370c1, type: 3}
     amount: 1
     dropChance: 0.85
 --- !u!1 &5940920557566561559
@@ -315,3 +317,4 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 0
+  attackCooldown: 1.5

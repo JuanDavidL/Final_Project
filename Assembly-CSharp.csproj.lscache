@@ -69,6 +69,8 @@ Assets/
    DeliveryTube.cs
    MonitorSwitch.cs
  _Project/Scripts/Data/ScriptableObject/
+  CreatureData.cs
+  EnemyData.cs
   ItemData.cs
   RecipeData.cs
  _Project/Scripts/Gameplay/Abilities/
@@ -115,11 +117,17 @@ Assets/
  _Project/Scripts/
   TEST/TesterInventario.cs
   UI/
+   AbilitiesPageUI.cs
    ArrowButton3D.cs
    BookAnimatorController.cs
    BookUI.cs
    CollectibleItem.cs
+   CreaturesInfoUI.cs
+   CreatureSlotUI.cs
    FloatingShelf.cs
+   InfoPageUI.cs
+   IngredientsInfoUI.cs
+   IngredientSlotInfoUI.cs
    IngredientSlotUI.cs
    InteractiveMenuManager.cs
    InventoryUI.cs
@@ -127,6 +135,9 @@ Assets/
    MachineUI.cs
    PotionSlot.cs
    PotionSlotUI.cs
+   RecipeDetailUI.cs
+   RecipeSlotUI.cs
+   RecipesUI.cs
    RotateCameraInShip.cs
    WorldAndTreeButton3D.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
