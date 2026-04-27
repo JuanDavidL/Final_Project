@@ -64,7 +64,7 @@ public class FloatingShelf : MonoBehaviour
     {
         if (_isRotating) return;
         _currentAngle -= 90f;
-        _targetRotation = Quaternion.Euler(0f, 0f, _currentAngle);
+        _targetRotation = Quaternion.Euler(-90f, 0f, _currentAngle);
         _isRotating = true;
     }
 
@@ -72,7 +72,7 @@ public class FloatingShelf : MonoBehaviour
     {
         if (_isRotating) return;
         _currentAngle += 90f;
-        _targetRotation = Quaternion.Euler(0f, 0f, _currentAngle);
+        _targetRotation = Quaternion.Euler(-90f, 0f, _currentAngle);
         _isRotating = true;
     }
 

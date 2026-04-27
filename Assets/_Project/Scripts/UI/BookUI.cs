@@ -20,6 +20,12 @@ public class BookUI : MonoBehaviour
     public Button tabAbilities;
     public float tabSelectedOffsetY = 10f;
 
+    [Header("Right Page Panels")]
+    public GameObject inventoryInfo;
+    public GameObject recipesInfo;
+    public GameObject infoRightPage;   // Info(RightPage)
+    public GameObject abilitiesInfo;
+
     private PlayerInput playerInput;
     private InputAction inventoryAction;
     private BookAnimatorController bookAnimator;
@@ -80,19 +86,56 @@ public class BookUI : MonoBehaviour
     private void ShowPage(GameObject page)
     {
         InitTabPositions();
+
+        // ── Oculta TODAS las páginas izquierda ────────
         inventoryPanel.SetActive(false);
         recipesPage.SetActive(false);
         infoPage.SetActive(false);
         abilitiesPanel.SetActive(false);
 
+        // ── Oculta TODOS los paneles derecha ──────────
+        inventoryInfo.SetActive(false);
+        recipesInfo.SetActive(false);
+        infoRightPage.SetActive(false);
+        abilitiesInfo.SetActive(false);
+
+        // ── Activa página izquierda seleccionada ──────
         page.SetActive(true);
         lastPage = page;
 
-    
-        InventoryUI inventoryUI = inventoryPanel.GetComponent<InventoryUI>();
-        if (inventoryUI != null)
-            inventoryUI.RefreshUI();
+        // ── Activa panel derecho correspondiente ──────
+        if (page == inventoryPanel)
+            inventoryInfo.SetActive(true);
+        else if (page == recipesPage)
+            recipesInfo.SetActive(true);
+        else if (page == infoPage)
+            infoRightPage.SetActive(true);
+        else if (page == abilitiesPanel)
+            abilitiesInfo.SetActive(true);
 
+        // ── Refreshes ─────────────────────────────────
+        if (page == inventoryPanel)
+        {
+            InventoryUI inventoryUI = inventoryPanel.GetComponent<InventoryUI>();
+            if (inventoryUI != null) inventoryUI.RefreshUI();
+        }
+        else if (page == recipesPage)
+        {
+        RecipesUI recipesUI = recipesPage.GetComponent<RecipesUI>();
+        if (recipesUI != null) recipesUI.RefreshUI();
+        }
+        else if (page == infoPage)
+        {
+        InfoPageUI infoUI = infoPage.GetComponent<InfoPageUI>();
+        if (infoUI != null) infoUI.RefreshUI();
+        }
+        else if (page == abilitiesPanel)
+        {
+        AbilitiesPageUI abilitiesUI = abilitiesPanel.GetComponent<AbilitiesPageUI>();
+        if (abilitiesUI != null) abilitiesUI.RefreshUI();
+        }
+
+        // ── Tabs ──────────────────────────────────────
         ResetTabPosition(tabInventory);
         ResetTabPosition(tabRecipes);
         ResetTabPosition(tabInfo);
