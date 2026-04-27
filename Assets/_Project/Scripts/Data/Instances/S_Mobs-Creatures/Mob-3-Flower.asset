@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eeb647fa22165a41b7deb959b712e54, type: 3}
   m_Name: Mob-3-Flower
   m_EditorClassIdentifier: Assembly-CSharp::CreatureData
-  creatureName: MataqueMata
-  creatureSprite: {fileID: 406247594, guid: db35ec421132ec24cbaf12293f5a3abb, type: 3}
+  creatureName: Venomous
+  creatureSprite: {fileID: -3913208896339694306, guid: 676468038e3cfb54e9890d1d6e198777, type: 3}
   creatureDescription: "It is highly aggressive and relentlessly carnivorous, actively
     hunting and trapping any creature that comes too close. Despite its dangerous
     nature and adaptability, it has a critical weakness\u2014it is extremely vulnerable

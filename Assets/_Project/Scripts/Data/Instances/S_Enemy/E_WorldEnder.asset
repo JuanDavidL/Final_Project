@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: adc7686567b1743488ddfdcd9a793350, type: 3}
-  m_Name: E_JawHop
+  m_Name: E_WorldEnder
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: JawHop
-  health: 50
-  speed: 4
-  damage: 15
+  enemyName: World Ender
+  health: 25
+  speed: 3
+  damage: 5
