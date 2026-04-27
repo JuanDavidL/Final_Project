@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc7686567b1743488ddfdcd9a793350, type: 3}
   m_Name: E_WingedHeart
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: 
-  health: 60
-  speed: 3
-  damage: 15
+  enemyName: Winged Herald
+  health: 30
+  speed: 4
+  damage: 10

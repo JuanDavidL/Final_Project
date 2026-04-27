@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mob-1-WingedHerald
   m_EditorClassIdentifier: Assembly-CSharp::CreatureData
   creatureName: WingeHerald
-  creatureSprite: {fileID: 2806414869788639878, guid: 48b6059066c80e347a9ba546e12e5d46, type: 3}
+  creatureSprite: {fileID: -2738642153227063766, guid: 48b6059066c80e347a9ba546e12e5d46, type: 3}
   creatureDescription: A gravity-defying creature found in dark, humid environments,
     known for hunting in the shadows and possessing a deadly venom.
   whereYouFindIt: This impressive creature defies gravity and can be found in (Biome
