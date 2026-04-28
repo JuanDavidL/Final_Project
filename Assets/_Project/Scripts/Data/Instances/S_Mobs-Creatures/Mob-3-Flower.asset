@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mob-3-Flower
   m_EditorClassIdentifier: Assembly-CSharp::CreatureData
   creatureName: Venomous
-  creatureSprite: {fileID: -3913208896339694306, guid: 676468038e3cfb54e9890d1d6e198777, type: 3}
+  creatureSprite: {fileID: -5210818313251767507, guid: 676468038e3cfb54e9890d1d6e198777, type: 3}
   creatureDescription: "It is highly aggressive and relentlessly carnivorous, actively
     hunting and trapping any creature that comes too close. Despite its dangerous
     nature and adaptability, it has a critical weakness\u2014it is extremely vulnerable
