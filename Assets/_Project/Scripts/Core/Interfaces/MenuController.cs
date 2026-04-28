@@ -18,6 +18,9 @@ public class MenuController : MonoBehaviour
     public GameObject playButton;
     public GameObject optionsButton;
     public GameObject exitButton;
+
+    [Header("Configuración")]
+    public bool enableEscapeKey = true; // ✅ desactívalo en la escena del planeta
     
 
     void Start()
@@ -35,6 +38,8 @@ public class MenuController : MonoBehaviour
 
     void Update()
     {
+        if (!enableEscapeKey) return;
+        
         if (GameManager.Instance != null && GameManager.Instance.hasGameStarted)
         {
             if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
@@ -105,5 +110,17 @@ public class MenuController : MonoBehaviour
     {
         // ✅ Vuelve al menú
         optionsController.HideOptions();
+    }
+
+    public void OnExitButtonClicked()
+    {
+        GameManager.Instance?.SaveGlobalProgress();
+
+        // ✅ En el Editor detiene el Play, en el juego cierra la aplicación
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
     }
 }
