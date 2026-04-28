@@ -11,6 +11,9 @@ public class DialogueController : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public GameObject navigationArrows;
 
+    [Header("Activadores de Estaciones")]
+    public GameObject stationTriggersParent;
+
     [Header("Conexiones")]
     public ClientSystem clientSystem;
 
@@ -55,23 +58,32 @@ public class DialogueController : MonoBehaviour
 
     void Start()
     {
-        // 1. Limpieza inicial por seguridad
+        // 1. Limpieza inicial
         if (dialoguePanel != null)
             dialoguePanel.SetActive(false);
         if (navigationArrows != null)
             navigationArrows.SetActive(true);
 
-        // 2. Lógica de inicio
-        if (GameManager.Instance != null && !GameManager.Instance.isTutorialCompleted)
+        // 2. Control de activadores y lógica de inicio
+        if (GameManager.Instance != null && GameManager.Instance.isTutorialCompleted)
         {
-            // ¡AQUÍ ESTABA EL ERROR!
-            // Llamamos directamente a tu función real, sin StartCoroutine
-            StartTutorialDialogue();
+            // Si el tutorial ya se hizo, apagamos los activadores para siempre
+            if (stationTriggersParent != null)
+            {
+                stationTriggersParent.SetActive(false);
+            }
+
+            PlayRandomWelcome();
         }
         else
         {
-            // Opcion B: El tutorial ya se vio, estamos regresando a la nave
-            PlayRandomWelcome();
+            // Si el tutorial es nuevo, nos aseguramos de que los activadores estén ON
+            if (stationTriggersParent != null)
+            {
+                stationTriggersParent.SetActive(true);
+            }
+
+            StartTutorialDialogue();
         }
     }
 
@@ -168,9 +180,9 @@ public class DialogueController : MonoBehaviour
                 GameManager.Instance.SaveGlobalProgress();
             }
 
-            if (clientSystem != null)
+            if (stationTriggersParent != null)
             {
-                // clientSystem.StartTutorialMode();
+                stationTriggersParent.SetActive(false);
             }
         }
     }
