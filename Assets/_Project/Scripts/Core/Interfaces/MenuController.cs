@@ -5,10 +5,20 @@ public class MenuController : MonoBehaviour
 {
     [Header("UI del Menú")]
     public GameObject menuPanel;
+    public GameObject MusicPanel;
 
     [Header("Interfaz de Juego (HUD)")]
     [SerializeField]
     private GameObject hudGameContainer; // Arrastra aquí el HUD_Game_Container
+
+    [Header("Opciones")]
+    public OptionsController optionsController;
+
+    [Header("SFX Menu")]
+    public GameObject playButton;
+    public GameObject optionsButton;
+    public GameObject exitButton;
+    
 
     void Start()
     {
@@ -68,5 +78,32 @@ public class MenuController : MonoBehaviour
         // ¡Encendemos el HUD de juego!
         if (hudGameContainer != null)
             hudGameContainer.SetActive(true);
+    }
+
+    public void ShowOptions()
+    {
+        playButton.SetActive(false);
+        optionsButton.SetActive(false);
+        exitButton.SetActive(false);
+        MusicPanel.SetActive(true);
+    }
+
+    public void HideOptions()
+    {
+        playButton.SetActive(true);
+        optionsButton.SetActive(true);
+        exitButton.SetActive(true);
+        MusicPanel.SetActive(false);
+    }
+
+    public void OnOptionsButtonClicked()
+    {
+        optionsController.ShowOptions();
+    }
+
+    public void OnOptionsBackClicked()
+    {
+        // ✅ Vuelve al menú
+        optionsController.HideOptions();
     }
 }
