@@ -13573,6 +13573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueController
   dialoguePanel: {fileID: 1237510080}
   dialogueText: {fileID: 260221784}
+  navigationArrows: {fileID: 108481334}
   clientSystem: {fileID: 3564710556910204147}
   typingSpeed: 0.04
   tutorialDialogues:
@@ -13612,6 +13613,46 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+  welcomeDialogues:
+  - text: Welcome back, Alchemist. The transmuter's pressure levels remained perfectly
+      stable during your absence.
+    onLineTrigger:
+      m_PersistentCalls:
+        m_Calls: []
+  - text: Detecting traces of exotic biomass on your boots... Initiating cabin decontamination
+      protocols.
+    onLineTrigger:
+      m_PersistentCalls:
+        m_Calls: []
+  - text: Did you find anything useful out there? The local clientele will start
+      arriving shortly.
+    onLineTrigger:
+      m_PersistentCalls:
+        m_Calls: []
+  - text: Systems online. I prepared a detailed report on local mana fluctuations,
+      but I assume you'd rather jump straight into crafting.
+    onLineTrigger:
+      m_PersistentCalls:
+        m_Calls: []
+  - text: I am glad you returned in one piece. The Quintessence isn't going to synthesize
+      itself.
+    onLineTrigger:
+      m_PersistentCalls:
+        m_Calls: []
+  - text: Hull integrity is at 100%. The Star-Brew is powered up and ready for business.
+    onLineTrigger:
+      m_PersistentCalls:
+        m_Calls: []
+  - text: I was monitoring your vitals out there. You should take a breath before
+      we fire up the transmuter.
+    onLineTrigger:
+      m_PersistentCalls:
+        m_Calls: []
+  - text: Let's see what materials you gathered. The brewing station is primed for
+      your next batch of potions.
+    onLineTrigger:
+      m_PersistentCalls:
+        m_Calls: []
   stationDialogues:
   - stationTag: ClientSystem
     dialogues:
@@ -22971,14 +23012,17 @@ MonoBehaviour:
     difficulty: Easy
     planetSprite: {fileID: 757834019, guid: 21e8c67990ccef94eb8f5663334fe609, type: 3}
     sceneName: Bioma1
+    skyboxMaterial: {fileID: 0}
   - planetName: Roomush-46D
     difficulty: Medium
     planetSprite: {fileID: -455249793, guid: 20c3960e6c514534797f28b710623660, type: 3}
     sceneName: 
-  - planetName: Alfha_48B
+    skyboxMaterial: {fileID: 0}
+  - planetName: Alpha_48B
     difficulty: Available soon
     planetSprite: {fileID: 407574973, guid: 6c030e1cfd27f214b8946da89e8d2f3b, type: 3}
     sceneName: 
+    skyboxMaterial: {fileID: 0}
   buttonSelectTreeFireball: {fileID: 1774690346}
   buttonSelectTreeFrostNova: {fileID: 1916931457}
   imageFireball: {fileID: 2096788350}

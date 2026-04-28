@@ -9,6 +9,7 @@ public class DialogueController : MonoBehaviour
     [Header("UI del Diálogo")]
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
+    public GameObject navigationArrows;
 
     [Header("Conexiones")]
     public ClientSystem clientSystem;
@@ -27,6 +28,9 @@ public class DialogueController : MonoBehaviour
 
     [Header("Diálogo Inicial (Tutorial)")]
     public DialogueLine[] tutorialDialogues; // Ahora es un array de la nueva estructura
+
+    [Header("Saludos Aleatorios (Al regresar)")]
+    public DialogueLine[] welcomeDialogues;
 
     [System.Serializable]
     public struct ContextDialogue
@@ -49,6 +53,28 @@ public class DialogueController : MonoBehaviour
     private bool isTutorialDialogueActive = false;
     private HashSet<string> stationsVisited = new HashSet<string>();
 
+    void Start()
+    {
+        // 1. Limpieza inicial por seguridad
+        if (dialoguePanel != null)
+            dialoguePanel.SetActive(false);
+        if (navigationArrows != null)
+            navigationArrows.SetActive(true);
+
+        // 2. Lógica de inicio
+        if (GameManager.Instance != null && !GameManager.Instance.isTutorialCompleted)
+        {
+            // ¡AQUÍ ESTABA EL ERROR!
+            // Llamamos directamente a tu función real, sin StartCoroutine
+            StartTutorialDialogue();
+        }
+        else
+        {
+            // Opcion B: El tutorial ya se vio, estamos regresando a la nave
+            PlayRandomWelcome();
+        }
+    }
+
     public void OnDialogueClicked()
     {
         if (isTyping)
@@ -70,6 +96,10 @@ public class DialogueController : MonoBehaviour
 
         currentActiveDialogue = tutorialDialogues;
         isTutorialDialogueActive = true;
+        if (navigationArrows != null)
+        {
+            navigationArrows.SetActive(false); // Oculta las flechas para que el jugador se centre en leer
+        }
 
         if (currentActiveDialogue.Length > 0)
         {
@@ -124,10 +154,19 @@ public class DialogueController : MonoBehaviour
     {
         dialoguePanel.SetActive(false);
 
+        if (navigationArrows != null)
+        {
+            navigationArrows.SetActive(true);
+        }
+
         if (isTutorialDialogueActive)
         {
-            PlayerPrefs.SetInt("TutorialVisto", 1);
-            PlayerPrefs.Save();
+            // Usamos directamente el GameManager para mantener una sola fuente de la verdad
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.isTutorialCompleted = true;
+                GameManager.Instance.SaveGlobalProgress();
+            }
 
             if (clientSystem != null)
             {
@@ -160,6 +199,34 @@ public class DialogueController : MonoBehaviour
                 );
                 return;
             }
+        }
+    }
+
+    private void PlayRandomWelcome()
+    {
+        // Nos aseguramos de que haya saludos escritos en el Inspector
+        if (welcomeDialogues != null && welcomeDialogues.Length > 0)
+        {
+            int randomIndex = Random.Range(0, welcomeDialogues.Length);
+
+            // Configuramos la interfaz
+            dialoguePanel.SetActive(true);
+            if (navigationArrows != null)
+            {
+                navigationArrows.SetActive(false);
+            }
+
+            // Engañamos a tu sistema haciéndole creer que el diálogo actual es solo esta frase
+            currentActiveDialogue = new DialogueLine[] { welcomeDialogues[randomIndex] };
+            currentLineIndex = 0;
+            isTutorialDialogueActive = false; // No es el tutorial, es solo un saludo
+
+            // Disparamos el evento (por si quieres que B.E.L. parpadee, por ejemplo)
+            currentActiveDialogue[currentLineIndex].onLineTrigger?.Invoke();
+
+            typingCoroutine = StartCoroutine(
+                TypeLine(currentActiveDialogue[currentLineIndex].text)
+            );
         }
     }
 }

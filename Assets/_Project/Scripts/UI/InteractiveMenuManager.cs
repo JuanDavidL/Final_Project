@@ -1,8 +1,8 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections;
 
 public class InteractiveMenuManager : MonoBehaviour
 {
@@ -25,6 +25,7 @@ public class InteractiveMenuManager : MonoBehaviour
 
     [Header("Configuración de Audio")]
     public AudioClip buyButtonSFX; // Sonido al comprar una mejora en el árbol de habilidades
+
     [System.Serializable]
     public class PlanetData
     {
@@ -220,8 +221,10 @@ public class InteractiveMenuManager : MonoBehaviour
     // Llama esto desde el ButtonTravel
     public void OnTravelPressed()
     {
-        if (_currentState != MenuState.ViajaMundos) return;
-        if (planets.Length == 0) return;
+        if (_currentState != MenuState.ViajaMundos)
+            return;
+        if (planets.Length == 0)
+            return;
 
         GameManager.Instance.selectedPlanetIndex = _currentPlanetIndex;
         GameManager.Instance.SaveGlobalProgress();
@@ -378,40 +381,45 @@ public class InteractiveMenuManager : MonoBehaviour
 
     private IEnumerator FadeAndTravel(string sceneName)
     {
-    // ── Crea el canvas de fade ─────────────────────
-    GameObject fadeCanvas = new GameObject("FadeCanvas");
-    Canvas canvas = fadeCanvas.AddComponent<Canvas>();
-    canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-    canvas.sortingOrder = 999;
-    fadeCanvas.AddComponent<UnityEngine.UI.CanvasScaler>();
-    fadeCanvas.AddComponent<UnityEngine.UI.GraphicRaycaster>();
+        // ── Crea el canvas de fade ─────────────────────
+        GameObject fadeCanvas = new GameObject("FadeCanvas");
+        Canvas canvas = fadeCanvas.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 999;
+        fadeCanvas.AddComponent<UnityEngine.UI.CanvasScaler>();
+        fadeCanvas.AddComponent<UnityEngine.UI.GraphicRaycaster>();
 
-    GameObject imageGO = new GameObject("FadeImage");
-    imageGO.transform.SetParent(fadeCanvas.transform, false);
-    UnityEngine.UI.Image fadeImage = imageGO.AddComponent<UnityEngine.UI.Image>();
-    fadeImage.color = new Color(0f, 0f, 0f, 0f);
+        GameObject imageGO = new GameObject("FadeImage");
+        imageGO.transform.SetParent(fadeCanvas.transform, false);
+        UnityEngine.UI.Image fadeImage = imageGO.AddComponent<UnityEngine.UI.Image>();
+        fadeImage.color = new Color(0f, 0f, 0f, 0f);
 
-    RectTransform rect = fadeImage.GetComponent<RectTransform>();
-    rect.anchorMin = Vector2.zero;
-    rect.anchorMax = Vector2.one;
-    rect.offsetMin = Vector2.zero;
-    rect.offsetMax = Vector2.zero;
+        RectTransform rect = fadeImage.GetComponent<RectTransform>();
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.offsetMin = Vector2.zero;
+        rect.offsetMax = Vector2.zero;
 
-    DontDestroyOnLoad(fadeCanvas);
+        DontDestroyOnLoad(fadeCanvas);
 
-    // ── Fade a negro ───────────────────────────────
-    float timer = 0f;
-    float fadeDuration = 1f;
-    while (timer < fadeDuration)
-    {
-        timer += Time.deltaTime;
-        fadeImage.color = new Color(0f, 0f, 0f, Mathf.Clamp01(timer / fadeDuration));
-        yield return null;
-    }
+        // ── Fade a negro ───────────────────────────────
+        float timer = 0f;
+        float fadeDuration = 1f;
+        while (timer < fadeDuration)
+        {
+            timer += Time.deltaTime;
+            fadeImage.color = new Color(0f, 0f, 0f, Mathf.Clamp01(timer / fadeDuration));
+            yield return null;
+        }
+        if (GameManager.Instance != null && !GameManager.Instance.isTutorialCompleted)
+        {
+            GameManager.Instance.isTutorialCompleted = true;
+            GameManager.Instance.SaveGlobalProgress();
+        }
 
-    fadeImage.color = new Color(0f, 0f, 0f, 1f);
+        fadeImage.color = new Color(0f, 0f, 0f, 1f);
 
-    // ── Guarda y viaja ─────────────────────────────
+        // ── Guarda y viaja ─────────────────────────────
         GameManager.Instance?.SaveGlobalProgress();
         SceneManager.LoadScene(sceneName);
     }
