@@ -1,77 +1,95 @@
 using UnityEngine;
-using UnityEngine.AI;
+using System.Collections;
 using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [System.Serializable] // Esto permite que aparezca en el Inspector
-    public class EnemyConfig
+    [Header("Enemy Prefabs")]
+    public GameObject[] enemyPrefabs;           // Arrastra tus 4 prefabs aquí
+
+    [Header("Spawn Points")]
+    public Transform[] spawnPoints;             // Los puntos O del mapa
+
+    [Header("Spawn Limits")]
+    public int totalEnemiesLimit = 15;          // Máximo total que spawnearán en toda la partida
+    public int maxAliveAtOnce = 5;              // Máximo vivos al mismo tiempo
+
+    [Header("Spawn Timing")]
+    public float spawnInterval = 3f;            // Segundos entre cada chequeo de spawn
+    public float initialDelay = 1f;             // Espera antes del primer spawn
+
+    // ---- Estado interno ----
+    private int totalSpawned = 0;
+    private List<GameObject> aliveEnemies = new List<GameObject>();
+
+    void Start()
     {
-        public string name;
-        public GameObject prefab;
-        public int maxAmount = 10;
-        public float spawnInterval = 5f;
-        [HideInInspector] public float lastSpawnTime;
-        [HideInInspector] public List<GameObject> activeEnemies = new List<GameObject>();
+        if (enemyPrefabs.Length == 0)
+        {
+            Debug.LogWarning("EnemySpawner: No hay prefabs asignados.");
+            return;
+        }
+        if (spawnPoints.Length == 0)
+        {
+            Debug.LogWarning("EnemySpawner: No hay spawn points asignados.");
+            return;
+        }
+
+        StartCoroutine(SpawnRoutine());
     }
 
-    [Header("Configuración de Enemigos")]
-    public List<EnemyConfig> enemyConfigs; // Aquí añades tus 5 o 6 tipos
-
-    [Header("Área de Spawn")]
-    public Vector3 spawnAreaSize = new Vector3(100, 0, 100);
-
-    void Update()
+    IEnumerator SpawnRoutine()
     {
-        foreach (var config in enemyConfigs)
-        {
-            // 1. Limpiar muertos de la lista específica
-            config.activeEnemies.RemoveAll(e => e == null);
+        yield return new WaitForSeconds(initialDelay);
 
-            // 2. Verificar condiciones: ¿Hay espacio? ¿Pasó el tiempo (cooldown)?
-            if (config.activeEnemies.Count < config.maxAmount)
+        while (totalSpawned < totalEnemiesLimit)
+        {
+            // Limpiar referencias nulas (enemigos destruidos)
+            aliveEnemies.RemoveAll(e => e == null);
+
+            int currentAlive = aliveEnemies.Count;
+            int canSpawn = Mathf.Min(
+                maxAliveAtOnce - currentAlive,          // Cuántos caben hasta el límite vivo
+                totalEnemiesLimit - totalSpawned        // Cuántos quedan por spawnear en total
+            );
+
+            for (int i = 0; i < canSpawn; i++)
             {
-                if (Time.time >= config.lastSpawnTime + config.spawnInterval)
-                {
-                    SpawnEnemy(config);
-                    config.lastSpawnTime = Time.time;
-                }
+                SpawnOneEnemy();
             }
+
+            yield return new WaitForSeconds(spawnInterval);
         }
+
+        Debug.Log("EnemySpawner: Límite total alcanzado. No spawneará más enemigos.");
     }
 
-    void SpawnEnemy(EnemyConfig config)
+    void SpawnOneEnemy()
     {
-        Vector3 randomPoint = GetRandomNavMeshPoint();
-        
-        if (randomPoint != Vector3.zero)
+        // Elegir punto de spawn aleatorio
+        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
+        // Elegir prefab aleatorio entre los 4
+        GameObject prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+
+        GameObject enemy = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+        aliveEnemies.Add(enemy);
+        totalSpawned++;
+
+        Debug.Log($"Spawneado: {enemy.name} | Vivos: {aliveEnemies.Count} | Total spawneados: {totalSpawned}/{totalEnemiesLimit}");
+    }
+
+    // ---- Gizmos para ver los spawn points en el editor ----
+    void OnDrawGizmos()
+    {
+        if (spawnPoints == null) return;
+
+        Gizmos.color = Color.green;
+        foreach (Transform sp in spawnPoints)
         {
-            GameObject newEnemy = Instantiate(config.prefab, randomPoint, Quaternion.identity);
-            config.activeEnemies.Add(newEnemy);
-            Debug.Log($"Spawned {config.name}. Total: {config.activeEnemies.Count}/{config.maxAmount}");
+            if (sp == null) continue;
+            Gizmos.DrawSphere(sp.position, 0.4f);
+            Gizmos.DrawLine(sp.position, sp.position + Vector3.up * 1.5f);
         }
-    }
-
-    Vector3 GetRandomNavMeshPoint()
-    {
-        Vector3 randomPos = new Vector3(
-            Random.Range(-spawnAreaSize.x / 2, spawnAreaSize.x / 2),
-            10,
-            Random.Range(-spawnAreaSize.z / 2, spawnAreaSize.z / 2)
-        ) + transform.position;
-
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPos, out hit, 15f, NavMesh.AllAreas))
-        {
-            return hit.position;
-        }
-        return Vector3.zero;
-    }
-
-    // Para ver el área de spawn en el editor
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(transform.position, spawnAreaSize);
     }
 }
