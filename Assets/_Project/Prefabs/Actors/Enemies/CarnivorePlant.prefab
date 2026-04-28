@@ -135,14 +135,16 @@ MonoBehaviour:
   chaseStopDistance: 20
   damageDealt: 25
   attackPoint: {fileID: 8774504367791517539}
-  attackRadius: 1.5
+  attackRadius: 2
   playerLayer:
     serializedVersion: 2
     m_Bits: 2048
   obstructionMask:
     serializedVersion: 2
     m_Bits: 0
-  attackCooldown: 1.5
+  attackCooldown: 2
+  audioSource: {fileID: 0}
+  hitClip: {fileID: 0}
 --- !u!1 &5690528454557970833
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +271,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 0
@@ -293,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66302a6f375a8468e7266500c38f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 30
+  maxHealth: 80
   currentHealth: 0
 --- !u!114 &1936974781669090457
 MonoBehaviour:
@@ -323,11 +325,11 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: ec3c10fda64830b49b7d0083c3932e56, type: 2}
     collectablePrefab: {fileID: 7863539330069029907, guid: 6789ef8a44b3b6d4db09572282b224db, type: 3}
     amount: 10
-    dropChance: 0.01
+    dropChance: 0.1
   - item: {fileID: 11400000, guid: 8a74c0e6d30305e408e697469bdcde17, type: 2}
     collectablePrefab: {fileID: 7863539330069029907, guid: 3759c59991d9de44e84a250fcacbe1a3, type: 3}
     amount: 1
-    dropChance: 0.1
+    dropChance: 0.01
   - item: {fileID: 11400000, guid: f64fdb1289db28d42a45e80bc0469c8d, type: 2}
     collectablePrefab: {fileID: 7863539330069029907, guid: 3896aa199da06aa4b8b209a582f9ea7d, type: 3}
     amount: 1

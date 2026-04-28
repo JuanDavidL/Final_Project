@@ -164,16 +164,18 @@ MonoBehaviour:
   attackRange: 3
   patrolRadius: 15
   chaseStopDistance: 20
-  damageDealt: 15
+  damageDealt: 25
   attackPoint: {fileID: 4603792353760243593}
-  attackRadius: 1.5
+  attackRadius: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 2048
   obstructionMask:
     serializedVersion: 2
     m_Bits: 0
-  attackCooldown: 1.5
+  attackCooldown: 0.5
+  audioSource: {fileID: 0}
+  hitClip: {fileID: 0}
 --- !u!1 &9046951032173600128
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +271,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 0
@@ -293,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca66302a6f375a8468e7266500c38f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 15
+  maxHealth: 25
   currentHealth: 0
 --- !u!114 &155424581381000796
 MonoBehaviour:
