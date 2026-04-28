@@ -29207,25 +29207,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
   inventory:
   - item: {fileID: 11400000, guid: 0edb7b25430ce5c46824661103cf7e34, type: 2}
-    quantity: 1000
+    quantity: 6
   - item: {fileID: 11400000, guid: 95352bdcd1f51fe4fbebdd323e2213c3, type: 2}
-    quantity: 1000
+    quantity: 0
   - item: {fileID: 11400000, guid: 8c412733f2eb90749b64eb9c93f92916, type: 2}
-    quantity: 1000
+    quantity: 0
   - item: {fileID: 11400000, guid: a215784442437a448b19aba1abe61ffd, type: 2}
-    quantity: 1000
+    quantity: 0
   - item: {fileID: 11400000, guid: 8a74c0e6d30305e408e697469bdcde17, type: 2}
-    quantity: 1000
+    quantity: 6
   - item: {fileID: 11400000, guid: 383ef6a0db0397546a31fab7c7036345, type: 2}
-    quantity: 1000
+    quantity: 0
   - item: {fileID: 11400000, guid: b97313eaeabd29e42807aad539fd7aa4, type: 2}
-    quantity: 1000
+    quantity: 0
   - item: {fileID: 11400000, guid: 8bf35bc26b2000c44bcd73b91638c038, type: 2}
-    quantity: 1000
+    quantity: 0
   - item: {fileID: 11400000, guid: f64fdb1289db28d42a45e80bc0469c8d, type: 2}
-    quantity: 1000
+    quantity: 0
   - item: {fileID: 11400000, guid: ec3c10fda64830b49b7d0083c3932e56, type: 2}
-    quantity: 1000
+    quantity: 0
 --- !u!4 &5964604601877574245 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8429056385922219588, guid: d4357573a52ee514abf7fef470f90417, type: 3}

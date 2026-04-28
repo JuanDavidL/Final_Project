@@ -61,20 +61,16 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    void Start() 
-    {
-        
-    }
+    void Start() { }
 
     [ContextMenu("Reset Progress")]
     public void ResetUpgrades()
     {
         fireballUpgradesPurchased = 0;
         frostNovaUpgradesPurchased = 0;
-        totalCredits = 10000; // créditos de prueba
+        totalCredits = 100; // créditos de prueba
         PlayerPrefs.DeleteKey("TutorialVisto");
         isTutorialCompleted = false;
-
 
         SaveGlobalProgress(); // ✅ guarda el reset en PlayerPrefs inmediatamente
         //Debug.Log($"Reseteado! Verificando PlayerPrefs → Fireball: {PlayerPrefs.GetInt("FireballUpgrades")} | FrostNova: {PlayerPrefs.GetInt("FrostNovaUpgrades")}");
