@@ -45,6 +45,8 @@ public class InventoryManager : MonoBehaviour
         }
 
         OnInventoryUpdated?.Invoke(); // Notificar cambio
+
+        EndingManager.Instance?.CheckForQuintessence(newItem); // Verificar si el item agregado es la Quinta Esencia
     }
 
     // MÉTODO para que "sacar" cosas a la mesa 3D
