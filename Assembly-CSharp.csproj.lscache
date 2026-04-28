@@ -64,6 +64,7 @@ Assets/
    ChangeScene.cs
    GameManager.cs
    InventoryManager.cs
+   OptionsController.cs
    SceneMusicTrigger.cs
   Systems/
    ClientSystem.cs
