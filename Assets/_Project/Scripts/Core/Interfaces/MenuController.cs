@@ -48,14 +48,6 @@ public class MenuController : MonoBehaviour
             GameManager.Instance.hasGameStarted = true;
         }
         ResumeGame();
-
-        // Solo lanzamos el tutorial si es la primera vez
-        if (PlayerPrefs.GetInt("TutorialVisto", 0) == 0)
-        {
-            DialogueController diag = FindObjectOfType<DialogueController>();
-            if (diag != null)
-                diag.StartTutorialDialogue();
-        }
     }
 
     private void ShowMainMenu()
@@ -77,5 +69,4 @@ public class MenuController : MonoBehaviour
         if (hudGameContainer != null)
             hudGameContainer.SetActive(true);
     }
-
 }
