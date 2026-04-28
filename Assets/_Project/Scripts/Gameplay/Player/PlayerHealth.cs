@@ -27,6 +27,11 @@ public class PlayerHealth : MonoBehaviour
     public float regenRate = 5f;
     private float lastDamageTime;
 
+    [Header("SFX hit and death")]
+    public AudioSource audioSource;
+    public AudioClip hitClip;
+    public AudioClip deathClip;
+
     private Animator anim; // Animator del personaje en el mundo
     private SpriteRenderer spriteRenderer;
     private bool isDead = false;
@@ -36,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         anim = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
 
         // Asegurarnos de que el panel de muerte esté oculto al iniciar
         if (deathPanel != null) deathPanel.SetActive(false);
@@ -61,6 +67,10 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damage;
         lastDamageTime = Time.time;
         ActualizarUI();
+
+        // Reproduce el sonido de daño
+        if (audioSource != null && hitClip != null)
+            audioSource.PlayOneShot(hitClip);
 
         // --- FEEDBACK VISUAL EN LA UI ---
         if (faceUIAnimator != null)
@@ -124,6 +134,10 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
         currentHealth = 0;
         ActualizarUI();
+
+        // Reproduce el sonido de muerte
+        if (audioSource != null && deathClip != null)
+            audioSource.PlayOneShot(deathClip);
 
         // 1. Disparar animaciones de muerte
         if (anim != null) anim.SetTrigger("Die");

@@ -5,6 +5,8 @@ public class FrostNova : BaseAbility
     [Header("FrostNova")]
     public float novaRadius = 5f;
     public GameObject frostNovaVFX;
+    public AudioClip frostNovaSFX;
+    private AudioSource audioSource;
 
     [Header("Indicator")]
     public GameObject circleIndicator;
@@ -12,6 +14,7 @@ public class FrostNova : BaseAbility
     void Start()
     {
         circleIndicator.SetActive(false);
+        audioSource = FindFirstObjectByType<AudioSource>();
     }
 
     void Update()
@@ -60,6 +63,10 @@ public class FrostNova : BaseAbility
             GameObject vfx = Instantiate(frostNovaVFX, transform.position, Quaternion.identity);
             Destroy(vfx, 2f);
         }
+
+        // Reproduce el sonido de la Frost Nova
+        if (audioSource != null && frostNovaSFX != null)
+            audioSource.PlayOneShot(frostNovaSFX);
 
         HideIndicator();
     }

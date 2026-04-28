@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireballProjectile
   explosionVFX: {fileID: 4322418750141340833, guid: 1c46c18c2b8861a4886a8e0989b41ebb, type: 3}
+  explosionSFX: {fileID: 8300000, guid: 651deac6b18284b41b8139c9fdf6f197, type: 3}
 --- !u!54 &566049119834953925
 Rigidbody:
   m_ObjectHideFlags: 0

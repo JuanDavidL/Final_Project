@@ -8,11 +8,14 @@ public class FireballProjectile : MonoBehaviour
     private float explosionRadius;
 
     public GameObject explosionVFX;
+    public AudioClip explosionSFX;
+    private AudioSource audioSource;
 
     public void Init(Vector3 dir, float spd, float radius, float dmg)
     {
         this.direction = dir;
         this.direction.y = 0f;
+        audioSource = FindFirstObjectByType<AudioSource>();
         this.direction.Normalize();
 
         this.speed = spd;
@@ -64,7 +67,13 @@ public class FireballProjectile : MonoBehaviour
             Destroy(vfx, 2f);
         }
 
-        // 5. Destruir el proyectil
+        // 5. Efectos de sonido
+        if (audioSource != null && explosionSFX != null)
+        {
+            audioSource.PlayOneShot(explosionSFX);
+        }
+
+        // 6. Destruir el proyectil
         Destroy(gameObject);
     }
 

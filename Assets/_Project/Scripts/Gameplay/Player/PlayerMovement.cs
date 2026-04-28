@@ -11,6 +11,10 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 cameraOffset = new Vector3(0f, 5f, -10f);
     public float cameraSmooth = 5f;
 
+    [Header("SFX Walking")]
+    public AudioSource walkingSFX;
+    public AudioClip walkingClip;
+
     // Referencias privadas
     private Vector2 moveInput;
     private PlayerInput playerInput;
@@ -29,6 +33,9 @@ public class PlayerMovement : MonoBehaviour
         // BUSCAR COMPONENTES EN EL HIJO
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
+        walkingSFX = GetComponent<AudioSource>();
+
+         // Configurar el sonido de caminar
 
         if (playerInput != null)
         {
@@ -45,6 +52,21 @@ public class PlayerMovement : MonoBehaviour
         
         Vector3 moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
         rb.linearVelocity = new Vector3(moveDirection.x * moveSpeed, rb.linearVelocity.y, moveDirection.z * moveSpeed);
+
+            // Manejo de sonido de caminar
+        if (moveInput.magnitude > 0.1f)
+        {
+            if (!walkingSFX.isPlaying)
+            {
+                walkingSFX.clip = walkingClip;
+                walkingSFX.Play();
+            }
+        }
+        else
+        {
+            if (walkingSFX.isPlaying)
+                walkingSFX.Stop();
+        }
 
         // --- ACTUALIZACIÓN DE ANIMACIONES Y VISUALES ---
         

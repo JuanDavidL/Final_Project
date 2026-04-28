@@ -45,48 +45,70 @@ public abstract class BaseAbility : MonoBehaviour
 
     private void RechargeUpdate()
     {
-        if (_currentCharge >= maxCharge) return;
+    if (_chargeTimers == null) return;
 
-        for (int i = 0; i < maxCharge; i++)
-        {
+    // ✅ Si maxCharge cambió, redimensiona y actualiza currentCharge
+    if (_chargeTimers.Length != maxCharge)
+    {
+        int oldMax = _chargeTimers.Length;
+        float[] newTimers = new float[maxCharge];
+        for (int i = 0; i < newTimers.Length; i++)
+            newTimers[i] = i < _chargeTimers.Length ? _chargeTimers[i] : -cooldown;
+        _chargeTimers = newTimers;
+
+        // ✅ Agrega las cargas nuevas que se desbloquearon
+        int newCharges = maxCharge - oldMax;
+        if (newCharges > 0)
+            _currentCharge += newCharges;
+
+        // ✅ Nunca supera el máximo
+        _currentCharge = Mathf.Clamp(_currentCharge, 0, maxCharge);
+    }
+
+    // Si tiene todas las cargas no necesita recargar
+    if (_currentCharge >= maxCharge) return;
+
+    for (int i = 0; i < maxCharge; i++)
+    {
         if (_chargeTimers[i] > 0)
+        {
+            float elapsed = Time.time - _chargeTimers[i];
+            if (elapsed >= cooldown)
             {
-                float elapsed = Time.time - _chargeTimers[i];
-            
-                if (elapsed >= cooldown)
-                {
                 _currentCharge++;
                 _chargeTimers[i] = 0f;
                 break;
-                }
             }
+        }
         }
     }
 
     public bool TryConsumeCharge()
     {
-        if (_currentCharge <= 0) 
-        {
-            //Debug.Log($"{abilityName}: Sin cargas disponibles");
-            return false;
-        }
+        // ✅ Protección si el array no coincide con maxCharge
+        if (_chargeTimers == null || _chargeTimers.Length != maxCharge)
+            InitCharge();
+
+        if (_currentCharge <= 0) return false;
 
         _currentCharge--;
-        //Debug.Log($"{abilityName}: Carga consumida. Quedan: {_currentCharge}/{maxCharge}");
 
-        // Busca el primer timer libre y lo activa
         for (int i = 0; i < maxCharge; i++)
         {
             if (_chargeTimers[i] <= 0f)
             {
                 _chargeTimers[i] = Time.time;
-                 //Debug.Log($"{abilityName}: Timer[{i}] activado en {Time.time}");
                 break;
             }
         }
 
         return true;
+    
     }
+
+
+    
+    
 
     public bool IsOnCooldown()
     {

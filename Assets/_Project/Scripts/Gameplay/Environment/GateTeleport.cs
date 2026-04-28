@@ -36,6 +36,19 @@ public class GateTeleport : MonoBehaviour
     [SerializeField]
     private float amplitud = 1.5f;
 
+    [Header("SFX to enter portal")]
+    [SerializeField]
+    private AudioClip enterPortalSFX;
+    private AudioSource audioSource;
+
+        void Start()
+        {
+            if (vfxMago != null)
+                vfxMago.SetActive(false);
+    
+            audioSource = FindFirstObjectByType<AudioSource>();
+        }
+
     // ─────────────────────────────────────────────
     //  ESTADO INTERNO
     // ─────────────────────────────────────────────
@@ -127,6 +140,10 @@ public class GateTeleport : MonoBehaviour
             if (ps != null)
                 ps.Play();
         }
+
+        // Reproduce el sonido de entrada al portal
+        if (audioSource != null && enterPortalSFX != null)
+            audioSource.PlayOneShot(enterPortalSFX);
 
         Debug.Log("[GateTeleport] VFX activado, iniciando viaje.");
 

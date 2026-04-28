@@ -22,6 +22,10 @@ public class EnemyAI : MonoBehaviour
     public float attackCooldown = 1.5f; // Tiempo entre ataques
     private float lastAttackTime;
 
+    [Header("SFX hit player")]
+    public AudioSource audioSource;
+    public AudioClip hitClip;
+
     private NavMeshAgent agent;
     private Transform player;
     private Vector3 startPosition;
@@ -35,6 +39,7 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponentInParent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = FindFirstObjectByType<AudioSource>();
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null) player = playerObj.transform;
@@ -94,6 +99,10 @@ public class EnemyAI : MonoBehaviour
 
                 // Mirar siempre al jugador mientras ataca
                 HandleSpriteFlip();
+
+                // Reproduce el sonido de daño al jugador
+                if (audioSource != null && hitClip != null)
+                    audioSource.PlayOneShot(hitClip);
 
                 // Lógica de repetición de ataque
                 if (Time.time >= lastAttackTime + attackCooldown)

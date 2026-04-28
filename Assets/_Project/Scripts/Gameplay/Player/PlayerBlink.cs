@@ -10,6 +10,8 @@ public class PlayerBlink : BaseAbility
     public float blinkDelay = 0.5f; 
     [Header("VFX")]
     public GameObject blinkVFX;
+    public AudioClip blinkSFX;
+    private AudioSource audioSource;
 
     private PlayerInput playerInput;
     private InputAction blinkAction;
@@ -24,6 +26,7 @@ public class PlayerBlink : BaseAbility
         blinkAction = playerInput.actions["Blink"];
         mainCamera = Camera.main;
         anim = GetComponentInChildren<Animator>();
+        audioSource = FindFirstObjectByType<AudioSource>();
     }
 
     void OnEnable() 
@@ -68,6 +71,10 @@ public class PlayerBlink : BaseAbility
 
         // VFX en la posición final
         SpawnVFX(blinkTarget); 
+
+        // Reproduce el sonido del Blink
+        if (audioSource != null && blinkSFX != null)
+            audioSource.PlayOneShot(blinkSFX);
     }
 
     public override void Use()

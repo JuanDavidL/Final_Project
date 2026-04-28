@@ -12,15 +12,20 @@ public class Fireball : BaseAbility
     [Header("Indicator")]
     public LineRenderer lineIndicator;
 
+    [Header("SFX")]
+    public AudioClip fireballSound;
+
     private Camera mainCamera;
     private MagicBook magicBook;
     private Mouse mouse;
+    private AudioSource audioSource;
 
     void Start()
     {
         mainCamera = Camera.main;
         mouse = Mouse.current;
         magicBook = FindFirstObjectByType<MagicBook>();
+        audioSource = FindFirstObjectByType<AudioSource>();
     }
 
     void Update()
@@ -80,6 +85,10 @@ public class Fireball : BaseAbility
             GameObject projectile = Instantiate(projectilePrefab, finalSpawn, Quaternion.identity);
             FireballProjectile fp = projectile.GetComponent<FireballProjectile>();
             fp.Init(direction, projectileSpeed, explosionRadius, damage);
+
+            // Reproduce el sonido de la bola de fuego
+            if (audioSource != null && fireballSound != null)
+                audioSource.PlayOneShot(fireballSound);
 
             // Si hay más de una bola, espera 0.2s antes de la siguiente
             if (i < quantity - 1)
