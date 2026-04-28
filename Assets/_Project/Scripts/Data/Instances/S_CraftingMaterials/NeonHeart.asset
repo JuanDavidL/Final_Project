@@ -19,4 +19,5 @@ MonoBehaviour:
   itemDescription: A pulsing, energy-rich organ extracted from an anomaly. Curiously,
     it continues to beat in perfect, uninterrupted synchronization with our ship's
     main fusion engine.
-  whereAndWho: Bioma1
+  whereAndWho: Slimes, WingedHerald and JawHop can drop this, but it is extremely
+    rare

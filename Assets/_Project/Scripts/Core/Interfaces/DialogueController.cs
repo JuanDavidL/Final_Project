@@ -58,16 +58,15 @@ public class DialogueController : MonoBehaviour
 
     void Start()
     {
-        // 1. Limpieza inicial
         if (dialoguePanel != null)
             dialoguePanel.SetActive(false);
         if (navigationArrows != null)
             navigationArrows.SetActive(true);
 
-        // 2. Control de activadores y lógica de inicio
+        // Validamos el estado global del tutorial
         if (GameManager.Instance != null && GameManager.Instance.isTutorialCompleted)
         {
-            // Si el tutorial ya se hizo, apagamos los activadores para siempre
+            // El jugador ya fue al mundo, el tutorial acabó. Apagamos TODOS los activadores.
             if (stationTriggersParent != null)
             {
                 stationTriggersParent.SetActive(false);
@@ -77,7 +76,7 @@ public class DialogueController : MonoBehaviour
         }
         else
         {
-            // Si el tutorial es nuevo, nos aseguramos de que los activadores estén ON
+            // Es la primera vez. Mantenemos los activadores encendidos.
             if (stationTriggersParent != null)
             {
                 stationTriggersParent.SetActive(true);
@@ -182,13 +181,14 @@ public class DialogueController : MonoBehaviour
 
             if (stationTriggersParent != null)
             {
-                stationTriggersParent.SetActive(false);
+                //stationTriggersParent.SetActive(false);
             }
         }
     }
 
     public void TryStartContextDialogue(string tagLookedAt)
     {
+        // Tu lógica original que funciona perfecto:
         if (dialoguePanel.activeSelf || stationsVisited.Contains(tagLookedAt))
             return;
 
@@ -196,15 +196,13 @@ public class DialogueController : MonoBehaviour
         {
             if (station.stationTag == tagLookedAt)
             {
-                stationsVisited.Add(tagLookedAt);
+                stationsVisited.Add(tagLookedAt); // Anota que ya la vio en esta sesión
 
                 currentActiveDialogue = station.dialogues;
                 currentLineIndex = 0;
                 isTutorialDialogueActive = false;
 
                 dialoguePanel.SetActive(true);
-
-                // Disparamos el evento de la primera línea de contexto
                 currentActiveDialogue[currentLineIndex].onLineTrigger?.Invoke();
                 typingCoroutine = StartCoroutine(
                     TypeLine(currentActiveDialogue[currentLineIndex].text)
