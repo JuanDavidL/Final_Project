@@ -53,7 +53,7 @@ public class Fireball : BaseAbility
         Vector3 direction = (mouseWorldPosition - transform.position).normalized;
         direction.y = 0f;
 
-        Vector3 startPos = new Vector3(transform.position.x, 0.05f, transform.position.z);
+        Vector3 startPos = new Vector3(transform.position.x, 0.2f, transform.position.z);
         Vector3 endPos = new Vector3(transform.position.x + direction.x * 20f, 0.05f, transform.position.z + direction.z * 20f);
 
         lineIndicator.SetPosition(0, startPos);

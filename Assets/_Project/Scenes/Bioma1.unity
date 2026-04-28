@@ -57402,8 +57402,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   enemyPrefabs:
-  - {fileID: 9046951032173600128, guid: 15d4f74f946d2734f91e242a7d55e67c, type: 3}
-  - {fileID: 6126442105135073124, guid: 112415362e7e08d40a16a2bc92de2375, type: 3}
+  - {fileID: 5046242719250851364, guid: 9e074f1f582c3774297fd0accff2a26f, type: 3}
+  - {fileID: 7350082744961062397, guid: 0de98a7b8f557cb49ab6467f38bff75c, type: 3}
   spawnPoints:
   - {fileID: 311352195}
   - {fileID: 66032786}
@@ -107575,8 +107575,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   enemyPrefabs:
-  - {fileID: 5046242719250851364, guid: 9e074f1f582c3774297fd0accff2a26f, type: 3}
-  - {fileID: 7350082744961062397, guid: 0de98a7b8f557cb49ab6467f38bff75c, type: 3}
+  - {fileID: 6126442105135073124, guid: 112415362e7e08d40a16a2bc92de2375, type: 3}
+  - {fileID: 9046951032173600128, guid: 15d4f74f946d2734f91e242a7d55e67c, type: 3}
   spawnPoints:
   - {fileID: 909731785}
   - {fileID: 1605704621}
@@ -151051,7 +151051,7 @@ PrefabInstance:
       objectReference: {fileID: 1864822654}
     - target: {fileID: 6847463041439183871, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: regenRate
-      value: 5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6847463041439183871, guid: 3e5ac3a028a275441a46bf6cdd5a8301, type: 3}
       propertyPath: ManaNumbers
